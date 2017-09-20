@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.mbc_page.body
+    - field.field.node.mbc_page.field_weight
     - node.type.mbc_page
   module:
     - path
     - text
+    - weight
 id: node.mbc_page.default
 targetEntityType: node
 bundle: mbc_page
@@ -28,6 +30,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_weight:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: weight_selector
+    region: content
   path:
     type: path
     weight: 30

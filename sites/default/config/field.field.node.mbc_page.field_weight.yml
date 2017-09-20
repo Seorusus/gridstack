@@ -1,0 +1,24 @@
+uuid: e43139ac-8dc0-4e5e-a7df-b81b920dffa1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.mbc_page
+  module:
+    - weight
+id: node.mbc_page.field_weight
+field_name: field_weight
+entity_type: node
+bundle: mbc_page
+label: Weight
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings:
+  range: '50'
+field_type: weight
