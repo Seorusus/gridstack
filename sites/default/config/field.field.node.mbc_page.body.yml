@@ -1,0 +1,22 @@
+uuid: 7cc77b73-b3ba-4e44-9fc8-9ba4b846e649
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.mbc_page
+  module:
+    - text
+id: node.mbc_page.body
+field_name: body
+entity_type: node
+bundle: mbc_page
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

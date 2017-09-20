@@ -1,0 +1,36 @@
+uuid: fe879bb0-fd14-47b7-adfe-a5e068b22241
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.mbc_page.body
+    - field.field.node.mbc_page.field_weight
+    - node.type.mbc_page
+  module:
+    - text
+    - user
+id: node.mbc_page.default
+targetEntityType: node
+bundle: mbc_page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_weight:
+    weight: 102
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

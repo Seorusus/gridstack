@@ -1,0 +1,7 @@
+drupal_ng.view:
+  path: '/mbc_app'
+  defaults:
+    _title: 'MBC SPA'
+    _controller: '\Drupal\mbc_app\Controller\MbcAppController::viewMbcApp'
+  requirements:
+    _permission: 'access content'

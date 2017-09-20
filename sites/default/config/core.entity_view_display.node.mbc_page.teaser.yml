@@ -1,0 +1,28 @@
+uuid: 27f7af56-2686-4c19-b37e-9afc38591be6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.mbc_page.body
+    - node.type.mbc_page
+  module:
+    - text
+    - user
+id: node.mbc_page.teaser
+targetEntityType: node
+bundle: mbc_page
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

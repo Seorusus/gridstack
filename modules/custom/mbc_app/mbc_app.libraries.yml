@@ -1,0 +1,10 @@
+angularjs:
+  version: VERSION
+  js:
+    'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js':  {type: external}
+
+mbc_app:
+  js:
+    js/mbc_app.js: {}
+  dependencies:
+    - mbc_app/angularjs
