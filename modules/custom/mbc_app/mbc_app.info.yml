@@ -1,0 +1,4 @@
+name: MBC
+type: module
+description: 'MBC (Gridstack) SPA implementation'
+core: 8.x

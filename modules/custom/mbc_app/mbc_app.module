@@ -1,0 +1,16 @@
+<?php
+/**
+ * Provides main functionality of the module
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function mbc_app_theme($existing, $type, $theme, $path) {
+  return array(
+    'mbc_app_view' => array(
+      'template' => 'view',
+      'variables' => array('title' => NULL),
+    ),
+  );
+}
