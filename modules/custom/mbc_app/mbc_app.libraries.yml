@@ -3,8 +3,25 @@ angularjs:
   js:
     'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js':  {type: external}
 
+angular_sanitize:
+  version: VERSION
+  js:
+    'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-sanitize.min.js':  {type: external}
+
 mbc_app:
   js:
     js/mbc_app.js: {}
+  dependencies:
+    - mbc_app/angularjs
+
+mbc_controllers:
+  js:
+    js/mbc_controllers.js: {}
+  dependencies:
+    - mbc_app/angularjs
+
+mbc_services:
+  js:
+    js/mbc_services.js: {}
   dependencies:
     - mbc_app/angularjs

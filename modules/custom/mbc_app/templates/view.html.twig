@@ -1,10 +1,28 @@
 <h2>{{  title }}</h2>
 
-<div ng-app="myModule">
+<div ng-app="mbcApp">
+    <div class="left-sidebar">
+        <div ng-controller="PageList">
+            {% verbatim %}
+             <ul class="pages">
+                <li ng-repeat="page in pages">
+                    <a href="page/{{ page.nid }}" ng-bind-html="page.title"></a>
+                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>)
+                </li>
+              </ul>
+              <hr />
+              <form ng-submit="newPage()" >
+                <div class="form-group">
+                    <label>Create a new Page</label>
+                    <input ng-model="title" class="form-control" placeholder="Page title" autofocus  />
 
-    <div ng-controller="myController">
-        {% verbatim %}
-      << message >>
-    {% endverbatim %}
+                    <button class="btn btn-primary" type="submit">Add Page</button>
+                </div>
+              </form>
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="main_canvas">
+
     </div>
 </div>
