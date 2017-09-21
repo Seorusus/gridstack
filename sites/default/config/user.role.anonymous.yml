@@ -12,5 +12,7 @@ permissions:
   - 'access comments'
   - 'access content'
   - 'access site-wide contact form'
+  - 'create mbc_page content'
+  - 'delete own mbc_page content'
   - 'search content'
   - 'use text format restricted_html'
