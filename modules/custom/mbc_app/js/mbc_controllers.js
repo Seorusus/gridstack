@@ -22,15 +22,16 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
         poller();
 
         $scope.newPage = function(){
-
+            var csrf = drupalSettings.csrf;
             // Get our data from the form
             var package = {
                 'title': { 'value': $scope.title },
-                '_links': { 'type': { 'href': '/rest/type/node/mbc_page' }}
+                '_links': { 'type': { 'href': drupalSettings.baseUrl + '/rest/type/node/mbc_page' }},
+                'type' : {"target_id": "mbc_page"},
             }
 
             // Call the PageService object with the addPage method
-            PageService.addPage(package)
+            PageService.addPage(package, csrf)
                 .success(function(){
                     console.log("Added");
 
@@ -51,8 +52,6 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                     PageService.getPages(function(data){
                         $scope.pages = data;
                     });
-                    // Redirect to the page list
-                    $location.path('/');
                 })
         }
 

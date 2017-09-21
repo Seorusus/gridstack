@@ -11,13 +11,14 @@ mbcApp.service('PageService', ['$http',
                     callback(data);
                 });
         };
-        this.addPage = function(package){
+        this.addPage = function(package, csrf){
             return $http({
-                url: '/entity/node',
+                url: 'http://gridstack/entity/node?_format=hal_json',
                 method: 'POST',
                 data: package, // pass the data object as defined above
                 headers: {
-                    //"Authorization": "Basic YWRtaW46MTIzcXdl", // encoded user/pass
+                   // "Authorization": "Basic YWRtaW4vYWRtaW4=", // encoded user/pass
+                    "X-CSRF-Token": csrf,
                     "Content-Type": "application/hal+json",
                 },
             })
@@ -27,7 +28,8 @@ mbcApp.service('PageService', ['$http',
                 url: '/node/' + id,
                 method: 'DELETE',
                 headers: {
-                    //"Authorization": "Basic YWRtaW46MTIzcXdl", // encoded user/pass
+                   // "Authorization": "Basic YWRtaW4vYWRtaW4=", // encoded user/pass
+                        "X-CSRF-Token": "iqf3iz6ap482kC7Hawn-5Him-1etre7r-YsyIASvGaA",
                     "Content-Type": "application/hal+json",
                 },
             })
