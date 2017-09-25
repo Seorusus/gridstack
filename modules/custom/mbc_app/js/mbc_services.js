@@ -11,9 +11,9 @@ mbcApp.service('PageService', ['$http',
                     callback(data);
                 });
         };
-        this.addPage = function(package, csrf){
+        this.addPage = function(package, csrf, baseUrl){
             return $http({
-                url: 'http://gridstack/entity/node?_format=hal_json',
+                url: baseUrl + '/entity/node?_format=hal_json',
                 method: 'POST',
                 data: package, // pass the data object as defined above
                 headers: {
