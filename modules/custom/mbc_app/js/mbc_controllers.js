@@ -4,17 +4,8 @@
 mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$timeout',
     function($scope, $http, PageService, $location, $timeout){
 
-        // Call the GetTasks service and the tasks method
-        // Then pass the data form this to the scope
-        // Addition: created a poller which uses the timeout service to query the feed every 5 seconds
-        // Upon querying, it just updates the task list.
-
         //var count = 0;
         var poller = function() {
-            $timeout(poller, 5000);
-            //count++;
-            //count = count;
-            //console.log(count);
             PageService.getPages(function(data){
                 $scope.pages = data;
             });
