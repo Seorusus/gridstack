@@ -23,13 +23,13 @@ mbcApp.service('PageService', ['$http',
                 },
             })
         };
-        this.deletePage = function(id){
+        this.deletePage = function(id, csrf){
             return $http({
                 url: '/node/' + id,
                 method: 'DELETE',
                 headers: {
                    // "Authorization": "Basic YWRtaW4vYWRtaW4=", // encoded user/pass
-                        "X-CSRF-Token": "iqf3iz6ap482kC7Hawn-5Him-1etre7r-YsyIASvGaA",
+                        "X-CSRF-Token": csrf,
                     "Content-Type": "application/hal+json",
                 },
             })

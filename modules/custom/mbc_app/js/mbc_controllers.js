@@ -39,7 +39,7 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
         $scope.deletePage = function(id){
 
-            PageService.deletePage(id)
+            PageService.deletePage(id, csrf)
                 .success(function(){
                     PageService.getPages(function(data){
                         $scope.pages = data;
