@@ -1,1 +1,1 @@
-var mbcApp = angular.module("mbcApp", ['ngSanitize']);
+var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists']);

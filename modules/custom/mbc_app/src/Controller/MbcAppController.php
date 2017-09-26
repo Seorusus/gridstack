@@ -11,6 +11,7 @@ class MbcAppController extends ControllerBase {
     );
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angularjs';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_sanitize';
+    $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_dnd_lists';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_app';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_controllers';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_services';

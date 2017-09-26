@@ -4,8 +4,8 @@
     <div class="left-sidebar">
         <div ng-controller="PageList">
             {% verbatim %}
-             <ul class="pages">
-                <li ng-repeat="page in pages">
+             <ul class="pages" dnd-list="pages">
+                <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
                     <a href="page/{{ page.nid }}" ng-bind-html="page.title"></a>
                     (<a href="#" ng-click="deletePage(page.nid)">Delete</a>)
                 </li>

@@ -8,6 +8,11 @@ angular_sanitize:
   js:
     'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-sanitize.min.js':  {type: external}
 
+angular_dnd_lists:
+  version: VERSION
+  js:
+    js/libraries/angular-drag-and-drop-lists.min.js: {}
+
 mbc_app:
   js:
     js/mbc_app.js: {}
