@@ -23,6 +23,18 @@ mbcApp.service('PageService', ['$http',
                 },
             })
         };
+        this.updatePage = function(package, csrf, baseUrl, nid){
+            return $http({
+                url: baseUrl + '/node/' + nid + '?_format=hal_json',
+                method: 'PATCH',
+                data: package, // pass the data object as defined above
+                headers: {
+                    // "Authorization": "Basic YWRtaW4vYWRtaW4=", // encoded user/pass
+                    "X-CSRF-Token": csrf,
+                    "Content-Type": "application/hal+json",
+                },
+            })
+        };
         this.deletePage = function(id, csrf){
             return $http({
                 url: '/node/' + id,

@@ -36,6 +36,19 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                     });
                 })
         }
+        $scope.updatePage = function (nid, values) {
+            var package = {
+                '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
+                'type' : {"target_id": "mbc_page"},
+            }
+            angular.forEach(values, function(value, key){
+                package[key] = value;
+            });
+            PageService.updatePage(package, csrf, baseUrl, nid)
+                .success(function() {
+                    console.log("Updated");
+                });
+        }
 
         $scope.deletePage = function(id){
 
@@ -45,6 +58,21 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                         $scope.pages = data;
                     });
                 })
+        }
+
+        $scope.savePagesList = function(){
+           var pages = $scope.pages;
+           var i = 0;
+           var values = {};
+            angular.forEach (pages, function (value, key){
+                $scope.pages[key].field_weight_value = i;
+                i++;
+                values = {
+                    'field_weight': {"value": value.field_weight_value},
+                };
+
+                $scope.updatePage(value.nid, values);
+            });
         }
 
     }]);

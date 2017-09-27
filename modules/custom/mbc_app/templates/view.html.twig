@@ -4,6 +4,13 @@
     <div class="left-sidebar">
         <div ng-controller="PageList">
             {% verbatim %}
+             <form ng-submit="newPage()" >
+                <div class="form-group">
+                    <label>Create a new Page</label>
+                    <input ng-model="title" class="form-control" placeholder="Page title" autofocus  />
+                    <button class="btn btn-primary" type="submit">Add Page</button>
+                </div>
+             </form>
              <ul class="pages" dnd-list="pages">
                 <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
                     <a href="page/{{ page.nid }}" ng-bind-html="page.title"></a>
@@ -11,13 +18,7 @@
                 </li>
               </ul>
               <hr />
-              <form ng-submit="newPage()" >
-                <div class="form-group">
-                    <label>Create a new Page</label>
-                    <input ng-model="title" class="form-control" placeholder="Page title" autofocus  />
-                    <button class="btn btn-primary" type="submit">Add Page</button>
-                </div>
-              </form>
+              <a href="#" ng-click="savePagesList()">Save</a>
             {% endverbatim %}
         </div>
     </div>
