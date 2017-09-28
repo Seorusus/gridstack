@@ -332,6 +332,7 @@ display:
             title:
               alias: ''
               raw_output: false
+      auth: {  }
     cache_metadata:
       max-age: -1
       contexts:
