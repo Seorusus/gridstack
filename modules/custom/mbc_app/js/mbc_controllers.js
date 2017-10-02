@@ -24,15 +24,15 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
             // Call the PageService object with the addPage method
             PageService.addPage(package, csrf, baseUrl)
-                .success(function(){
+                .then(function(response){
                     console.log("Added");
 
                     // Clear the inputs
                     $scope.title = '';
-
+                    var resData = response.data;
                     // Re-call the list of pages so that it updates
-                    PageService.getPages(function(data){
-                        $scope.pages = data;
+                    PageService.getPages(function(resData){
+                        $scope.pages = resData;
                     });
                 })
         }
@@ -45,21 +45,20 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                 package[key] = value;
             });
             PageService.updatePage(package, csrf, baseUrl, nid)
-                .success(function() {
+                .then(function() {
                     console.log("Updated");
                 });
         }
-
         $scope.deletePage = function(id){
 
             PageService.deletePage(id, csrf)
-                .success(function(){
-                    PageService.getPages(function(data){
-                        $scope.pages = data;
+                .then(function(response){
+                    var resData = response.data;
+                    PageService.getPages(function(resData){
+                        $scope.pages = resData;
                     });
                 })
         }
-
         $scope.savePagesList = function(){
            var pages = $scope.pages;
            var i = 0;
@@ -76,3 +75,84 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
         }
 
     }]);
+
+app.controller('GridstackController', ['$scope', function($scope) {
+
+    this.gridstack = null;
+
+    this.init = function(element, options) {
+        this.gridstack = element.gridstack(options).data('gridstack');
+        return this.gridstack;
+    };
+
+    this.removeItem = function(element) {
+        if(this.gridstack) {
+            return this.gridstack.removeWidget(element, false);
+        }
+        return null;
+    };
+
+    this.addItem = function(element) {
+        if(this.gridstack) {
+            this.gridstack.makeWidget(element);
+            return element;
+        }
+        return null;
+    };
+
+}]);
+
+mbcApp.controller('DemoCtrl', ['$scope', function($scope) {
+
+    $scope.widgets = [{ x:0, y:0, width:3, height:1 }, { x:0, y:0, width:3, height:1 }];
+
+    $scope.options = {
+        cellHeight: 200,
+        verticalMargin: 10
+    };
+
+    $scope.addWidget = function() {
+        var newWidget = { x:0, y:0, width:3, height:1 };
+        $scope.widgets.push(newWidget);
+    };
+
+    $scope.moveWidget = function() {
+        $scope.widgets[0].x = 1;
+        $scope.widgets[0].width = 3;
+        $scope.widgets[0].height = 1;
+    };
+
+    $scope.removeWidget = function(w) {
+        var index = $scope.widgets.indexOf(w);
+        $scope.widgets.splice(index, 1);
+    };
+
+    $scope.onChange = function(event, items) {
+        console.log("onChange event: "+event+" items:"+items);
+    };
+
+    $scope.onDragStart = function(event, ui) {
+        console.log("onDragStart event: "+event+" ui:"+ui);
+    };
+
+    $scope.onDragStop = function(event, ui) {
+        console.log("onDragStop event: "+event+" ui:"+ui);
+    };
+
+    $scope.onResizeStart = function(event, ui) {
+        console.log("onResizeStart event: "+event+" ui:"+ui);
+    };
+
+    $scope.onResizeStop = function(event, ui) {
+        console.log("onResizeStop event: "+event+" ui:"+ui);
+    };
+
+    $scope.onItemAdded = function(item) {
+        console.log("onItemAdded item: "+item);
+    };
+
+    $scope.onItemRemoved = function(item) {
+        console.log("onItemRemoved item: "+item);
+    };
+
+}]);
