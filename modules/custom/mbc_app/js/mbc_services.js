@@ -7,8 +7,9 @@ mbcApp.service('PageService', ['$http',
         this.getPages = function(callback){
             $http.get('/api/mbc-pages')
             // On success, pass the results to the view via the scope object
-                .success(function(data){
-                    callback(data);
+                .then(function(response){
+                    var resData = response.data;
+                    callback(resData);
                 });
         };
         this.addPage = function(package, csrf, baseUrl){
