@@ -9,6 +9,8 @@ class MbcAppController extends ControllerBase {
       '#theme' => 'mbc_app_view',
       '#title' => $title,
     );
+
+//    $build['mbc_app']['#attached']['library'][] = 'mbc_app/lodash';
 //    $build['mbc_app']['#attached']['library'][] = 'mbc_app/jquery';
 //    $build['mbc_app']['#attached']['library'][] = 'mbc_app/jquery.ui';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angularjs';

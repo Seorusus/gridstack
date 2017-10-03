@@ -1,6 +1,34 @@
-jquery-ui:
+jquery:
+  remote: https://github.com/jquery/jquery
+  version: "3.1.0"
+  license:
+    name: MIT
+    url: https://github.com/jquery/jquery/blob/3.1.0/LICENSE.txt
+    gpl-compatible: true
   js:
-    js/libraries/jquery-ui/jquery-ui.min.js: {}
+    js/libraries/jquery/dist/jquery.min.js: { minified: true, weight: -200 }
+
+jquery.ui:
+  remote: https://github.com/jquery/jquery-ui
+  version: &jquery_ui_version 1.12.0
+  license: &jquery_ui_license
+    name: Public Domain
+    url: https://github.com/jquery/jquery-ui/blob/1.12.0/LICENSE.txt
+    gpl-compatible: true
+  js:
+    js/libraries/jquery-ui/jquery-ui.min.js: { weight: -110, minified: true }
+  css:
+    component:
+      js/libraries/jquery-ui/themes/base/core.css: {}
+    theme:
+      js/libraries/jquery-ui/themes/base/theme.css: {}
+  dependencies:
+    - mbc_app/jquery
+
+lodash:
+  version: VERSION
+  js:
+    js/libraries/lodash/dist/lodash.min.js: {}
 
 angularjs:
   version: VERSION
@@ -21,10 +49,14 @@ gridstack:
   version: VERSION
   css:
     layout:
-      css/gridstack.css: {}
-      css/gridstack-extra.css: {}
+      js/libraries/gridstack/dist/gridstack.min.css: {}
+      js/libraries/gridstack/dist/gridstack-extra.min.css: {}
+      css/gridstack-mbc.css: {}
   js:
-    js/libraries/gridstack.min.js: {}
+    js/libraries/gridstack/dist/gridstack.min.js: {}
+#  dependencies:
+#    - mbc_app/jquery
+#    - mbc_app/jquery.ui
 
 mbc_directives:
   js:
@@ -47,38 +79,3 @@ mbc_services:
     js/mbc_services.js: {}
   dependencies:
     - mbc_app/angularjs
-
-#jquery:
-#  remote: https://github.com/jquery/jquery
-#  version: "3.1.0"
-#  license:
-#    name: MIT
-#    url: https://github.com/jquery/jquery/blob/3.1.0/LICENSE.txt
-#    gpl-compatible: true
-#  js:
-#    js/libraries/jquery/dist/jquery.min.js: { minified: true, weight: -20 }
-#
-#jquery.ui:
-#  remote: https://github.com/jquery/jquery-ui
-#  version: &jquery_ui_version 1.12.0
-#  license: &jquery_ui_license
-#    name: Public Domain
-#    url: https://github.com/jquery/jquery-ui/blob/1.12.0/LICENSE.txt
-#    gpl-compatible: true
-#  js:
-#    js/libraries/jquery-ui/ui/core.js: { weight: -11, minified: true }
-#  css:
-#    component:
-#      js/libraries/jquery-ui/themes/base/core.css: {}
-#    theme:
-#      js/libraries/jquery-ui/themes/base/theme.css: {}
-#  dependencies:
-#    - mbc_app/jquery
-
-#libraries-override:
-#  core/jquery.ui:
-#    mbc_app/jquery.ui
-#  core/jquery:
-#    mbc_app/jquery
-#  core/jquery: false
-#  core/jquery.ui: false

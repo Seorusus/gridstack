@@ -369,15 +369,6 @@
   transition: left 0s, top 0s, height 0s, width 0s;
 }
 
-.grid1 {
-  background: #c6ecf1;
-}
-.grid-stack-item-content {
-  color: #2c3e50;
-  text-align: center;
-  background-color: #732145;
-}
-
 @media (max-width: 768px) {
   .grid-stack-item {
     position: relative !important;
