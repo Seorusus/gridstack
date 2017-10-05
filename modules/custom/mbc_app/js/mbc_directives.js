@@ -73,7 +73,8 @@
                 gsItemMinHeight: '=?',
                 gsItemMaxHeight: '=?',
                 gsItemMinWidth: '=?',
-                gsItemMaxWidth: '=?'
+                gsItemMaxWidth: '=?',
+                mbcWidgetId: '=',
             },
             link: function(scope, element, attrs, controller) {
                 if (scope.gsItemId) {
@@ -88,6 +89,7 @@
                 $(element).attr('data-gs-max-width', scope.gsItemMaxWidth);
                 $(element).attr('data-gs-max-height', scope.gsItemMaxHeight);
                 $(element).attr('data-gs-auto-position', scope.gsItemAutopos);
+                $(element).attr('mbc-widget-id', scope.mbcWidgetId);
                 var widget = controller.addItem(element);
                 var item = element.data('_gridstack_node');
                 $timeout(function() {

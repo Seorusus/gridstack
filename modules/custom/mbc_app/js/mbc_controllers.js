@@ -104,15 +104,15 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 mbcApp.controller('DemoCtrl', ['$scope', function($scope) {
 
-    $scope.widgets = [{ x:0, y:0, width:3, height:1 }, { x:0, y:0, width:3, height:1 }];
+    $scope.widgets = [{ x:0, y:0, width:3, height:1, mbcWidgetId:22 }, { x:0, y:0, width:3, height:1, mbcWidgetId:22 }];
 
     $scope.options = {
         cellHeight: 200,
         verticalMargin: 10
     };
 
-    $scope.addWidget = function() {
-        var newWidget = { x:0, y:0, width:3, height:1 };
+    $scope.addWidget = function(widid) {
+        var newWidget = { x:0, y:0, width:3, height:1, mbcWidgetId:widid};
         $scope.widgets.push(newWidget);
     };
 
