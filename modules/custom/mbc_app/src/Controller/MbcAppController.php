@@ -10,17 +10,16 @@ class MbcAppController extends ControllerBase {
       '#title' => $title,
     );
 
-//    $build['mbc_app']['#attached']['library'][] = 'mbc_app/lodash';
-//    $build['mbc_app']['#attached']['library'][] = 'mbc_app/jquery';
-    //$build['mbc_app']['#attached']['library'][] = 'mbc_app/ngStrap';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angularjs';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_sanitize';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_dnd_lists';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/gridstack';
+    $build['mbc_app']['#attached']['library'][] = 'mbc_app/ngStrap';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_app';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_controllers';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_directives';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_services';
+    $build['mbc_app']['#attached']['library'][] = 'mbc_app/bootstrap';
     $build['mbc_app']['#attached']['drupalSettings']['csrf'] = \Drupal::csrfToken()->get('rest');
     $build['mbc_app']['#attached']['drupalSettings']['baseUrl'] = $base_url;
     return $build;

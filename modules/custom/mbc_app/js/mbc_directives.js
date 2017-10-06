@@ -90,6 +90,22 @@
                 $(element).attr('data-gs-max-height', scope.gsItemMaxHeight);
                 $(element).attr('data-gs-auto-position', scope.gsItemAutopos);
                 $(element).attr('mbc-widget-id', scope.mbcWidgetId);
+                var mbcWidget = angular.element(element[0].querySelector('.mbc-widget'));
+                var mbcWidgetContent = '';
+                switch (scope.mbcWidgetId) {
+                    case 'button':
+                        mbcWidgetContent = '<button type="button" class="btn btn-default" ng-model="button.toggle" bs-checkbox>Button</button>';
+                        break;
+                    case 'calendar':
+                        mbcWidgetContent = '<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>';
+                        break;
+                    default:
+                        mbcWidgetContent = 'in proccess';
+                        break;
+                }
+
+                $(mbcWidget).html(mbcWidgetContent);
+
                 var widget = controller.addItem(element);
                 var item = element.data('_gridstack_node');
                 $timeout(function() {

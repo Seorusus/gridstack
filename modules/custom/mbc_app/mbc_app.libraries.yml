@@ -55,12 +55,16 @@ gridstack:
   js:
     js/libraries/gridstack/dist/gridstack.min.js: {}
 
-#ngStrap:
-#  version: "2.3.8"
-#  js:
-#    '//cdnjs.cloudflare.com/ajax/libs/angular-strap/v2.3.8/angular-strap.min.js':  {type: external}
-#    '//cdnjs.cloudflare.com/ajax/libs/angular-strap/v2.3.8/angular-strap.tpl.min.js':  {type: external}
+ngStrap:
+  version: "2.3.8"
+  js:
+    js/libraries/angular-strap/dist/angular-strap.min.js:  {}
+    js/libraries/angular-strap/dist/angular-strap.tpl.min.js:  {}
 
+bootstrap:
+    css:
+      layout:
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css': {type: external}
 
 mbc_directives:
   js:
