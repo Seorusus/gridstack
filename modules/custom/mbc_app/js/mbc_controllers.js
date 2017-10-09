@@ -76,7 +76,14 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
     }]);
 
-app.controller('GridstackController', ['$scope', function($scope) {
+app.controller('GridstackController', ['$scope', '$datepicker', function($scope, $datepicker) {
+
+
+    $scope.button = {
+        'toggle' : true,
+    }
+
+    $scope.selectedDate = "2017-10-07T17:17:09.840Z";
 
     this.gridstack = null;
 
@@ -104,7 +111,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 mbcApp.controller('DemoCtrl', ['$scope', function($scope) {
 
-    $scope.widgets = [{ x:0, y:0, width:3, height:1, mbcWidgetId:22 }, { x:0, y:0, width:3, height:1, mbcWidgetId:22 }];
+    $scope.widgets = [{ x:0, y:0, width:3, height:1, mbcWidgetId:"calendar" }, { x:0, y:0, width:3, height:1, mbcWidgetId:"button" }];
 
     $scope.options = {
         cellHeight: 200,

@@ -33,17 +33,17 @@ lodash:
 angularjs:
   version: VERSION
   js:
-    'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js':  {type: external}
+    'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js':  {type: external, weight: -10}
 
 angular_sanitize:
   version: VERSION
   js:
-    'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-sanitize.min.js':  {type: external}
+    'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-sanitize.min.js':  {type: external, weight: -10}
 
 angular_dnd_lists:
   version: VERSION
   js:
-    js/libraries/angular-drag-and-drop-lists.min.js: {}
+    js/libraries/angular-drag-and-drop-lists.min.js: {weight: -9}
 
 gridstack:
   version: VERSION
@@ -53,13 +53,13 @@ gridstack:
       js/libraries/gridstack/dist/gridstack-extra.min.css: {}
       css/gridstack-mbc.css: {}
   js:
-    js/libraries/gridstack/dist/gridstack.min.js: {}
+    js/libraries/gridstack/dist/gridstack.min.js: {weight: -9}
 
 ngStrap:
   version: "2.3.8"
   js:
-    js/libraries/angular-strap/dist/angular-strap.min.js:  {}
-    js/libraries/angular-strap/dist/angular-strap.tpl.min.js:  {}
+    js/libraries/angular-strap/dist/angular-strap.min.js:  {weight: -9}
+    js/libraries/angular-strap/dist/angular-strap.tpl.min.js:  {weight: -9}
 
 bootstrap:
     css:
