@@ -99,15 +99,17 @@
                             mbcWidgetContent = '<button type="button" class="btn btn-default" ng-model="button.toggle" bs-checkbox>Button</button>';
                             break;
                         case 'calendar':
-                            var myDatepicker = element.datepicker({
-                                onSelect:function (dateText, inst) {
-                                    scope.$apply(function(scope){
-                                        // Change binded variable
-                                        ngModel.assign(scope, dateText);
-                                    });
+                            var calElement = '<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>';
+                            $(calElement).datepicker({
+                                inline: true,
+                                dateFormat: 'dd.mm.yy',
+                                onSelect: function(dateText) {
+                                    var modelPath = $(this).attr('ng-model');
+                                    putObject(modelPath, scope, dateText);
+                                    scope.$apply();
                                 }
                             });
-                            mbcWidgetContent = '<div class="calendar">' + myDatepicker + '</div>';
+                            mbcWidgetContent = calElement;
                             break;
                         default:
                             mbcWidgetContent = 'in proccess';
