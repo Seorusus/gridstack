@@ -12,6 +12,14 @@ mbcApp.service('PageService', ['$http',
                     callback(resData);
                 });
         };
+        this.loadPage = function (nid, callback) {
+            $http.get('/node/' + nid + '?_format=hal_json')
+            // On success, pass the results to the view via the scope object
+                .then(function(response){
+                    var resData = response.data;
+                    callback(resData);
+                });
+        }
         this.addPage = function(package, csrf, baseUrl){
             return $http({
                 url: baseUrl + '/entity/node?_format=hal_json',
@@ -46,5 +54,10 @@ mbcApp.service('PageService', ['$http',
                     "Content-Type": "application/hal+json",
                 },
             })
+        }
+        this.gridStack = function() {
+            return  {
+                value: '',
+            }
         }
     }]);

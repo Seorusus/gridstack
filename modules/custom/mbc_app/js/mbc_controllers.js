@@ -36,6 +36,16 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                     });
                 })
         }
+
+        $scope.loadPage = function(nid) {
+            PageService.loadPage(nid, function(data){
+                $scope.$emit('pageLoaded', {
+                    "nid": nid,
+                    "grid": JSON.parse(data.field_gridstack_data[0].value),
+                });
+            });
+        }
+
         $scope.updatePage = function (nid, values) {
             var package = {
                 '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
@@ -109,14 +119,41 @@ app.controller('GridstackController', ['$scope', '$datepicker', function($scope,
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope', function($scope) {
+mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageService) {
 
-    $scope.widgets = [{ x:0, y:0, width:3, height:1, mbcWidgetId:"calendar" }, { x:0, y:0, width:3, height:1, mbcWidgetId:"button" }];
+    var csrf = drupalSettings.csrf;
+    var baseUrl = drupalSettings.baseUrl;
+
+    $scope.$on('pageLoaded', function(event, pageObj) {
+        $scope.widgets = pageObj.grid;
+        $scope.nid = pageObj.nid;
+        console.log($scope);
+    });
 
     $scope.options = {
         cellHeight: 200,
         verticalMargin: 10
     };
+
+    $scope.savePage = function() {
+        var nid = $scope.nid;
+        var package = {
+            '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
+            'type' : {"target_id": "mbc_page"},
+        }
+        var values = {
+            'field_gridstack_data' : {
+                "value": JSON.stringify($scope.widgets)
+            },
+        }
+        angular.forEach(values, function(value, key){
+            package[key] = value;
+        });
+        PageService.updatePage(package, csrf, baseUrl, nid)
+            .then(function() {
+                console.log("Saved");
+            });
+    }
 
     $scope.addWidget = function(widid) {
         var newWidget = { x:0, y:0, width:3, height:1, mbcWidgetId:widid};

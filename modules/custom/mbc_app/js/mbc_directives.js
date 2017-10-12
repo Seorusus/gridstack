@@ -99,8 +99,8 @@
                             mbcWidgetContent = '<button type="button" class="btn btn-default" ng-model="button.toggle" bs-checkbox>Button</button>';
                             break;
                         case 'calendar':
-                            var calElement = '<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>';
-                            $(calElement).datepicker({
+                            //$(mbcWidget).html('<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>');
+                            var calElement = $(mbcWidget).datepicker({
                                 inline: true,
                                 dateFormat: 'dd.mm.yy',
                                 onSelect: function(dateText) {
