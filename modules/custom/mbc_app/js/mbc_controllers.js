@@ -39,10 +39,12 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
         $scope.loadPage = function(nid) {
             PageService.loadPage(nid, function(data){
-                $scope.$emit('pageLoaded', {
-                    "nid": nid,
-                    "grid": JSON.parse(data.field_gridstack_data[0].value),
-                });
+                if (data.field_gridstack_data !== undefined) {
+                    $scope.$emit('pageLoaded', {
+                        "nid": nid,
+                        "grid": JSON.parse(data.field_gridstack_data[0].value),
+                    });
+                }
             });
         }
 
