@@ -19,12 +19,12 @@ function mbc_app_theme($existing, $type, $theme, $path) {
  * Implements hook_js_alter().
  */
 function mbc_app_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-//  unset($javascript['core/assets/vendor/jquery/jquery.min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/core-min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/draggable-min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/resizable-min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/widget-min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/button-min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/mouse-min.js']);
-//  unset($javascript['core/assets/vendor/jquery.ui/ui/dialog-min.js']);
+  unset($javascript['core/assets/vendor/jquery/jquery.min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/core-min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/draggable-min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/resizable-min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/widget-min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/button-min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/mouse-min.js']);
+  unset($javascript['core/assets/vendor/jquery.ui/ui/dialog-min.js']);
 }

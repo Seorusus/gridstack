@@ -61,8 +61,9 @@ ngStrap:
     js/libraries/angular-strap/dist/angular-strap.min.js:  {weight: -9}
     js/libraries/angular-strap/dist/angular-strap.tpl.min.js:  {weight: -9}
   dependencies:
-    - core/jquery
-    - core/jquery.ui.datepicker
+    - mbc_app/jquery
+    - mbc_app/jquery.ui
+    - mbc_app/jquery.ui.datepicker
 
 bootstrap:
     css:
