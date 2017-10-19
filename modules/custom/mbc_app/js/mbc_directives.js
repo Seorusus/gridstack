@@ -54,7 +54,7 @@
 
     }]);
 
-    app.directive('gridstackItem', ['$timeout', '$datepicker', '$parse', function($timeout, $datepicker, $parse) {
+    app.directive('gridstackItem', ['$timeout', '$datepicker', '$parse', function ($timeout, $datepicker, $parse) {
 
         return {
             restrict: 'A',
@@ -90,36 +90,8 @@
                 $(element).attr('data-gs-max-height', scope.gsItemMaxHeight);
                 $(element).attr('data-gs-auto-position', scope.gsItemAutopos);
                 $(element).attr('mbc-widget-id', scope.mbcWidgetId);
-                var ngModel = $parse(attrs.ngModel);
-                $(function(){
-                    var mbcWidget = angular.element(element[0].querySelector('.mbc-widget'));
-                    var mbcWidgetContent = '';
-                    switch (scope.mbcWidgetId) {
-                        case 'button':
-                            mbcWidgetContent = '<button type="button" class="btn btn-default" ng-model="button.toggle" bs-checkbox>Button</button>';
-                            break;
-                        case 'calendar':
-                            //var mbc_control = angular.element('<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>');
-                            scope.mbcWidgetContent = '<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>';
-                            //mbcWidget.append(mbc_control);
-                            // var calElement = $(mbc_control).datepicker({
-                            //     inline: true,
-                            //     dateFormat: 'dd.mm.yy',
-                            //     onSelect: function(dateText) {
-                            //         var modelPath = $(this).attr('ng-model');
-                            //         putObject(modelPath, scope, dateText);
-                            //         scope.$apply();
-                            //     }
-                            // });
-                            //mbcWidgetContent = calElement;
-                            break;
-                        default:
-                            mbcWidgetContent = 'in proccess';
-                            break;
-                    }
-
-                    $(mbcWidget).html(mbcWidgetContent);
-                });
+                var mbcWidget = angular.element(element[0].querySelector('.mbc-widget'));
+                $(mbcWidget).attr('mbc-widget-id', scope.mbcWidgetId);
 
                 var widget = controller.addItem(element);
                 var item = element.data('_gridstack_node');
@@ -164,6 +136,37 @@
                     controller.removeItem(element);
                 });
 
+            }
+
+        };
+
+    }]);
+
+    app.directive('mbcWidget', ['$compile', '$datepicker', '$parse', function ($compile, $datepicker, $parse) {
+
+        return {
+            restrict: 'A',
+            scope: {
+                mbcWidgetId: "=",
+            },
+            link: function (scope, element, attrs, controller) {
+                var mbcWidgetId = scope.mbcWidgetId;
+                var ngModel = $parse(attrs.ngModel);
+                    var mbcWidgetContent = '';
+                    switch (mbcWidgetId) {
+                        case 'button':
+                            mbcWidgetContent = $compile('<button type="button" class="btn btn-default" ng-model="button.toggle" bs-checkbox>Button</button>')(scope);
+                            element.append(mbcWidgetContent);
+                            break;
+                        case 'calendar':
+                            mbcWidgetContent = $compile('<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>')(scope);
+                            element.append(mbcWidgetContent);
+                            break;
+                        default:
+                            mbcWidgetContent = 'in proccess';
+                            break;
+                    }
+                element.append(mbcWidgetContent);
             }
 
         };

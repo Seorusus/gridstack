@@ -1,4 +1,3 @@
-var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists', 'gridstack-angular', 'mgcrea.ngStrap']);
+var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists', 'gridstack-angular', 'mgcrea.ngStrap', 'mgcrea.ngStrap.datepicker']);
 
-angular.module('gridstack-angular', ['mbcApp', 'mgcrea.ngStrap']);
-var app = angular.module('gridstack-angular');
+var app = angular.module('gridstack-angular', ['mbcApp', 'mgcrea.ngStrap', 'mgcrea.ngStrap.datepicker']);

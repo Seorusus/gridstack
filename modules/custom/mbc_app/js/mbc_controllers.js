@@ -90,7 +90,6 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
 app.controller('GridstackController', ['$scope', '$datepicker', function($scope, $datepicker) {
 
-
     $scope.button = {
         'toggle' : true,
     }

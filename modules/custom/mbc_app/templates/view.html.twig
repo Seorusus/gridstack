@@ -31,8 +31,7 @@
                          gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId">
                         <div class="grid-stack-item-content">
                             <a class="btn btn-primary" ng-click="removeWidget(w)" href="#">remove</a>
-                            <div class="mbc-widget">
-                              <div ng-bind-html="mbcWidgetContent"></div>
+                              <div mbc-widget class="mbc-widget" mbc-widget-id="w.mbcWidgetId">
                             </div>
                         </div>
                     </div>
