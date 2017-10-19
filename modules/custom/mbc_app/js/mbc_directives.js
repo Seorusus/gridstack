@@ -146,28 +146,18 @@
 
         return {
             restrict: 'A',
+            template: '<div ng-include="getTemplate()"></div>',
             scope: {
                 mbcWidgetId: "=",
             },
             link: function (scope, element, attrs, controller) {
-                var mbcWidgetId = scope.mbcWidgetId;
-                var ngModel = $parse(attrs.ngModel);
-                    var mbcWidgetContent = '';
-                    switch (mbcWidgetId) {
-                        case 'button':
-                            mbcWidgetContent = $compile('<button type="button" class="btn btn-default" ng-model="button.toggle" bs-checkbox>Button</button>')(scope);
-                            element.append(mbcWidgetContent);
-                            break;
-                        case 'calendar':
-                            mbcWidgetContent = $compile('<input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>')(scope);
-                            element.append(mbcWidgetContent);
-                            break;
-                        default:
-                            mbcWidgetContent = 'in proccess';
-                            break;
-                    }
-                element.append(mbcWidgetContent);
-            }
+                    var mbcWidgetId = scope.mbcWidgetId;
+                    var baseURL = '/modules/custom/mbc_app/components/';
+
+                    scope.getTemplate = function(){
+                        return baseURL + mbcWidgetId + "/index.html";
+                    };
+                }
 
         };
 
