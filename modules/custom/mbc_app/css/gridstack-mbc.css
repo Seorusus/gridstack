@@ -1,6 +1,21 @@
+/* temporary common template settings*/
 body {
   font-size: 14px!important;
 }
+
+@media (min-width: 851px) {
+  .layout-sidebar-first .main-content {
+    margin-left: 0!important;
+    margin-right: 0;
+  }
+  .layout-one-sidebar .main-content {
+    width: 100%!important;
+  }
+  .layout-container {
+    max-width: 100%!important;
+  }
+}
+/* end of temporary common template settings*/
 
 .grid1 {
   background: #c6ecf1;
