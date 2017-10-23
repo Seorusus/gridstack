@@ -65,10 +65,19 @@ ngStrap:
     - mbc_app/jquery.ui
     - mbc_app/jquery.ui.datepicker
 
+uiBootstrap:
+  version: "2.5.0"
+  js:
+    js/libraries/ui-bootstrap/ui-bootstrap-tpls-2.5.0.js:  {weight: -9}
+  dependencies:
+    - mbc_app/jquery
+    - mbc_app/jquery.ui
+    - mbc_app/jquery.ui.datepicker
+
 bootstrap:
     css:
       layout:
-        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css': {type: external}
+        js/libraries/bootstrap-3.3.7/css/bootstrap.css: {}
 
 mbc_directives:
   js:

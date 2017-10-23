@@ -1,7 +1,3 @@
-var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists', 'gridstack-angular', 'mgcrea.ngStrap', 'mgcrea.ngStrap.datepicker']);
+var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists', 'gridstack-angular', 'ui.bootstrap']);
 
-var app = angular.module('gridstack-angular', ['mbcApp', 'mgcrea.ngStrap', 'mgcrea.ngStrap.datepicker']).config(function($datepickerProvider) {
-    angular.extend($datepickerProvider.defaults, {
-        autoclose: true,
-    });
-})
+var app = angular.module('gridstack-angular', ['mbcApp', 'ui.bootstrap']);

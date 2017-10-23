@@ -54,7 +54,7 @@
 
     }]);
 
-    app.directive('gridstackItem', ['$timeout', '$datepicker', '$parse', function ($timeout, $datepicker, $parse) {
+    app.directive('gridstackItem', ['$timeout', '$parse', function ($timeout, $parse) {
 
         return {
             restrict: 'A',
@@ -142,7 +142,7 @@
 
     }]);
 
-    app.directive('mbcWidget', ['$compile', '$datepicker', '$parse', function ($compile, $datepicker, $parse) {
+    app.directive('mbcWidget', ['$compile', '$parse', function ($compile, $parse) {
 
         return {
             restrict: 'A',
