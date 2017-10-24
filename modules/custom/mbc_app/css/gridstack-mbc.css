@@ -1,0 +1,43 @@
+/* temporary common template settings*/
+body {
+  font-size: 14px!important;
+}
+
+@media (min-width: 851px) {
+  .layout-sidebar-first .main-content {
+    margin-left: 0!important;
+    margin-right: 0;
+  }
+  .layout-one-sidebar .main-content {
+    width: 100%!important;
+  }
+  .layout-container {
+    max-width: 100%!important;
+  }
+}
+/* end of temporary common template settings*/
+
+.grid1 {
+  background: #c6ecf1;
+}
+.grid-stack-item-content {
+  color: #2c3e50;
+  text-align: center;
+  background-color: #c4bec0;
+}
+
+@media (max-width: 768px) {
+  .grid-stack-item {
+    position: relative !important;
+    width: auto !important;
+    left: 0 !important;
+    top: auto !important;
+    margin-bottom: 20px;
+  }
+  .grid-stack-item .ui-resizable-handle {
+    display: none;
+  }
+  .grid-stack {
+    height: auto !important;
+  }
+}

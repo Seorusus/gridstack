@@ -36,6 +36,18 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                     });
                 })
         }
+
+        $scope.loadPage = function(nid) {
+            PageService.loadPage(nid, function(data){
+                if (data.field_gridstack_data !== undefined) {
+                    $scope.$emit('pageLoaded', {
+                        "nid": nid,
+                        "grid": JSON.parse(data.field_gridstack_data[0].value),
+                    });
+                }
+            });
+        }
+
         $scope.updatePage = function (nid, values) {
             var package = {
                 '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
@@ -78,6 +90,12 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
 app.controller('GridstackController', ['$scope', function($scope) {
 
+    $scope.button = {
+        'toggle' : true,
+    }
+
+    $scope.selectedDate = "2017-10-07T17:17:09.840Z";
+
     this.gridstack = null;
 
     this.init = function(element, options) {
@@ -102,17 +120,44 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope', function($scope) {
+mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageService) {
 
-    $scope.widgets = [{ x:0, y:0, width:3, height:1 }, { x:0, y:0, width:3, height:1 }];
+    var csrf = drupalSettings.csrf;
+    var baseUrl = drupalSettings.baseUrl;
+
+    $scope.$on('pageLoaded', function(event, pageObj) {
+        $scope.widgets = pageObj.grid;
+        $scope.nid = pageObj.nid;
+        console.log($scope);
+    });
 
     $scope.options = {
         cellHeight: 200,
         verticalMargin: 10
     };
 
-    $scope.addWidget = function() {
-        var newWidget = { x:0, y:0, width:3, height:1 };
+    $scope.savePage = function() {
+        var nid = $scope.nid;
+        var package = {
+            '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
+            'type' : {"target_id": "mbc_page"},
+        }
+        var values = {
+            'field_gridstack_data' : {
+                "value": JSON.stringify($scope.widgets)
+            },
+        }
+        angular.forEach(values, function(value, key){
+            package[key] = value;
+        });
+        PageService.updatePage(package, csrf, baseUrl, nid)
+            .then(function() {
+                console.log("Saved");
+            });
+    }
+
+    $scope.addWidget = function(widid) {
+        var newWidget = { x:0, y:0, width:3, height:1, mbcWidgetId:widid};
         $scope.widgets.push(newWidget);
     };
 

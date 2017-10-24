@@ -1,5 +1,3 @@
-var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists', 'gridstack-angular']);
+var mbcApp = angular.module("mbcApp", ['ngSanitize', 'dndLists', 'gridstack-angular', 'ui.bootstrap']);
 
-angular.module('gridstack-angular', ['mbcApp']);
-
-var app = angular.module('gridstack-angular');
+var app = angular.module('gridstack-angular', ['mbcApp', 'ui.bootstrap']);

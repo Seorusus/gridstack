@@ -54,7 +54,7 @@
 
     }]);
 
-    app.directive('gridstackItem', ['$timeout', function($timeout) {
+    app.directive('gridstackItem', ['$timeout', '$parse', function ($timeout, $parse) {
 
         return {
             restrict: 'A',
@@ -73,7 +73,8 @@
                 gsItemMinHeight: '=?',
                 gsItemMaxHeight: '=?',
                 gsItemMinWidth: '=?',
-                gsItemMaxWidth: '=?'
+                gsItemMaxWidth: '=?',
+                mbcWidgetId: '=',
             },
             link: function(scope, element, attrs, controller) {
                 if (scope.gsItemId) {
@@ -88,6 +89,10 @@
                 $(element).attr('data-gs-max-width', scope.gsItemMaxWidth);
                 $(element).attr('data-gs-max-height', scope.gsItemMaxHeight);
                 $(element).attr('data-gs-auto-position', scope.gsItemAutopos);
+                $(element).attr('mbc-widget-id', scope.mbcWidgetId);
+                var mbcWidget = angular.element(element[0].querySelector('.mbc-widget'));
+                $(mbcWidget).attr('mbc-widget-id', scope.mbcWidgetId);
+
                 var widget = controller.addItem(element);
                 var item = element.data('_gridstack_node');
                 $timeout(function() {
@@ -132,6 +137,27 @@
                 });
 
             }
+
+        };
+
+    }]);
+
+    app.directive('mbcWidget', ['$compile', '$parse', function ($compile, $parse) {
+
+        return {
+            restrict: 'A',
+            template: '<div ng-include="getTemplate()"></div>',
+            scope: {
+                mbcWidgetId: "=",
+            },
+            link: function (scope, element, attrs, controller) {
+                    var mbcWidgetId = scope.mbcWidgetId;
+                    var baseURL = '/modules/custom/mbc_app/components/';
+
+                    scope.getTemplate = function(){
+                        return baseURL + mbcWidgetId + "/index.html";
+                    };
+                }
 
         };
 

@@ -1,9 +1,10 @@
 <h2>{{  title }}</h2>
 
 <div ng-app="mbcApp">
-    <div class="left-sidebar" style="width: 15%; float: left">
-        <div ng-controller="PageList">
-            {% verbatim %}
+    <div ng-controller="DemoCtrl">
+        <div class="left-sidebar" style="width: 15%; float: left">
+            <div ng-controller="PageList">
+                {% verbatim %}
              <form ng-submit="newPage()" >
                 <div class="form-group">
                     <label>Create a new Page</label>
@@ -13,36 +14,50 @@
              </form>
              <ul class="pages" dnd-list="pages">
                 <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
-                    <a href="page/{{ page.nid }}" ng-bind-html="page.title"></a>
-                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>)
+                    <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
+                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>&nbsp;<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
                 </li>
               </ul>
               <hr />
               <a href="#" ng-click="savePagesList()">Save</a>
             {% endverbatim %}
+            </div>
         </div>
-    </div>
-    <div ng-controller="DemoCtrl">
         {% verbatim %}
-<p>{{widgets}}</p>
+          <p>{{widgets}}</p>
             <div class="main-canvas" style="width: 70%; float: left">
-                <div gridstack class="grid-stack grid1" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)">
-                    <div gridstack-item ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
-                         gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)">
+                <div gridstack class="grid-stack grid1" nid="{{nid}}" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)">
+                    <div gridstack-item ng-model="widgets" ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
+                         gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId">
                         <div class="grid-stack-item-content">
                             <a class="btn btn-primary" ng-click="removeWidget(w)" href="#">remove</a>
+                              <div mbc-widget class="mbc-widget" mbc-widget-id="w.mbcWidgetId">
+                            </div>
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-primary" ng-click="savePage()" href="#">Save</a>
             </div>
             <div class="right-canvas" style="width: 15%; float: left">
 
                 <ul>
                   <li>
-                    <a class="btn btn-primary" ng-click="addWidget()" href="#">Add Button</a>
+                    <a class="btn btn-primary" ng-click="addWidget('form')" href="#">Add Form</a>
                   </li>
                   <li>
-                    <a class="btn btn-primary" ng-click="addWidget()" href="#">Add Calendar</a>
+                    <a class="btn btn-primary" ng-click="addWidget('image')" href="#">Add Image</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('video')" href="#">Add Video</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('button')" href="#">Add Button</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('calendar')" href="#">Add Calendar</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('countdown-timer')" href="#">Add Countdown Timer</a>
                   </li>
                 </ul>
 
