@@ -157,7 +157,23 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageSer
     }
 
     $scope.addWidget = function(widid) {
-        var newWidget = { x:0, y:0, width:3, height:1, mbcWidgetId:widid};
+        var width = 3;
+        var height = 1;
+        switch(widid) {
+            case 'calendar':
+                width = 5;
+                height = 2;
+                break;
+            case 'button':
+                width = 1;
+                height = 1;
+                break;
+            case 'form':
+                width = 6;
+                height = 2;
+                break;
+        }
+        var newWidget = { x:0, y:0, width:width, height:height, mbcWidgetId:widid};
         $scope.widgets.push(newWidget);
     };
 
