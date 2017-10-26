@@ -74,6 +74,13 @@ uiBootstrap:
     - mbc_app/jquery.ui
     - mbc_app/jquery.ui.datepicker
 
+mbcCountdown:
+    js:
+      js/libraries/coundown/jquery.time-to.min.js: {}
+    css:
+      layout:
+        js/libraries/coundown/timeTo.css: {}
+
 bootstrap:
     css:
       layout:

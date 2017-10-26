@@ -172,6 +172,10 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageSer
                 width = 6;
                 height = 2;
                 break;
+            case 'countdown':
+                width = 5;
+                height = 1;
+                break;
         }
         var newWidget = { x:0, y:0, width:width, height:height, mbcWidgetId:widid};
         $scope.widgets.push(newWidget);
