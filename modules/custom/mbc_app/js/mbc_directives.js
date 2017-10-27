@@ -142,11 +142,26 @@
 
     }]);
 
+    app.directive('mbcCountdown', ['$compile', '$parse', function ($compile, $parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs, controller) {
+                element.timeTo({
+                 timeTo: new Date('Dec 10 2017 00:00:00'),
+                 displayCaptions: true,
+                 fontSize: 56,
+                });
+            }
+
+        };
+
+    }]);
+
     app.directive('mbcWidget', ['$compile', '$parse', function ($compile, $parse) {
 
         return {
             restrict: 'A',
-            template: '<div ng-include="getTemplate()"></div>',
+            template: '<div ng-include="getTemplate()" class="mbc-widget-wrapper"></div>',
             scope: {
                 mbcWidgetId: "=",
             },

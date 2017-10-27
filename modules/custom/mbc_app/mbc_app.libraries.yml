@@ -74,6 +74,15 @@ uiBootstrap:
     - mbc_app/jquery.ui
     - mbc_app/jquery.ui.datepicker
 
+mbcCountdown:
+    js:
+      js/libraries/coundown/jquery.time-to.min.js: {}
+    css:
+      layout:
+        js/libraries/coundown/timeTo.css: {}
+videosharing:
+    js:
+      js/libraries/videosharing/build/ng-videosharing-embed.min.js: {}
 bootstrap:
     css:
       layout:
