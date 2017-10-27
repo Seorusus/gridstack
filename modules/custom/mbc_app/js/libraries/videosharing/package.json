@@ -1,0 +1,32 @@
+{
+  "name": "ng-videosharing-embed",
+  "version": "0.3.8",
+  "description": "Embed videos using AngularJS directives",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-cli": "~1.2.0",
+    "grunt-contrib-concat" : "~1.0.1",
+    "grunt-contrib-uglify" : "~2.0.0",
+    "phantomjs-prebuilt": "~2.1.14",
+    "karma": "~1.3.0",
+    "jasmine-core": "~2.5.2",
+    "karma-junit-reporter": "~1.2.0",
+    "karma-phantomjs-launcher" : "~1.0.2",
+    "karma-jasmine": "~1.1.0",
+    "karma-commonjs": "~1.0.0",
+    "grunt-karma": "~2.0.0"
+  },
+  "scripts": { "test": "grunt test","build": "grunt" },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/erost/ng-videosharing-embed.git"
+  },
+  "author": "erost",
+  "license": "MIT",
+  "main":"index.js"
+}

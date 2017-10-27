@@ -122,6 +122,9 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageService) {
 
+    $scope.videoUrl = "http://www.youtube.com/watch?v=vabnZ9-ex7o";
+    $scope.width = '100%';
+
     var csrf = drupalSettings.csrf;
     var baseUrl = drupalSettings.baseUrl;
 
