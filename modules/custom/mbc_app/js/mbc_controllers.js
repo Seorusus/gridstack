@@ -160,27 +160,69 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageSer
     }
 
     $scope.addWidget = function(widid) {
-        var width = 3;
-        var height = 1;
+        var newWidget = {
+            x:0,
+            y:0,
+            width:3,
+            height:1,
+            mbcWidgetId:widid,
+            settings: {
+                font: '',
+                border: '',
+                background: '',
+            }
+        };
         switch(widid) {
             case 'calendar':
-                width = 5;
-                height = 2;
+                newWidget.width = 5;
+                newWidget.height = 2;
+                newWidget.date = '';
                 break;
             case 'button':
-                width = 1;
-                height = 1;
+                newWidget.width = 1;
+                newWidget.height = 1;
+                newWidget.buttonValue = '';
                 break;
             case 'form':
-                width = 6;
-                height = 2;
+                newWidget.width = 6;
+                newWidget.height = 2;
+                newWidget.email = '';
+                newWidget.password = '';
+                newWidget.rememberMe = '';
+                newWidget.buttonValue = '';
                 break;
             case 'countdown':
-                width = 5;
-                height = 1;
+                newWidget.width = 5;
+                newWidget.height = 1;
+                newWidget.date = '';
+                break;
+            case 'video':
+                newWidget.link = '';
+                break;
+            case 'image':
+                newWidget.link = '';
+                break;
+            case 'price':
+                newWidget.card1 = {
+                    title: '',
+                    description: '',
+                    price: '',
+                    button: '',
+                };
+                newWidget.card2 = {
+                    title: '',
+                    description: '',
+                    price: '',
+                    button: '',
+                };
+                newWidget.card3 = {
+                    title: '',
+                    description: '',
+                    price: '',
+                    button: '',
+                };
                 break;
         }
-        var newWidget = { x:0, y:0, width:width, height:height, mbcWidgetId:widid};
         $scope.widgets.push(newWidget);
     };
 
