@@ -17,6 +17,7 @@ mbcApp.service('PageService', ['$http',
             // On success, pass the results to the view via the scope object
                 .then(function(response){
                     var resData = response.data;
+                    console.log(resData);
                     callback(resData);
                 });
         }
@@ -33,10 +34,12 @@ mbcApp.service('PageService', ['$http',
             })
         };
         this.updatePage = function(package, csrf, baseUrl, nid){
+            console.log(package);
             return $http({
                 url: baseUrl + '/node/' + nid + '?_format=hal_json',
                 method: 'PATCH',
                 data: package, // pass the data object as defined above
+
                 headers: {
                     // "Authorization": "Basic YWRtaW4vYWRtaW4=", // encoded user/pass
                     "X-CSRF-Token": csrf,

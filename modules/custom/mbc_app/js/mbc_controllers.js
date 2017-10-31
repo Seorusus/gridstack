@@ -147,7 +147,7 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageSer
         }
         var values = {
             'field_gridstack_data' : {
-                "value": JSON.stringify($scope.widgets)
+                "value": angular.toJson($scope.widgets)
             },
         }
         angular.forEach(values, function(value, key){
@@ -160,29 +160,82 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageSer
     }
 
     $scope.addWidget = function(widid) {
-        var width = 3;
-        var height = 1;
+        var newWidget = {
+            x:0,
+            y:0,
+            width:3,
+            height:1,
+            mbcWidgetId:widid,
+            mbcComponentId:$scope.widgets.length + 1,
+            settings: {
+                font: '',
+                border: '',
+                backgroundColor: '',
+                backgroundUrl: '',
+            }
+        };
         switch(widid) {
             case 'calendar':
-                width = 5;
-                height = 2;
+                newWidget.width = 5;
+                newWidget.height = 2;
+                newWidget.settings.date = '';
                 break;
             case 'button':
-                width = 1;
-                height = 1;
+                newWidget.width = 1;
+                newWidget.height = 1;
+                newWidget.settings.buttonValue = '';
                 break;
             case 'form':
-                width = 6;
-                height = 2;
+                newWidget.width = 6;
+                newWidget.height = 2;
+                newWidget.settings.email = '';
+                newWidget.settings.password = '';
+                newWidget.settings.rememberMe = '';
+                newWidget.settings.buttonValue = '';
                 break;
             case 'countdown':
-                width = 5;
-                height = 1;
+                newWidget.width = 5;
+                newWidget.height = 1;
+                newWidget.settings.date = '';
+                break;
+            case 'video':
+                newWidget.settings.link = '';
+                break;
+            case 'image':
+                newWidget.settings.link = '';
+                break;
+            case 'price':
+                newWidget.settings.card1 = {
+                    title: '',
+                    description: '',
+                    price: '',
+                    button: '',
+                };
+                newWidget.settings.card2 = {
+                    title: '',
+                    description: '',
+                    price: '',
+                    button: '',
+                };
+                newWidget.settings.card3 = {
+                    title: '',
+                    description: '',
+                    price: '',
+                    button: '',
+                };
                 break;
         }
-        var newWidget = { x:0, y:0, width:width, height:height, mbcWidgetId:widid};
         $scope.widgets.push(newWidget);
+        console.log($scope.widgets);
+        console.log($scope.getComponentProperties($scope.widgets.length));
     };
+
+    $scope.getComponentProperties = function(id) {
+        var found = $scope.widgets.filter(function (obj) {
+            return obj.mbcComponentId === id;
+        })[0];
+        return found.settings;
+    }
 
     $scope.moveWidget = function() {
         $scope.widgets[0].x = 1;

@@ -28,12 +28,12 @@
             <div class="main-canvas" style="width: 70%; float: left">
                 <div gridstack class="grid-stack grid1" nid="{{nid}}" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)">
                     <div gridstack-item ng-model="widgets" ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
-                         gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId">
+                         gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                         <div class="grid-stack-item-content">
                             <a class="btn-grid-remove" ng-click="removeWidget(w)" href="#">
                               <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Remove"></span>
                             </a>
-                              <div mbc-widget class="mbc-widget" mbc-widget-id="w.mbcWidgetId">
+                              <div mbc-widget class="mbc-widget" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                             </div>
                         </div>
                     </div>
@@ -60,6 +60,9 @@
                   </li>
                   <li>
                     <a class="btn btn-primary" ng-click="addWidget('countdown')" href="#">Add Countdown Timer</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('price')" href="#">Price</a>
                   </li>
                 </ul>
 

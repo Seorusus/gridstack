@@ -1,0 +1,62 @@
+uuid: 7803e318-f7a4-4419-a9fe-988fa2ebf8af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.calendar.field_background_color
+    - field.field.paragraph.calendar.field_background_image
+    - field.field.paragraph.calendar.field_border
+    - field.field.paragraph.calendar.field_calendar_date
+    - field.field.paragraph.calendar.field_font
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.calendar
+  module:
+    - datetime
+    - image
+id: paragraph.calendar.default
+targetEntityType: paragraph
+bundle: calendar
+mode: default
+content:
+  field_background_color:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_background_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_border:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_calendar_date:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_font:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true
