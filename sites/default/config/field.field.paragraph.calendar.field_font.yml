@@ -1,0 +1,19 @@
+uuid: 7e1bfc76-447d-40e1-936d-49e20f8a82f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_font
+    - paragraphs.paragraphs_type.calendar
+id: paragraph.calendar.field_font
+field_name: field_font
+entity_type: paragraph
+bundle: calendar
+label: Font
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

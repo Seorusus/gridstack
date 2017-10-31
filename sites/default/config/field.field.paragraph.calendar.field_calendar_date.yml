@@ -1,0 +1,21 @@
+uuid: 2f90479f-77f2-4800-8b40-cf7c1849b9d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_calendar_date
+    - paragraphs.paragraphs_type.calendar
+  module:
+    - datetime
+id: paragraph.calendar.field_calendar_date
+field_name: field_calendar_date
+entity_type: paragraph
+bundle: calendar
+label: 'Calendar date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

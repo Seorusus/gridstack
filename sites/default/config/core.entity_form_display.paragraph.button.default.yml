@@ -1,0 +1,63 @@
+uuid: aaaded85-a192-42b2-8024-47a7d9a5fcdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.button.field_background_color
+    - field.field.paragraph.button.field_background_image
+    - field.field.paragraph.button.field_border
+    - field.field.paragraph.button.field_button_text
+    - field.field.paragraph.button.field_font
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.button
+  module:
+    - image
+id: paragraph.button.default
+targetEntityType: paragraph
+bundle: button
+mode: default
+content:
+  field_background_color:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_background_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_border:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_button_text:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_font:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true
