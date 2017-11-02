@@ -30,9 +30,12 @@
                     <div gridstack-item ng-model="widgets" ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
                          gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                         <div class="grid-stack-item-content">
-                            <a class="btn-grid-remove" ng-click="removeWidget(w)" href="#">
-                              <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Remove"></span>
-                            </a>
+                          <a class="btn-grid-edit" ng-click="editWidget(w.mbcComponentId)" href="#">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true" aria-label="Edit"></span>
+                              </a>
+                              <a class="btn-grid-remove" ng-click="removeWidget(w)" href="#">
+                                  <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Remove"></span>
+                              </a>
                               <div mbc-widget class="mbc-widget" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                             </div>
                         </div>
@@ -69,4 +72,28 @@
             </div>
         {% endverbatim %}
     </div>
+        {% verbatim %}    
+    <div  ng-controller="ModalController as $ctrl" class="modal-demo">  
+          <script type="text/ng-template" id="dialog.html"> 
+
+            <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Edit element</h3>
+            </div>
+            <div class="modal-body" >
+            <form>
+              <div class="form-group" ng-repeat="(key,field) in $ctrl.settings">
+
+                <label>{{key}}</label>
+                <input type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">    
+
+            </div>
+            </form> 
+            </div>
+            <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+            </div>
+          </script>
+        </div>
+        {% endverbatim %}
 </div>
