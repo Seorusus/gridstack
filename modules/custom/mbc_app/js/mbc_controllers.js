@@ -120,7 +120,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageService) {
+mbcApp.controller('DemoCtrl', ['$scope', 'PageService', 'Upload', function($scope, PageService, Upload) {
 
     $scope.videoUrl = "http://www.youtube.com/watch?v=vabnZ9-ex7o";
     $scope.width = '100%';
@@ -158,6 +158,26 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', function($scope, PageSer
                 console.log("Saved");
             });
     }
+
+    $scope.upload = function (file) {
+        var package = {
+            '_links': {
+                'type':
+                    { 'href': baseUrl + '/rest/type/file/field_image' }
+            },
+            'type' : {"target_id": "image"},
+
+        }
+        PageService.uploadFile(file, package, csrf, baseUrl)
+            .then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
 
     $scope.addWidget = function(widid) {
         var newWidget = {

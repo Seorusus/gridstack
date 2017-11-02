@@ -80,9 +80,16 @@ mbcCountdown:
     css:
       layout:
         js/libraries/coundown/timeTo.css: {}
+
 videosharing:
     js:
       js/libraries/videosharing/build/ng-videosharing-embed.min.js: {}
+
+ngFileUpload:
+    js:
+      js/libraries/ng-file-upload/ng-file-upload.min.js: {}
+      js/libraries/ng-file-upload/ng-file-upload-shim.min.js: {}
+
 bootstrap:
     css:
       layout:
