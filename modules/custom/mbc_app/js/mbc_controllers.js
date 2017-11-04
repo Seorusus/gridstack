@@ -189,6 +189,8 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', 'Upload', fu
             mbcComponentId:$scope.widgets.length + 1,
             settings: {
                 font: '',
+                text: '',
+                link: '',
                 border: '',
                 backgroundColor: '',
                 backgroundUrl: '',
@@ -198,7 +200,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', 'Upload', fu
             case 'calendar':
                 newWidget.width = 5;
                 newWidget.height = 2;
-                newWidget.settings.date = '';
+                newWidget.settings.calDate = '';
                 break;
             case 'button':
                 newWidget.width = 1;
@@ -225,24 +227,22 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', 'Upload', fu
                 newWidget.settings.link = '';
                 break;
             case 'price':
-                newWidget.settings.card1 = {
-                    title: '',
-                    description: '',
-                    price: '',
-                    button: '',
-                };
-                newWidget.settings.card2 = {
-                    title: '',
-                    description: '',
-                    price: '',
-                    button: '',
-                };
-                newWidget.settings.card3 = {
-                    title: '',
-                    description: '',
-                    price: '',
-                    button: '',
-                };
+                newWidget.settings.title = '';
+                newWidget.settings.description = '';
+                newWidget.settings.price = '';
+                newWidget.settings.button = '';
+                // newWidget.settings.card2 = {
+                //     title: '',
+                //     description: '',
+                //     price: '',
+                //     button: '',
+                // };
+                // newWidget.settings.card3 = {
+                //     title: '',
+                //     description: '',
+                //     price: '',
+                //     button: '',
+                // };
                 break;
         }
         $scope.widgets.push(newWidget);
@@ -289,24 +289,15 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', 'Upload', fu
       });
       $scope.modalInstance.result.then(function (res) {
         $scope.settings = res;
-
         angular.forEach($scope.widgets, function (widget,key ) {
           if (widget.mbcComponentId == id)
           {
             $scope.widgets[key].settings = $scope.settings;
           }
         });
-
-
-
       }, function (res) {
         $scope.settings = res;
       });
-
-
-
-
-
     };
 
 
