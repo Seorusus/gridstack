@@ -120,7 +120,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope', 'PageService', 'Upload', function($scope, PageService, Upload) {
+mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', 'Upload', function($scope, $uibModal, PageService, Upload) {
 
     $scope.videoUrl = "http://www.youtube.com/watch?v=vabnZ9-ex7o";
     $scope.width = '100%';
@@ -268,6 +268,48 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', 'Upload', function($scop
         $scope.widgets.splice(index, 1);
     };
 
+    $scope.editWidget = function (id) {
+      console.log('id : '+id);
+      // get settings
+      $scope.settings = $scope.getComponentProperties(id);
+      // seve old settings
+      $scope.old_settings = angular.copy($scope.settings);
+
+      $scope.modalInstance = $uibModal.open({
+        animation: true,
+        ariaLabelledBy: 'modal-title-bottom',
+        ariaDescribedBy: 'modal-body-bottom',
+        templateUrl: 'dialog.html',
+        size: 'sm',
+        controller: 'ModalController',
+        controllerAs: '$ctrl',
+        backdrop: false,
+        scope: $scope,
+
+      });
+      $scope.modalInstance.result.then(function (res) {
+        $scope.settings = res;
+
+        angular.forEach($scope.widgets, function (widget,key ) {
+          if (widget.mbcComponentId == id)
+          {
+            $scope.widgets[key].settings = $scope.settings;
+          }
+        });
+
+
+
+      }, function (res) {
+        $scope.settings = res;
+      });
+
+
+
+
+
+    };
+
+
     $scope.onChange = function(event, items) {
         console.log("onChange event: "+event+" items:"+items);
     };
@@ -297,3 +339,21 @@ mbcApp.controller('DemoCtrl', ['$scope', 'PageService', 'Upload', function($scop
     };
 
 }]);
+
+mbcApp.controller('ModalController', function ($scope)
+{
+  var $ctrl = this;
+  $ctrl.settings = $scope.settings;
+  $ctrl.ok = function () {
+    $scope.modalInstance.close($ctrl.settings);
+  };
+
+  $ctrl.cancel = function () {
+    $scope.settings = $scope.old_settings;
+    $scope.modalInstance.close($scope.settings);
+  };
+
+
+
+
+});
