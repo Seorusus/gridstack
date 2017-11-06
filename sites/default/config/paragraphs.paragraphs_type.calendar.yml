@@ -1,9 +1,0 @@
-uuid: 9bb67c8a-2615-4bec-81f1-78ad26f079a3
-langcode: en
-status: true
-dependencies: {  }
-id: calendar
-label: Calendar
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

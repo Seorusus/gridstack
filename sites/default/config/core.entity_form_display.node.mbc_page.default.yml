@@ -5,11 +5,12 @@ dependencies:
   config:
     - field.field.node.mbc_page.body
     - field.field.node.mbc_page.field_gridstack_data
+    - field.field.node.mbc_page.field_image
     - field.field.node.mbc_page.field_weight
-    - field.field.node.mbc_page.field_widgets
+    - image.style.thumbnail
     - node.type.mbc_page
   module:
-    - paragraphs
+    - image
     - path
     - text
     - weight
@@ -41,23 +42,19 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_image:
+    weight: 34
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_weight:
     weight: 32
     settings: {  }
     third_party_settings: {  }
     type: weight_selector
-    region: content
-  field_widgets:
-    type: entity_reference_paragraphs
-    weight: 35
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
     region: content
   path:
     type: path
