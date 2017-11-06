@@ -12,12 +12,20 @@ mbcApp.service('PageService', ['$http', 'Upload',
                     callback(resData);
                 });
         };
+        this.mbcGetFiles = function(callback){
+            $http.get('/api/mbc-files')
+            // On success, pass the results to the view via the scope object
+                .then(function(response){
+                    var resData = response.data;
+                    console.log(resData);
+                    callback(resData);
+                });
+        };
         this.loadPage = function (nid, callback) {
             $http.get('/node/' + nid + '?_format=hal_json')
             // On success, pass the results to the view via the scope object
                 .then(function(response){
                     var resData = response.data;
-                    console.log(resData);
                     callback(resData);
                 });
         }

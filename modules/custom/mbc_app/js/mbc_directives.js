@@ -158,7 +158,6 @@
     }]);
 
     app.directive('mbcWidget', ['$compile', '$parse', function ($compile, $parse) {
-
         return {
             restrict: 'A',
             template: '<div ng-include="getTemplate()" class="mbc-widget-wrapper"></div>',
@@ -177,4 +176,15 @@
         };
 
     }]);
+    mbcApp.directive('fileSelection', function() {
+        return {
+           restrict: 'E',
+            controller: 'DemoCtrl',
+           templateUrl: '/modules/custom/mbc_app/js/dir-templates/fileSelection.html',
+           replace: true,
+           link: function ($scope, element, attrs) {
+               console.log($scope.mbcFiles);
+           }
+        }
+    });
 })(jQuery);
