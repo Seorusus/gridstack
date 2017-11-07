@@ -66,3 +66,13 @@ body {
   height: auto;
 }
 /*contdown template*/
+
+.mbc-file-manager {
+  max-height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+.img-preview-item a img {
+  height: 100px;
+  width: 100px;
+}

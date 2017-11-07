@@ -1,0 +1,12 @@
+<div class="panel panel-default mbc-file-manager">
+  <div class="panel-body">
+    <div class="row">
+      <div ng-repeat="f in mbcFiles" class="col-xs-3 img-preview-item">
+        <a href="{{f.uri}}" id="mbc-img-thumb" ng-click="setImageUrl($event, f)" uritype="{{urlType}}">
+          <img src="{{f.uri}}" />
+          <!--<span class="img-title">{{f.filename}}</span>-->
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -120,7 +120,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($scope,$uibModal, PageService) {
+mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($scope, $uibModal, PageService) {
 
     $scope.videoUrl = "http://www.youtube.com/watch?v=vabnZ9-ex7o";
     $scope.width = '100%';
@@ -138,6 +138,13 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         cellHeight: 200,
         verticalMargin: 10
     };
+
+    var mbcShowFiles = function() {
+        PageService.mbcGetFiles(function(data){
+            $scope.mbcFiles = data;
+        });
+    }
+    mbcShowFiles();
 
     $scope.savePage = function() {
         var nid = $scope.nid;
@@ -169,6 +176,8 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             mbcComponentId:$scope.widgets.length + 1,
             settings: {
                 font: '',
+                text: '',
+                link: '',
                 border: '',
                 backgroundColor: '',
                 backgroundUrl: '',
@@ -178,7 +187,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             case 'calendar':
                 newWidget.width = 5;
                 newWidget.height = 2;
-                newWidget.settings.date = '';
+                newWidget.settings.calDate = '';
                 break;
             case 'button':
                 newWidget.width = 1;
@@ -202,33 +211,42 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 newWidget.settings.link = '';
                 break;
             case 'image':
-                newWidget.settings.link = '';
+                newWidget.settings.imageUrl = '';
                 break;
             case 'price':
-                newWidget.settings.card1 = {
-                    title: '',
-                    description: '',
-                    price: '',
-                    button: '',
-                };
-                newWidget.settings.card2 = {
-                    title: '',
-                    description: '',
-                    price: '',
-                    button: '',
-                };
-                newWidget.settings.card3 = {
-                    title: '',
-                    description: '',
-                    price: '',
-                    button: '',
-                };
+                newWidget.settings.title = '';
+                newWidget.settings.description = '';
+                newWidget.settings.price = '';
+                newWidget.settings.button = '';
+                // newWidget.settings.card2 = {
+                //     title: '',
+                //     description: '',
+                //     price: '',
+                //     button: '',
+                // };
+                // newWidget.settings.card3 = {
+                //     title: '',
+                //     description: '',
+                //     price: '',
+                //     button: '',
+                // };
                 break;
         }
         $scope.widgets.push(newWidget);
         console.log($scope.widgets);
         console.log($scope.getComponentProperties($scope.widgets.length));
     };
+
+    $scope.setImageUrl = function($event, f) {
+        $event.preventDefault();
+        var imgUrlType = this.$parent.urlType;
+        $scope.$emit('changeComponentUrlImage', {
+            imgUrlType: imgUrlType,
+            file: f,
+        });
+
+        console.log(f);
+    }
 
     $scope.getComponentProperties = function(id) {
         var found = $scope.widgets.filter(function (obj) {
@@ -247,14 +265,15 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         var index = $scope.widgets.indexOf(w);
         $scope.widgets.splice(index, 1);
     };
-    
+
     $scope.editWidget = function (id) {
+      $scope.currentEditWidget = id;
       console.log('id : '+id);
       // get settings
       $scope.settings = $scope.getComponentProperties(id);
       // seve old settings
       $scope.old_settings = angular.copy($scope.settings);
-      
+
       $scope.modalInstance = $uibModal.open({
         animation: true,
         ariaLabelledBy: 'modal-title-bottom',
@@ -269,26 +288,24 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
       });
       $scope.modalInstance.result.then(function (res) {
         $scope.settings = res;
-        
         angular.forEach($scope.widgets, function (widget,key ) {
           if (widget.mbcComponentId == id)
           {
             $scope.widgets[key].settings = $scope.settings;
           }
         });
-        
-        
-        
       }, function (res) {
         $scope.settings = res;
       });
-      
-     
-      
-      
-     
+        $scope.$on('changeComponentUrlImage', function (event, data) {
+            angular.forEach($scope.widgets, function (widget,key ) {
+                if (widget.mbcComponentId == $scope.currentEditWidget)
+                {
+                    $scope.widgets[key].settings[data.imgUrlType] = data.file.uri;
+                }
+            });
+        });
     };
-    
 
     $scope.onChange = function(event, items) {
         console.log("onChange event: "+event+" items:"+items);
@@ -332,8 +349,5 @@ mbcApp.controller('ModalController', function ($scope)
     $scope.settings = $scope.old_settings;
     $scope.modalInstance.close($scope.settings);
   };
-
-
-
 
 });

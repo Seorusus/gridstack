@@ -1,9 +1,0 @@
-uuid: 6abe34c2-d3a2-4b54-8320-f5ce5b81284d
-langcode: en
-status: true
-dependencies: {  }
-id: button
-label: Button
-icon_uuid: null
-description: ''
-behavior_plugins: {  }
