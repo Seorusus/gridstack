@@ -192,7 +192,7 @@ display:
           type: file_uri
           settings:
             link_to_file: false
-            file_download_path: false
+            file_download_path: true
           group_column: value
           group_columns: {  }
           group_rows: true
