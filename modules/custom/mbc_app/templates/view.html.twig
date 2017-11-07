@@ -70,11 +70,8 @@
                 </ul>
 
             </div>
-        {% endverbatim %}
-    </div>
-        {% verbatim %}    
-    <div  ng-controller="ModalController as $ctrl" class="modal-demo">  
-          <script type="text/ng-template" id="dialog.html"> 
+            <div  ng-controller="ModalController as $ctrl" class="modal-demo">
+            <script type="text/ng-template" id="dialog.html">
 
             <div class="modal-header">
             <h3 class="modal-title" id="modal-title">Edit element</h3>
@@ -84,10 +81,13 @@
               <div class="form-group" ng-repeat="(key,field) in $ctrl.settings">
 
                 <label>{{key}}</label>
-                <input type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">    
+                <input type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">
+                   <div ng-if="(key === 'imageUrl') || (key === 'backgroundUrl')">
+                      <file-selection url-type="{{key}}"></file-selection>
+                    </div>
 
             </div>
-            </form> 
+            </form>
             </div>
             <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
@@ -96,4 +96,5 @@
           </script>
         </div>
         {% endverbatim %}
+    </div>
 </div>

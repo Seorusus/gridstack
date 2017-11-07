@@ -182,8 +182,13 @@
             controller: 'DemoCtrl',
            templateUrl: '/modules/custom/mbc_app/js/dir-templates/fileSelection.html',
            replace: true,
+            scope: {
+                urlType: '@',
+            },
            link: function ($scope, element, attrs) {
-               console.log($scope.mbcFiles);
+               // console.log(attrs);
+               // var uType = attrs.urlType;
+               // $(element).find('a').attr('uritype', uType);
            }
         }
     });

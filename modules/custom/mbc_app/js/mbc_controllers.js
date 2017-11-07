@@ -211,7 +211,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 newWidget.settings.link = '';
                 break;
             case 'image':
-                newWidget.settings.link = '';
+                newWidget.settings.imageUrl = '';
                 break;
             case 'price':
                 newWidget.settings.title = '';
@@ -237,6 +237,17 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         console.log($scope.getComponentProperties($scope.widgets.length));
     };
 
+    $scope.setImageUrl = function($event, f) {
+        $event.preventDefault();
+        var imgUrlType = this.$parent.urlType;
+        $scope.$emit('changeComponentUrlImage', {
+            imgUrlType: imgUrlType,
+            file: f,
+        });
+
+        console.log(f);
+    }
+
     $scope.getComponentProperties = function(id) {
         var found = $scope.widgets.filter(function (obj) {
             return obj.mbcComponentId === id;
@@ -256,6 +267,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
     };
 
     $scope.editWidget = function (id) {
+      $scope.currentEditWidget = id;
       console.log('id : '+id);
       // get settings
       $scope.settings = $scope.getComponentProperties(id);
@@ -285,8 +297,15 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
       }, function (res) {
         $scope.settings = res;
       });
+        $scope.$on('changeComponentUrlImage', function (event, data) {
+            angular.forEach($scope.widgets, function (widget,key ) {
+                if (widget.mbcComponentId == $scope.currentEditWidget)
+                {
+                    $scope.widgets[key].settings[data.imgUrlType] = data.file.uri;
+                }
+            });
+        });
     };
-
 
     $scope.onChange = function(event, items) {
         console.log("onChange event: "+event+" items:"+items);
@@ -330,8 +349,5 @@ mbcApp.controller('ModalController', function ($scope)
     $scope.settings = $scope.old_settings;
     $scope.modalInstance.close($scope.settings);
   };
-
-
-
 
 });
