@@ -157,15 +157,14 @@
 
     }]);
 
-    app.directive('mbcWidget', ['$compile', '$parse', function ($compile, $parse) {
+    mbcApp.directive('mbcWidget', ['$compile', '$parse', function ($compile, $parse) {
         return {
             restrict: 'A',
+            controller: 'DemoCtrl',
             template: '<div ng-include="getTemplate()" class="mbc-widget-wrapper"></div>',
-            scope: {
-                mbcWidgetId: "=",
-            },
+
             link: function (scope, element, attrs, controller) {
-                    var mbcWidgetId = scope.mbcWidgetId;
+                    var mbcWidgetId = scope.w.mbcWidgetId;
                     var baseURL = '/modules/custom/mbc_app/components/';
 
                     scope.getTemplate = function(){
