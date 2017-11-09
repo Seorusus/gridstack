@@ -67,6 +67,9 @@
                   <li>
                     <a class="btn btn-primary" ng-click="addWidget('price')" href="#">Price</a>
                   </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('card')" href="#">Card</a>
+                  </li>
                 </ul>
 
             </div>
@@ -82,7 +85,7 @@
 
                 <label>{{key}}</label>
                 <input type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">
-                   <div ng-if="(key === 'imageUrl') || (key === 'backgroundUrl')">
+                   <div ng-if="(key === 'imageUrl') || (key === 'backgroundUrl') || (key === 'cardImage')">
                       <file-selection url-type="{{key}}"></file-selection>
                     </div>
 
