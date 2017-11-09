@@ -218,10 +218,18 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 newWidget.settings.description = '';
                 newWidget.settings.price = '';
                 newWidget.settings.button = '';
+                break;
             case 'card':
                 newWidget.settings.cardImage = '';
                 newWidget.settings.cardTitle = '';
                 newWidget.settings.cardDescription = '';
+                break;
+            case 'title':
+                newWidget.settings.titleText = '';
+                break;
+            case 'subtitle':
+                newWidget.settings.subtitleText = '';
+                break;
                 // newWidget.settings.card2 = {
                 //     title: '',
                 //     description: '',
