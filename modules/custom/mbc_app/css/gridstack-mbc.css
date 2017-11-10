@@ -67,6 +67,11 @@ body {
 }
 /*contdown template*/
 
+.card .panel-heading img{
+  max-height: 150px;
+  width: auto;
+}
+
 .mbc-file-manager {
   max-height: 300px;
   width: 100%;
