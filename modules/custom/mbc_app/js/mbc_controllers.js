@@ -230,6 +230,9 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             case 'subtitle':
                 newWidget.settings.subtitleText = '';
                 break;
+            case 'menubar':
+                newWidget.settings.tabs = [];
+                break;
                 // newWidget.settings.card2 = {
                 //     title: '',
                 //     description: '',
@@ -242,7 +245,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 //     price: '',
                 //     button: '',
                 // };
-                break;
         }
         $scope.widgets.push(newWidget);
         console.log($scope.widgets);
@@ -317,6 +319,14 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 }
             });
         });
+        $scope.settings.mbcTabTitle = '';
+        $scope.mbcAddTab = function() {
+            $scope.settings.tabs.push($scope.settings.mbcTabTitle);
+            $scope.settings.mbcTabTitle = '';
+        }
+        $scope.mbcDeleteTab = function() {
+            $scope.settings.tabs.splice(this.$index, 1);
+        }
     };
 
     $scope.onChange = function(event, items) {
