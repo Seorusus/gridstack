@@ -173,7 +173,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             width:3,
             height:1,
             mbcWidgetId:widid,
-            mbcComponentId:$scope.widgets.length + 1,
+            mbcComponentId: $scope.getNewId(),
             settings: {
                 font: '',
                 text: '',
@@ -250,6 +250,14 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         console.log($scope.widgets);
         console.log($scope.getComponentProperties($scope.widgets.length));
     };
+
+    $scope.getNewId = function() {
+        var currentMaxId = 0;
+        angular.forEach(this.widgets, function (widget, key) {
+          currentMaxId = (widget.mbcComponentId > currentMaxId) ? widget.mbcComponentId : currentMaxId;
+        });
+        return ++currentMaxId;
+    }
 
     $scope.setImageUrl = function($event, f) {
         $event.preventDefault();
