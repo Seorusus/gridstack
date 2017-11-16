@@ -12,6 +12,14 @@ mbcApp.service('PageService', ['$http', 'Upload',
                     callback(resData);
                 });
         };
+        this.getPagesTemplates = function(callback){
+            $http.get('/api/mbc-templates-pages')
+            // On success, pass the results to the view via the scope object
+                .then(function(response){
+                    var resData = response.data;
+                    callback(resData);
+                });
+        };
         this.mbcGetFiles = function(callback){
             $http.get('/api/mbc-files')
             // On success, pass the results to the view via the scope object

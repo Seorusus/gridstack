@@ -10,6 +10,9 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
             PageService.getPages(function(data){
                 $scope.pages = data;
             });
+            PageService.getPagesTemplates(function(data){
+                $scope.templatePages = data;
+            });
         }
         poller();
 

@@ -44,7 +44,7 @@
                 <a class="btn btn-primary" ng-click="savePage()" href="#">Save</a>
             </div>
             <div class="right-canvas" style="width: 15%; float: left">
-
+                <h2>Components</h2>
                 <ul>
                   <li>
                     <a class="btn btn-primary" ng-click="addWidget('form')" href="#">Add Form</a>
@@ -80,6 +80,15 @@
                     <a class="btn btn-primary" ng-click="addWidget('menubar')" href="#">Menu Bar</a>
                   </li>
                 </ul>
+                <h2>Page templates</h2>
+                <div ng-controller="PageList">
+                 <ul class="pages" dnd-list="templatePages">
+                    <li ng-repeat="page in templatePages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
+                        <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
+                         (<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
+                    </li>
+                 </ul>
+    </div>
 
             </div>
             <div  ng-controller="ModalController as $ctrl" class="modal-demo">
