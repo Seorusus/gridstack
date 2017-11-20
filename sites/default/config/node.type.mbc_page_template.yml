@@ -1,0 +1,17 @@
+uuid: 36034313-61c4-431c-95c4-608be35020df
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Page template'
+type: mbc_page_template
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true
