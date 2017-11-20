@@ -303,7 +303,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         animation: true,
         ariaLabelledBy: 'modal-title-bottom',
         ariaDescribedBy: 'modal-body-bottom',
-        templateUrl: 'dialog.html',
+        templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcDialog.html',
         size: 'sm',
         controller: 'ModalController',
         controllerAs: '$ctrl',

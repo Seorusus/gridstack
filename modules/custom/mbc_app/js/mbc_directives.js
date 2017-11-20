@@ -178,10 +178,10 @@
     mbcApp.directive('fileSelection', function() {
         return {
            restrict: 'E',
-            controller: 'DemoCtrl',
+           controller: 'DemoCtrl',
            templateUrl: '/modules/custom/mbc_app/js/dir-templates/fileSelection.html',
            replace: true,
-            scope: {
+           scope: {
                 urlType: '@',
             },
            link: function ($scope, element, attrs) {
@@ -191,4 +191,23 @@
            }
         }
     });
+    mbcApp.directive('minicolor', function() {
+        return {
+            restrict: 'A',
+            controller: 'DemoCtrl',
+            link: function ($scope, element, attrs) {
+                $(element).minicolors();
+            }
+        }
+    });
+    mbcApp.directive('modalDialog', ['$uibModal', function ($uibModal) {
+       return {
+           restrict: 'E',
+           controller: 'ModalController',
+           transclude: true,
+           templateUrl: '/modules/custom/mbc_app/js/dir-templates/mbcDialog.html',
+           link: function($scope, element, attrs) {
+           }
+       }
+    }]);
 })(jQuery);
