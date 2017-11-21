@@ -5,25 +5,27 @@
   <div class="modal-body">
     <form>
       <div class="form-group" ng-repeat="(key,field) in $ctrl.settings">
-        <div ng-if="(key === 'tabs')">
-          <label>{{key}}</label>
-          <input ng-model="settings.mbcTabTitle.title" type="text" class="form-control">
-          <input type="submit" class="btn btn-default" id="submit" value="Save" ng-click="mbcAddTab()">
-          <ul>
-            <li ng-repeat="t in $ctrl.settings[key] track by $index" pid="{{$index}}"><a ng-click="mbcEditTab($event)">{{ t }}</a><a ng-click="mbcDeleteTab()"><span class="glyphicon glyphicon-remove"></span></a></li>
-          </ul>
-        </div>
-        <div ng-if="(key != 'tabs')&&(key != 'mbcTabTitle')">
-          <label>{{key}}</label>
-          <div ng-if="(key == 'backgroundColor')">
-            <input minicolor="true" type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">
+        <div class="element-wrapper" ng-switch on="field.type">
+          <div class="element" ng-switch-when="text">
+            <label>{{field.title}}</label>
+            <input type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
           </div>
-          <div ng-if="(key != 'backgroundColor')">
-            <input type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">
+          <div class="element" ng-switch-when="colorpicker">
+            <label>{{field.title}}</label>
+            <input minicolor="true" type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
           </div>
-
-          <div ng-if="(key === 'imageUrl') || (key === 'backgroundUrl') || (key === 'cardImage')">
+          <div class="element" ng-switch-when="files">
+            <label>{{field.title}}</label>
+            <input type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
             <file-selection url-type="{{key}}"></file-selection>
+          </div>
+          <div class="element" ng-switch-when="tabs">
+            <label>Tabs</label>
+            <input ng-model="settings.mbcTabTitle.title" type="text" class="form-control">
+            <input type="submit" class="btn btn-default" id="submit" value="Save" ng-click="mbcAddTab()">
+            <ul>
+              <li ng-repeat="t in $ctrl.settings[key] track by $index" pid="{{$index}}"><a ng-click="mbcEditTab($event)">{{ t }}</a><a ng-click="mbcDeleteTab()"><span class="glyphicon glyphicon-remove"></span></a></li>
+            </ul>
           </div>
         </div>
       </div>

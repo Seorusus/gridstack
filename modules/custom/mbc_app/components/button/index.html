@@ -1,3 +1,9 @@
-<button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-  Button
+<button type="button" class="btn btn-primary"
+        ng-model="w.settings.buttonValue.value"
+        uib-btn-checkbox
+        btn-checkbox-true="1"
+        btn-checkbox-false="0"
+        style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
+        color: {{w.settings.color.value || 'inherit'}}">
+  <a href="{{w.settings.link.value || '#'}}" style="color: {{w.settings.color.value || 'inherit'}}">Button</a>
 </button>

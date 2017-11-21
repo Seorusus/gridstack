@@ -1,3 +1,4 @@
 <ul class="nav nav-pills">
-  <li class="active" ng-repeat="t in w.settings.tabs"><a href="#">{{t}}</a></li>
+  <li class="active" ng-repeat="t in w.settings.tabs" style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
+        color: {{w.settings.color.value || 'inherit'}}"><a href="#">{{t}}</a></li>
 </ul>

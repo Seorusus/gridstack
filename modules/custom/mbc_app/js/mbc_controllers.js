@@ -178,76 +178,166 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             mbcWidgetId:widid,
             mbcComponentId: $scope.getNewId(),
             settings: {
-                font: '',
-                text: '',
-                link: '',
-                border: '',
-                backgroundColor: '',
-                backgroundUrl: '',
+                font: {
+                   value: '',
+                   title: 'Font',
+                   type: 'text',
+                },
+                color: {
+                    value: '',
+                    title: 'Color',
+                    type: 'colorpicker',
+                },
+                text: {
+                    value: '',
+                    title: 'Text',
+                    type: 'text',
+                },
+                link: {
+                    value: '',
+                    title: 'Link',
+                    type: 'text',
+                },
+                border: {
+                    value: '',
+                    title: 'Border',
+                    type: 'select',
+                },
+                backgroundColor: {
+                    value: '',
+                    title: 'Background color',
+                    type: 'colorpicker',
+                },
+                backgroundUrl: {
+                    value: '',
+                    title: 'Background url',
+                    type: 'files',
+                },
             }
         };
         switch(widid) {
             case 'calendar':
                 newWidget.width = 5;
                 newWidget.height = 2;
-                newWidget.settings.calDate = '';
+                newWidget.settings.calDate = {
+                    value: '',
+                    title: 'Date',
+                    type: 'text',
+                };
                 break;
             case 'button':
                 newWidget.width = 1;
                 newWidget.height = 1;
-                newWidget.settings.buttonValue = '';
+                newWidget.settings.buttonValue = {
+                    value: '',
+                    title: 'Button',
+                    type: 'text',
+                };
                 break;
             case 'form':
                 newWidget.width = 6;
                 newWidget.height = 2;
-                newWidget.settings.email = '';
-                newWidget.settings.password = '';
-                newWidget.settings.rememberMe = '';
-                newWidget.settings.buttonValue = '';
+                newWidget.settings.email = {
+                    value: '',
+                    title: 'Email',
+                    type: 'text',
+                };
+                newWidget.settings.password = {
+                    value: '',
+                    title: 'Password',
+                    type: 'text',
+                };
+                newWidget.settings.rememberMe = {
+                    value: '',
+                    title: 'Remember me',
+                    type: 'checkbox',
+                };
+                newWidget.settings.buttonValue = {
+                    value: '',
+                    title: 'Button',
+                    type: 'value',
+                };
                 break;
             case 'countdown':
                 newWidget.width = 5;
                 newWidget.height = 1;
-                newWidget.settings.date = '';
+                newWidget.settings.date = {
+                    value: '',
+                    title: 'Date',
+                    type: 'text',
+                };
                 break;
             case 'video':
-                newWidget.settings.link = '';
+                newWidget.settings.link = {
+                    value: '',
+                    title: 'Link',
+                    type: 'text',
+                };
                 break;
             case 'image':
-                newWidget.settings.imageUrl = '';
+                newWidget.settings.imageUrl = {
+                    value: '',
+                    title: 'Image Url',
+                    type: 'files',
+                };
                 break;
             case 'price':
-                newWidget.settings.title = '';
-                newWidget.settings.description = '';
-                newWidget.settings.price = '';
-                newWidget.settings.button = '';
+                newWidget.settings.title = {
+                    value: '',
+                    title: 'Title',
+                    type: 'text',
+                };
+                newWidget.settings.description = {
+                    value: '',
+                    title: 'Description',
+                    type: 'text',
+                };
+                newWidget.settings.price = {
+                    value: '',
+                    title: 'Price',
+                    type: 'text',
+                };
+                newWidget.settings.button = {
+                    value: '',
+                    title: 'Button',
+                    type: 'text',
+                };
                 break;
             case 'card':
-                newWidget.settings.cardImage = '';
-                newWidget.settings.cardTitle = '';
-                newWidget.settings.cardDescription = '';
+                newWidget.settings.cardImage = {
+                    value: '',
+                    title: 'Image',
+                    type: 'files',
+                };
+                newWidget.settings.cardTitle = {
+                    value: '',
+                    title: 'Title',
+                    type: 'text',
+                };
+                newWidget.settings.cardDescription = {
+                    value: '',
+                    title: 'Description',
+                    type: 'text',
+                };
                 break;
             case 'title':
-                newWidget.settings.titleText = '';
+                newWidget.settings.titleText = {
+                    value: '',
+                    title: 'Text',
+                    type: 'text',
+                };
                 break;
             case 'subtitle':
-                newWidget.settings.subtitleText = '';
+                newWidget.settings.subtitleText = {
+                    value: '',
+                    title: 'Text',
+                    type: 'text',
+                };
                 break;
             case 'menubar':
                 newWidget.settings.tabs = [];
                 break;
-                // newWidget.settings.card2 = {
-                //     title: '',
-                //     description: '',
-                //     price: '',
-                //     button: '',
-                // };
-                // newWidget.settings.card3 = {
-                //     title: '',
-                //     description: '',
-                //     price: '',
-                //     button: '',
-                // };
+
         }
         $scope.widgets.push(newWidget);
         console.log($scope.widgets);
@@ -298,7 +388,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
       $scope.settings = $scope.getComponentProperties(id);
       // seve old settings
       $scope.old_settings = angular.copy($scope.settings);
-
       $scope.modalInstance = $uibModal.open({
         animation: true,
         ariaLabelledBy: 'modal-title-bottom',
@@ -326,7 +415,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             angular.forEach($scope.widgets, function (widget,key ) {
                 if (widget.mbcComponentId == $scope.currentEditWidget)
                 {
-                    $scope.widgets[key].settings[data.imgUrlType] = data.file.uri;
+                    $scope.widgets[key].settings[data.imgUrlType].value = data.file.uri;
                 }
             });
         });

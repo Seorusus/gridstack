@@ -200,14 +200,4 @@
             }
         }
     });
-    mbcApp.directive('modalDialog', ['$uibModal', function ($uibModal) {
-       return {
-           restrict: 'E',
-           controller: 'ModalController',
-           transclude: true,
-           templateUrl: '/modules/custom/mbc_app/js/dir-templates/mbcDialog.html',
-           link: function($scope, element, attrs) {
-           }
-       }
-    }]);
 })(jQuery);
