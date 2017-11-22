@@ -1,5 +1,7 @@
-<form class="form-horizontal" style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
-        color: {{w.settings.color.value || 'inherit'}}">
+<form class="form-horizontal"
+      style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
+      background-image: url({{w.settings.backgroundUrl.value || 'inherit'}});
+      color: {{w.settings.color.value || 'inherit'}}">
   <div class="form-group">
     <label class="control-label col-sm-2" for="email">Email:</label>
     <div class="col-sm-10">

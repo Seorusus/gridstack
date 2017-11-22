@@ -1,4 +1,7 @@
 <div style="display:inline-block; min-height:290px;">
-  <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
-        color: {{w.settings.color.value || 'inherit'}}"></div>
+  <div uib-datepicker ng-model="w.settings.calDate.value" class="well well-sm" datepicker-options="options"
+       style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
+       background-image: url({{w.settings.backgroundUrl.value || 'inherit'}});
+       color: {{w.settings.color.value || 'inherit'}}">
+  </div>
 </div>

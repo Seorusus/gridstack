@@ -220,9 +220,9 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 newWidget.width = 5;
                 newWidget.height = 2;
                 newWidget.settings.calDate = {
-                    value: '',
+                    value: new Date(),
                     title: 'Date',
-                    type: 'text',
+                    type: 'date',
                 };
                 break;
             case 'button':
@@ -335,7 +335,10 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 };
                 break;
             case 'menubar':
-                newWidget.settings.tabs = [];
+                newWidget.settings.tabs = {
+                    value: [],
+                    type: 'tabs',
+                };
                 break;
 
         }
@@ -426,22 +429,28 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         $scope.mbcAddTab = function() {
             var tid = $scope.settings.mbcTabTitle.tid;
             if (tid === null) {
-                $scope.settings.tabs.push($scope.settings.mbcTabTitle.title);
+                $scope.settings.tabs.value.push($scope.settings.mbcTabTitle.title);
             }
             else {
-                $scope.settings.tabs[tid] = $scope.settings.mbcTabTitle.title;
+                $scope.settings.tabs.value[tid] = $scope.settings.mbcTabTitle.title;
             }
             $scope.settings.mbcTabTitle.title = '';
             $scope.settings.mbcTabTitle.tid = null;
         }
         $scope.mbcDeleteTab = function() {
-            $scope.settings.tabs.splice(this.$index, 1);
+            $scope.settings.tabs.value.splice(this.$index, 1);
         }
         $scope.mbcEditTab = function($event) {
             $event.preventDefault();
-            $scope.settings.mbcTabTitle.title = $scope.settings.tabs[this.$index];
+            $scope.settings.mbcTabTitle.title = $scope.settings.tabs.value[this.$index];
             $scope.settings.mbcTabTitle.tid = this.$index;
         }
+        $scope.calPopup = {
+            opened: false
+        };
+        $scope.openCalPopup = function() {
+            $scope.calPopup.opened = true;
+        };
     };
 
     $scope.onChange = function(event, items) {

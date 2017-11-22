@@ -1,2 +1,6 @@
-<div class="img-component" style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
-        color: {{w.settings.color.value || 'inherit'}}"><img src="{{w.settings.imageUrl.value || '#'}}"/></div>
+<div class="img-component"
+     style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
+            background-image: url({{w.settings.backgroundUrl.value || 'inherit'}});
+            color: {{w.settings.color.value || 'inherit'}}">
+  <img src="{{w.settings.imageUrl.value || '#'}}"/>
+</div>

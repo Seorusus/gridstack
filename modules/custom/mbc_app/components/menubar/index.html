@@ -1,4 +1,7 @@
 <ul class="nav nav-pills">
-  <li class="active" ng-repeat="t in w.settings.tabs" style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
-        color: {{w.settings.color.value || 'inherit'}}"><a href="#">{{t}}</a></li>
+  <li class="active" ng-repeat="t in w.settings.tabs.value">
+    <a href="#" style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
+             background-image: url({{w.settings.backgroundUrl.value || 'inherit'}});
+             color: {{w.settings.color.value || 'inherit'}}">{{t}}</a>
+  </li>
 </ul>
