@@ -229,7 +229,8 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 newWidget.width = 1;
                 newWidget.height = 1;
                 newWidget.settings.buttonValue = {
-                    value: '',
+                    value: 'Button',
+                    state: '',
                     title: 'Button',
                     type: 'text',
                 };
@@ -237,25 +238,26 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             case 'form':
                 newWidget.width = 6;
                 newWidget.height = 2;
-                newWidget.settings.email = {
+                newWidget.settings.formMail = {
                     value: '',
                     title: 'Email',
                     type: 'text',
                 };
-                newWidget.settings.password = {
+                newWidget.settings.formPassword = {
                     value: '',
                     title: 'Password',
                     type: 'text',
                 };
-                newWidget.settings.rememberMe = {
+                newWidget.settings.formRememberMe = {
                     value: '',
                     title: 'Remember me',
                     type: 'checkbox',
                 };
-                newWidget.settings.buttonValue = {
-                    value: '',
+                newWidget.settings.formButton = {
+                    value: 'Button',
+                    state: '',
                     title: 'Button',
-                    type: 'value',
+                    type: 'text',
                 };
                 break;
             case 'countdown':
@@ -268,11 +270,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 };
                 break;
             case 'video':
-                newWidget.settings.link = {
-                    value: '',
-                    title: 'Link',
-                    type: 'text',
-                };
                 break;
             case 'image':
                 newWidget.settings.imageUrl = {
@@ -282,22 +279,22 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 };
                 break;
             case 'price':
-                newWidget.settings.title = {
+                newWidget.settings.priceTitle = {
                     value: '',
                     title: 'Title',
                     type: 'text',
                 };
-                newWidget.settings.description = {
+                newWidget.settings.priceDescription = {
                     value: '',
                     title: 'Description',
                     type: 'text',
                 };
-                newWidget.settings.price = {
+                newWidget.settings.pricePrice = {
                     value: '',
                     title: 'Price',
                     type: 'text',
                 };
-                newWidget.settings.button = {
+                newWidget.settings.priceButton = {
                     value: '',
                     title: 'Button',
                     type: 'text',

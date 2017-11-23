@@ -27,8 +27,15 @@ body {
 }
 .btn-grid-remove {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+}
+
+.btn-grid-edit {
+  position: absolute;
+  top: 5px;
+  right: 30px;
   z-index: 10;
 }
 
