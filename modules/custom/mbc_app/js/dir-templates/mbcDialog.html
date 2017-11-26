@@ -35,6 +35,17 @@
               <li ng-repeat="t in $ctrl.settings[key].value track by $index" pid="{{$index}}"><a ng-click="mbcEditTab($event)">{{ t }}</a><a ng-click="mbcDeleteTab()"><span class="glyphicon glyphicon-remove"></span></a></li>
             </ul>
           </div>
+          <div class="element" ng-switch-when="select">
+            <div class="form-group">
+              <label for="key">{{field.title}}</label>
+              <select class="form-control" id="key" ng-model="$ctrl.settings[key].value">
+                <option ng-repeat="op in $ctrl.settings[key].options">{{op}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="element" ng-switch-when="borderplace">
+            <borderplace></borderplace>
+          </div>
         </div>
       </div>
     </form>

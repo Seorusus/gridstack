@@ -164,13 +164,55 @@
             template: '<div ng-include="getTemplate()" class="mbc-widget-wrapper"></div>',
 
             link: function (scope, element, attrs, controller) {
-                    var mbcWidgetId = scope.w.mbcWidgetId;
-                    var baseURL = '/modules/custom/mbc_app/components/';
+                var mbcWidgetId = scope.w.mbcWidgetId;
+                var baseURL = '/modules/custom/mbc_app/components/';
 
-                    scope.getTemplate = function(){
-                        return baseURL + mbcWidgetId + "/index.html";
-                    };
+                scope.getTemplate = function(){
+                    return baseURL + mbcWidgetId + "/index.html";
+                };
+                console.log(scope.w.settings.borderPlace.value.top);
+                switch (mbcWidgetId) {
+                    case 'button':
+                        scope.$watch(function () { return scope.w.settings.borderPlace.value.top; }, function(){
+                            var el = angular.element(element[0].querySelector('button'));
+                            if (scope.w.settings.borderPlace.value.top) {
+                                $(el).css('border-top', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                            }
+                            else {
+                                $(el).css('border-top', '');
+                            }
+                        });
+                        scope.$watch(function () { return scope.w.settings.borderPlace.value.right; }, function(){
+                            var el = angular.element(element[0].querySelector('button'));
+                            if (scope.w.settings.borderPlace.value.right) {
+                                $(el).css('border-right', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                            }
+                            else {
+                                $(el).css('border-right', '');
+                            }
+                        });
+                        scope.$watch(function () { return scope.w.settings.borderPlace.value.bottom; }, function(){
+                            var el = angular.element(element[0].querySelector('button'));
+                            if (scope.w.settings.borderPlace.value.bottom) {
+                                $(el).css('border-bottom', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                            }
+                            else {
+                                $(el).css('border-bottom', '');
+                            }
+                        });
+                        scope.$watch(function () { return scope.w.settings.borderPlace.value.left; }, function(){
+                            var el = angular.element(element[0].querySelector('button'));
+                            if (scope.w.settings.borderPlace.value.left) {
+                                $(el).css('border-left', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                            }
+                            else {
+                                $(el).css('border-left', '');
+                            }
+                        });
+                        break;
                 }
+
+            }
 
         };
 
@@ -197,6 +239,22 @@
             controller: 'DemoCtrl',
             link: function ($scope, element, attrs) {
                 $(element).minicolors();
+            }
+        }
+    });
+    mbcApp.directive('borderplace', function() {
+        return {
+            restrict: 'E',
+            controller: 'ModalController',
+            templateUrl: '/modules/custom/mbc_app/js/dir-templates/templates/borderplace.html',
+            replace: true,
+            link: function ($scope, element, attrs) {
+                 console.log($scope);
+                // $scope.$watch(function () { return $scope.$parent.field.value.top; }, function(){
+                //     if ($scope.$parent.field.value.top) {
+                //         $('#button1').css('border-left', '2px solid red');
+                //     }
+                // });
             }
         }
     });

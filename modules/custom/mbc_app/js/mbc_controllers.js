@@ -180,8 +180,9 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             settings: {
                 font: {
                    value: '',
+                   options: ['Times New Roman', 'Arial', 'Tahoma'],
                    title: 'Font',
-                   type: 'text',
+                   type: 'select',
                 },
                 color: {
                     value: '',
@@ -198,10 +199,32 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                     title: 'Link',
                     type: 'text',
                 },
-                border: {
-                    value: '',
-                    title: 'Border',
+                borderSize: {
+                    value: '1px',
+                    options: ['1px', '2px', '3px'],
+                    title: 'Border size',
                     type: 'select',
+                },
+                borderStyle: {
+                    value: 'solid',
+                    options: ['none', 'hidden', 'dotted', 'dashed', 'solid', 'double'],
+                    title: 'Border style',
+                    type: 'select',
+                },
+                borderColor: {
+                    value: '',
+                    title: 'Border color',
+                    type: 'colorpicker',
+                },
+                borderPlace: {
+                    value: {
+                       top: false,
+                       right: false,
+                       bottom: false,
+                       left: false,
+                    },
+                    title: 'Border placement',
+                    type: 'borderplace',
                 },
                 backgroundColor: {
                     value: '',
