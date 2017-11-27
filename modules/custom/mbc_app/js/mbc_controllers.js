@@ -125,7 +125,6 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($scope, $uibModal, PageService) {
 
-    $scope.videoUrl = "http://www.youtube.com/watch?v=vabnZ9-ex7o";
     $scope.width = '100%';
 
     var csrf = drupalSettings.csrf;
@@ -286,10 +285,14 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             case 'countdown':
                 newWidget.width = 5;
                 newWidget.height = 1;
-                newWidget.settings.date = {
-                    value: '',
+                newWidget.settings.CountdownDate = {
+                    value: {
+                      days: 1,
+                      hours: 1,
+                      mins: 0,
+                    },
                     title: 'Date',
-                    type: 'text',
+                    type: 'cdinput',
                 };
                 break;
             case 'video':
