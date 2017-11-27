@@ -218,10 +218,10 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 borderPlace: {
                     value: {
-                       top: false,
-                       right: false,
-                       bottom: false,
-                       left: false,
+                       top: true,
+                       right: true,
+                       bottom: true,
+                       left: true,
                     },
                     title: 'Border placement',
                     type: 'borderplace',

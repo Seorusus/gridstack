@@ -55,11 +55,11 @@ body {
   }
 }
 
-.mbc-widget {
+.mbc-widget-wrapper {
   position: relative;
   height: 100%;
 }
-.mbc-widget-wrapper {
+.mbc-widget {
   position: absolute;
   top: 50%;
   left: 0;

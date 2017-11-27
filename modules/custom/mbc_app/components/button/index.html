@@ -1,10 +1,7 @@
-<button type="button" class="btn btn-primary" id="{{w.mbcWidgetId}}-{{w.mbcComponentId}}"
+<button type="button" class="btn btn-primary mbc-widget" id="{{w.mbcWidgetId}}-{{w.mbcComponentId}}"
         ng-model="w.settings.buttonValue.state"
         uib-btn-checkbox
         btn-checkbox-true="1"
-        btn-checkbox-false="0"
-        style="background-color: {{w.settings.backgroundColor.value || 'inherit'}};
-        background-image: url({{w.settings.backgroundUrl.value || 'inherit'}});
-        color: {{w.settings.color.value || 'inherit'}};">
+        btn-checkbox-false="0">
   <a href="{{w.settings.link.value || '#'}}" style="color: {{w.settings.color.value || 'inherit'}}">{{w.settings.buttonValue.value}}</a>
 </button>
