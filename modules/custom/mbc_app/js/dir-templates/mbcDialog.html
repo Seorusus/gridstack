@@ -1,0 +1,69 @@
+<div ng-controller="ModalController as $ctrl" class="modal-demo">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Edit element</h3>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group" ng-repeat="(key,field) in $ctrl.settings">
+        <div class="element-wrapper" ng-switch on="field.type">
+          <div class="element" ng-switch-when="text">
+            <label>{{field.title}}</label>
+            <input type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
+          </div>
+          <div class="element" ng-switch-when="textarea">
+            <label>{{field.title}}</label>
+            <textarea class="form-control" ng-model="$ctrl.settings[key].value">{{field.value}}</textarea>
+          </div>
+          <div class="element" ng-switch-when="colorpicker">
+            <label>{{field.title}}</label>
+            <input minicolor="true" type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
+          </div>
+          <div class="element" ng-switch-when="files">
+            <label>{{field.title}}</label>
+            <input type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
+            <file-selection url-type="{{key}}"></file-selection>
+          </div>
+          <div class="element" ng-switch-when="date">
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup ng-model="$ctrl.settings[key].value" is-open="calPopup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openCalPopup()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+          <div class="element" ng-switch-when="tabs">
+            <label>Tabs</label>
+            <input ng-model="settings.mbcTabTitle.title" type="text" class="form-control">
+            <input type="submit" class="btn btn-default" id="submit" value="Save" ng-click="mbcAddTab()">
+            <ul>
+              <li ng-repeat="t in $ctrl.settings[key].value track by $index" pid="{{$index}}"><a ng-click="mbcEditTab($event)">{{ t }}</a><a ng-click="mbcDeleteTab()"><span class="glyphicon glyphicon-remove"></span></a></li>
+            </ul>
+          </div>
+          <div class="element" ng-switch-when="select">
+            <div class="form-group">
+              <label for="key">{{field.title}}</label>
+              <select class="form-control" id="key" ng-model="$ctrl.settings[key].value">
+                <option ng-repeat="op in $ctrl.settings[key].options">{{op}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="element" ng-switch-when="cdinput">
+            <div class="input-group">
+              <label for="key">{{field.title}}</label>
+              <input type="text" ng-model="$ctrl.settings.CountdownDate.value.days" class="form-control" placeholder="Days">
+              <input type="text" ng-model="$ctrl.settings.CountdownDate.value.hours" class="form-control" placeholder="Hours">
+              <input type="text" ng-model="$ctrl.settings.CountdownDate.value.mins" class="form-control" placeholder="Minutes">
+            </div>
+          </div>
+          <div class="element" ng-switch-when="borderplace">
+            <borderplace></borderplace>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+  </div>
+</div>

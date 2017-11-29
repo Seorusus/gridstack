@@ -10,6 +10,9 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
             PageService.getPages(function(data){
                 $scope.pages = data;
             });
+            PageService.getPagesTemplates(function(data){
+                $scope.templatePages = data;
+            });
         }
         poller();
 
@@ -122,7 +125,6 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($scope, $uibModal, PageService) {
 
-    $scope.videoUrl = "http://www.youtube.com/watch?v=vabnZ9-ex7o";
     $scope.width = '100%';
 
     var csrf = drupalSettings.csrf;
@@ -173,83 +175,215 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             width:3,
             height:1,
             mbcWidgetId:widid,
-            mbcComponentId:$scope.widgets.length + 1,
+            mbcComponentId: $scope.getNewId(),
             settings: {
-                font: '',
-                text: '',
-                link: '',
-                border: '',
-                backgroundColor: '',
-                backgroundUrl: '',
+                font: {
+                   value: '',
+                   options: ['Times New Roman', 'Arial', 'Tahoma'],
+                   title: 'Font',
+                   type: 'select',
+                },
+                color: {
+                    value: '',
+                    title: 'Color',
+                    type: 'colorpicker',
+                },
+                text: {
+                    value: '',
+                    title: 'Text',
+                    type: 'text',
+                },
+                link: {
+                    value: '',
+                    title: 'Link',
+                    type: 'text',
+                },
+                borderSize: {
+                    value: '1px',
+                    options: ['1px', '2px', '3px'],
+                    title: 'Border size',
+                    type: 'select',
+                },
+                borderStyle: {
+                    value: 'solid',
+                    options: ['none', 'hidden', 'dotted', 'dashed', 'solid', 'double'],
+                    title: 'Border style',
+                    type: 'select',
+                },
+                borderColor: {
+                    value: '',
+                    title: 'Border color',
+                    type: 'colorpicker',
+                },
+                borderPlace: {
+                    value: {
+                       top: true,
+                       right: true,
+                       bottom: true,
+                       left: true,
+                    },
+                    title: 'Border placement',
+                    type: 'borderplace',
+                },
+                backgroundColor: {
+                    value: '',
+                    title: 'Background color',
+                    type: 'colorpicker',
+                },
+                backgroundUrl: {
+                    value: '',
+                    title: 'Background url',
+                    type: 'files',
+                },
             }
         };
         switch(widid) {
             case 'calendar':
                 newWidget.width = 5;
                 newWidget.height = 2;
-                newWidget.settings.calDate = '';
+                newWidget.settings.calDate = {
+                    value: new Date(),
+                    title: 'Date',
+                    type: 'date',
+                };
                 break;
             case 'button':
                 newWidget.width = 1;
                 newWidget.height = 1;
-                newWidget.settings.buttonValue = '';
+                newWidget.settings.buttonValue = {
+                    value: 'Button',
+                    state: '',
+                    title: 'Button',
+                    type: 'text',
+                };
                 break;
             case 'form':
                 newWidget.width = 6;
                 newWidget.height = 2;
-                newWidget.settings.email = '';
-                newWidget.settings.password = '';
-                newWidget.settings.rememberMe = '';
-                newWidget.settings.buttonValue = '';
+                newWidget.settings.formMail = {
+                    value: '',
+                    title: 'Email',
+                    type: 'text',
+                };
+                newWidget.settings.formPassword = {
+                    value: '',
+                    title: 'Password',
+                    type: 'text',
+                };
+                newWidget.settings.formRememberMe = {
+                    value: '',
+                    title: 'Remember me',
+                    type: 'checkbox',
+                };
+                newWidget.settings.formButton = {
+                    value: 'Button',
+                    state: '',
+                    title: 'Button',
+                    type: 'text',
+                };
                 break;
             case 'countdown':
                 newWidget.width = 5;
                 newWidget.height = 1;
-                newWidget.settings.date = '';
+                newWidget.settings.CountdownDate = {
+                    value: {
+                      days: 1,
+                      hours: 1,
+                      mins: 0,
+                    },
+                    title: 'Date',
+                    type: 'cdinput',
+                };
                 break;
             case 'video':
-                newWidget.settings.link = '';
                 break;
             case 'image':
-                newWidget.settings.imageUrl = '';
+                newWidget.settings.imageUrl = {
+                    value: '',
+                    title: 'Image Url',
+                    type: 'files',
+                };
                 break;
             case 'price':
-                newWidget.settings.title = '';
-                newWidget.settings.description = '';
-                newWidget.settings.price = '';
-                newWidget.settings.button = '';
+                newWidget.settings.priceTitle = {
+                    value: '',
+                    title: 'Title',
+                    type: 'text',
+                };
+                newWidget.settings.priceDescription = {
+                    value: '',
+                    title: 'Description',
+                    type: 'text',
+                };
+                newWidget.settings.pricePrice = {
+                    value: '',
+                    title: 'Price',
+                    type: 'text',
+                };
+                newWidget.settings.priceButton = {
+                    value: '',
+                    title: 'Button',
+                    type: 'text',
+                };
                 break;
             case 'card':
-                newWidget.settings.cardImage = '';
-                newWidget.settings.cardTitle = '';
-                newWidget.settings.cardDescription = '';
+                newWidget.settings.cardImage = {
+                    value: '',
+                    title: 'Image',
+                    type: 'files',
+                };
+                newWidget.settings.cardTitle = {
+                    value: '',
+                    title: 'Title',
+                    type: 'text',
+                };
+                newWidget.settings.cardDescription = {
+                    value: '',
+                    title: 'Description',
+                    type: 'text',
+                };
                 break;
             case 'title':
-                newWidget.settings.titleText = '';
+                newWidget.settings.titleText = {
+                    value: '',
+                    title: 'Text',
+                    type: 'text',
+                };
+                break;
+            case 'text':
+                newWidget.settings.textText = {
+                    value: '',
+                    title: 'Text',
+                    type: 'textarea',
+                };
                 break;
             case 'subtitle':
-                newWidget.settings.subtitleText = '';
+                newWidget.settings.subtitleText = {
+                    value: '',
+                    title: 'Text',
+                    type: 'text',
+                };
                 break;
             case 'menubar':
-                newWidget.settings.tabs = [];
+                newWidget.settings.tabs = {
+                    value: [],
+                    type: 'tabs',
+                };
                 break;
-                // newWidget.settings.card2 = {
-                //     title: '',
-                //     description: '',
-                //     price: '',
-                //     button: '',
-                // };
-                // newWidget.settings.card3 = {
-                //     title: '',
-                //     description: '',
-                //     price: '',
-                //     button: '',
-                // };
+
         }
         $scope.widgets.push(newWidget);
         console.log($scope.widgets);
         console.log($scope.getComponentProperties($scope.widgets.length));
     };
+
+    $scope.getNewId = function() {
+        var currentMaxId = 0;
+        angular.forEach(this.widgets, function (widget, key) {
+          currentMaxId = (widget.mbcComponentId > currentMaxId) ? widget.mbcComponentId : currentMaxId;
+        });
+        return ++currentMaxId;
+    }
 
     $scope.setImageUrl = function($event, f) {
         $event.preventDefault();
@@ -287,12 +421,11 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
       $scope.settings = $scope.getComponentProperties(id);
       // seve old settings
       $scope.old_settings = angular.copy($scope.settings);
-
       $scope.modalInstance = $uibModal.open({
         animation: true,
         ariaLabelledBy: 'modal-title-bottom',
         ariaDescribedBy: 'modal-body-bottom',
-        templateUrl: 'dialog.html',
+        templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcDialog.html',
         size: 'sm',
         controller: 'ModalController',
         controllerAs: '$ctrl',
@@ -315,18 +448,39 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             angular.forEach($scope.widgets, function (widget,key ) {
                 if (widget.mbcComponentId == $scope.currentEditWidget)
                 {
-                    $scope.widgets[key].settings[data.imgUrlType] = data.file.uri;
+                    $scope.widgets[key].settings[data.imgUrlType].value = data.file.uri;
                 }
             });
         });
-        $scope.settings.mbcTabTitle = '';
+        $scope.settings.mbcTabTitle = {
+            title: '',
+            tid: null,
+        };
         $scope.mbcAddTab = function() {
-            $scope.settings.tabs.push($scope.settings.mbcTabTitle);
-            $scope.settings.mbcTabTitle = '';
+            var tid = $scope.settings.mbcTabTitle.tid;
+            if (tid === null) {
+                $scope.settings.tabs.value.push($scope.settings.mbcTabTitle.title);
+            }
+            else {
+                $scope.settings.tabs.value[tid] = $scope.settings.mbcTabTitle.title;
+            }
+            $scope.settings.mbcTabTitle.title = '';
+            $scope.settings.mbcTabTitle.tid = null;
         }
         $scope.mbcDeleteTab = function() {
-            $scope.settings.tabs.splice(this.$index, 1);
+            $scope.settings.tabs.value.splice(this.$index, 1);
         }
+        $scope.mbcEditTab = function($event) {
+            $event.preventDefault();
+            $scope.settings.mbcTabTitle.title = $scope.settings.tabs.value[this.$index];
+            $scope.settings.mbcTabTitle.tid = this.$index;
+        }
+        $scope.calPopup = {
+            opened: false
+        };
+        $scope.openCalPopup = function() {
+            $scope.calPopup.opened = true;
+        };
     };
 
     $scope.onChange = function(event, items) {
