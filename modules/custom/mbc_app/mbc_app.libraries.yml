@@ -95,6 +95,13 @@ bootstrap:
       layout:
         js/libraries/bootstrap-3.3.7/css/bootstrap.css: {}
 
+jquery-minicolors:
+    js:
+      js/libraries/jquery-minicolors/jquery.minicolors.min.js: {}
+    css:
+      layout:
+        js/libraries/jquery-minicolors/jquery.minicolors.css: {}
+
 mbc_directives:
   js:
     js/mbc_directives.js: {}

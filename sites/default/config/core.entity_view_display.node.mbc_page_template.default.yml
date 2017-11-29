@@ -1,0 +1,25 @@
+uuid: 67fdce73-7fbe-486f-8bed-dabc5dab276f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.mbc_page_template.field_gridstack_data
+    - node.type.mbc_page_template
+  module:
+    - user
+id: node.mbc_page_template.default
+targetEntityType: node
+bundle: mbc_page_template
+mode: default
+content:
+  field_gridstack_data:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

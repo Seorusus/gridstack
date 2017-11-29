@@ -36,7 +36,7 @@
                               <a class="btn-grid-remove" ng-click="removeWidget(w)" href="#">
                                   <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Remove"></span>
                               </a>
-                              <div mbc-widget class="mbc-widget" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
+                              <div mbc-widget="{{w.mbcWidgetId}}" class="mbc-widget-wrapper" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                 <a class="btn btn-primary" ng-click="savePage()" href="#">Save</a>
             </div>
             <div class="right-canvas" style="width: 15%; float: left">
-
+                <h2>Components</h2>
                 <ul>
                   <li>
                     <a class="btn btn-primary" ng-click="addWidget('form')" href="#">Add Form</a>
@@ -74,36 +74,28 @@
                     <a class="btn btn-primary" ng-click="addWidget('title')" href="#">Title</a>
                   </li>
                   <li>
+                    <a class="btn btn-primary" ng-click="addWidget('text')" href="#">Text</a>
+                  </li>
+                  <li>
                     <a class="btn btn-primary" ng-click="addWidget('subtitle')" href="#">Subtitle</a>
                   </li>
+                  <li>
+                    <a class="btn btn-primary" ng-click="addWidget('menubar')" href="#">Menu Bar</a>
+                  </li>
                 </ul>
+                <h2>Page templates</h2>
+                <div ng-controller="PageList">
+                 <ul class="pages" dnd-list="templatePages">
+                    <li ng-repeat="page in templatePages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
+                        <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
+                        (<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
+                    </li>
+                 </ul>
+    </div>
 
             </div>
-            <div  ng-controller="ModalController as $ctrl" class="modal-demo">
-            <script type="text/ng-template" id="dialog.html">
-
-            <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Edit element</h3>
+            <div class="modal-demo" id="modalwindow">
             </div>
-            <div class="modal-body" >
-            <form>
-              <div class="form-group" ng-repeat="(key,field) in $ctrl.settings">
-
-                <label>{{key}}</label>
-                <input type="text" class="form-control" ng-model="$ctrl.settings[key]"  value="{{field}}">
-                   <div ng-if="(key === 'imageUrl') || (key === 'backgroundUrl') || (key === 'cardImage')">
-                      <file-selection url-type="{{key}}"></file-selection>
-                    </div>
-
-            </div>
-            </form>
-            </div>
-            <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-            </div>
-          </script>
-        </div>
         {% endverbatim %}
     </div>
 </div>

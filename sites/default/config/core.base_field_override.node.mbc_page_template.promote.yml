@@ -1,0 +1,22 @@
+uuid: 18054482-93f9-4e00-aac3-c0946a942513
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.mbc_page_template
+id: node.mbc_page_template.promote
+field_name: promote
+entity_type: node
+bundle: mbc_page_template
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
