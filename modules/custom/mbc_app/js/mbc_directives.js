@@ -1245,6 +1245,104 @@
             },
         }
     });
+    mbcApp.directive('mbcWidgetText', function(){
+        return {
+            restrict: 'E',
+            controller: 'DemoCtrl',
+            replace: true,
+            templateUrl: '/modules/custom/mbc_app/components/text/index.html',
+            link: function (scope, element, attrs, controller) {
+                scope.$watch(function () { return scope.w.settings.color.value; }, function(){
+                    if (scope.w.settings.color.value) {
+                        $(element).css('color', scope.w.settings.color.value);
+                    }
+                    else {
+                        $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.font.value; }, function(){
+                    if (scope.w.settings.font.value) {
+                        $(element).css('font-family', scope.w.settings.font.value);
+                    }
+                    else {
+                        $(element).css('font-family', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
+                    if (scope.w.settings.backgroundColor.value) {
+                        $(element).css('background-color', scope.w.settings.backgroundColor.value);
+                    }
+                    else {
+                        $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
+                    if (scope.w.settings.backgroundUrl.value) {
+                        $(element).css('background-image', 'url(' + scope.w.settings.backgroundUrl.value + ')');
+                    }
+                    else {
+                        $(element).css('background-image', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderPlace.value.top; }, function(){
+                    if (scope.w.settings.borderPlace.value.top) {
+                        $(element).css('border-top', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                    }
+                    else {
+                        $(element).css('border-top', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderPlace.value.right; }, function(){
+                    if (scope.w.settings.borderPlace.value.right) {
+                        $(element).css('border-right', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                    }
+                    else {
+                        $(element).css('border-right', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderPlace.value.bottom; }, function(){
+                    if (scope.w.settings.borderPlace.value.bottom) {
+                        $(element).css('border-bottom', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                    }
+                    else {
+                        $(element).css('border-bottom', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderPlace.value.left; }, function(){
+                    if (scope.w.settings.borderPlace.value.left) {
+                        $(element).css('border-left', scope.w.settings.borderSize.value + ' ' + scope.w.settings.borderColor.value + ' ' + scope.w.settings.borderStyle.value);
+                    }
+                    else {
+                        $(element).css('border-left', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderSize.value; }, function(){
+                    if (scope.w.settings.borderSize.value) {
+                        $(element).css('border-width', scope.w.settings.borderSize.value);
+                    }
+                    else {
+                        $(element).css('border-width', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderStyle.value; }, function(){
+                    if (scope.w.settings.borderStyle.value) {
+                        $(element).css('border-style', scope.w.settings.borderStyle.value);
+                    }
+                    else {
+                        $(element).css('border-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.borderColor.value; }, function(){
+                    if (scope.w.settings.borderColor.value) {
+                        $(element).css('border-color', scope.w.settings.borderColor.value);
+                    }
+                    else {
+                        $(element).css('border-color', '');
+                    }
+                });
+            },
+        }
+    });
 
     mbcApp.directive('fileSelection', function() {
         return {

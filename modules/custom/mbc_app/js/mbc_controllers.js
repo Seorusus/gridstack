@@ -350,6 +350,13 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                     type: 'text',
                 };
                 break;
+            case 'text':
+                newWidget.settings.textText = {
+                    value: '',
+                    title: 'Text',
+                    type: 'textarea',
+                };
+                break;
             case 'subtitle':
                 newWidget.settings.subtitleText = {
                     value: '',

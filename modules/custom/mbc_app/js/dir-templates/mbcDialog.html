@@ -10,6 +10,10 @@
             <label>{{field.title}}</label>
             <input type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
           </div>
+          <div class="element" ng-switch-when="textarea">
+            <label>{{field.title}}</label>
+            <textarea class="form-control" ng-model="$ctrl.settings[key].value">{{field.value}}</textarea>
+          </div>
           <div class="element" ng-switch-when="colorpicker">
             <label>{{field.title}}</label>
             <input minicolor="true" type="text" class="form-control" ng-model="$ctrl.settings[key].value"  value="{{field.value}}">
