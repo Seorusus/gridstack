@@ -30,12 +30,16 @@ mbcApp.service('PageService', ['$http', 'Upload',
                 });
         };
         this.loadPage = function (nid, callback) {
-            $http.get('/node/' + nid + '?_format=hal_json')
-            // On success, pass the results to the view via the scope object
-                .then(function(response){
-                    var resData = response.data;
-                    callback(resData);
-                });
+            var resData = '[]';
+            if ((nid !== undefined)&&(nid !== 'new')) {
+                $http.get('/node/' + nid + '?_format=hal_json')
+                // On success, pass the results to the view via the scope object
+                    .then(function(response){
+                        var resData = response.data;
+                        callback(resData);
+                    });
+            }
+            callback(resData);
         }
         this.addPage = function(package, csrf, baseUrl){
             return $http({
