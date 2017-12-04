@@ -39,7 +39,9 @@ mbcApp.service('PageService', ['$http', 'Upload',
                         callback(resData);
                     });
             }
-            callback(resData);
+            else {
+                callback(resData);
+            }
         }
         this.addPage = function(package, csrf, baseUrl){
             return $http({

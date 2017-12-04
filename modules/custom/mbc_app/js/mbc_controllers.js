@@ -55,6 +55,7 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
                     res = {
                         "nid": nid,
                         "grid": JSON.parse(data),
+                        "type": 'mbc_page',
                     }
                 }
                 else if (data.field_gridstack_data !== undefined){
