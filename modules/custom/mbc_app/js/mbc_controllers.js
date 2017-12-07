@@ -6,15 +6,23 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
         var csrf = drupalSettings.csrf;
         var baseUrl = drupalSettings.baseUrl;
         //var count = 0;
-        var poller = function() {
+        $scope.init = function() {
             PageService.getPages(function(data){
                 $scope.pages = data;
             });
             PageService.getPagesTemplates(function(data){
                 $scope.templatePages = data;
             });
+            $scope.loadPage('new');
         }
-        poller();
+
+        $timeout($scope.init);
+
+        $scope.$on('newPageSaved', function (p1, p2) {
+            PageService.getPages(function(data){
+                $scope.pages = data;
+            });
+        });
 
         $scope.newPage = function(){
 
@@ -42,11 +50,23 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
         $scope.loadPage = function(nid) {
             PageService.loadPage(nid, function(data){
-                if (data.field_gridstack_data !== undefined) {
-                    $scope.$emit('pageLoaded', {
+                var res = false;
+                if (data === '[]') {
+                    res = {
+                        "nid": nid,
+                        "grid": JSON.parse(data),
+                        "type": 'mbc_page',
+                    }
+                }
+                else if (data.field_gridstack_data !== undefined){
+                    res = {
                         "nid": nid,
                         "grid": JSON.parse(data.field_gridstack_data[0].value),
-                    });
+                        "type": data.type[0].target_id,
+                    }
+                }
+                if (res) {
+                    $scope.$emit('pageLoaded', res);
                 }
             });
         }
@@ -132,8 +152,10 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
 
     $scope.$on('pageLoaded', function(event, pageObj) {
         $scope.widgets = pageObj.grid;
-        $scope.nid = pageObj.nid;
-        console.log($scope);
+        if (pageObj.type === 'mbc_page') {
+            $scope.nid = pageObj.nid;
+            console.log($scope);
+        }
     });
 
     $scope.options = {
@@ -162,10 +184,39 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
         angular.forEach(values, function(value, key){
             package[key] = value;
         });
-        PageService.updatePage(package, csrf, baseUrl, nid)
-            .then(function() {
-                console.log("Saved");
+        if (nid === 'new') {
+            $scope.newTitleModalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title-bottom',
+                ariaDescribedBy: 'modal-body-bottom',
+                templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcDialogNewTitle.html',
+                size: 'sm',
+                controller: 'ModalNewTitleController',
+                controllerAs: '$ctrl',
+                backdrop: false,
+                scope: $scope,
+
             });
+            $scope.newTitleModalInstance.result.then(function(res){
+                if(res){
+                    package.title = {
+                        value: res,
+                    };
+                    PageService.addPage(package, csrf, baseUrl)
+                        .then(function(node) {
+                            console.log(node);
+                            $scope.nid = node.data.nid[0].value;
+                            $scope.$broadcast('newPageSaved', $scope.nid);
+                        });
+                }
+            });
+        }
+        else {
+            PageService.updatePage(package, csrf, baseUrl, nid)
+                .then(function() {
+                    console.log("Page updated");
+                });
+        }
     }
 
     $scope.addWidget = function(widid) {
@@ -526,4 +577,15 @@ mbcApp.controller('ModalController', function ($scope)
     $scope.modalInstance.close($scope.settings);
   };
 
+});
+
+mbcApp.controller('ModalNewTitleController', function ($scope) {
+    var $ctrl = this;
+    $ctrl.ok = function() {
+        $scope.newTitleModalInstance.close($ctrl.pageTitle);
+    };
+    $ctrl.cancel = function() {
+        $ctrl.pageTitle = '';
+        $scope.newTitleModalInstance.close($ctrl.pageTitle);
+    }
 });
