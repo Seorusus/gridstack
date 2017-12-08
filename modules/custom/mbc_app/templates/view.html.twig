@@ -14,8 +14,8 @@
              </form>
              <ul class="pages" dnd-list="pages">
                 <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
-                    <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
-                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>&nbsp;<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
+                    <a href="#" ng-click="loadPage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title"></a>
+                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>&nbsp;<a href="#" ng-click="editPage(page.nid); $event.preventDefault(); $event.stopPropagation();">Edit</a>)
                 </li>
               </ul>
               <hr />
@@ -45,9 +45,9 @@
             </div>
             <div class="right-canvas" style="width: 15%; float: left">
                 <h2>Components</h2>
-                <ul>
-                  <li>
-                    <a class="btn btn-primary" ng-click="addWidget('form')" href="#">Add Form</a>
+                <ul class="components-buttons">
+                  <li class="form">
+                    <div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>
                   </li>
                   <li>
                     <a class="btn btn-primary" ng-click="addWidget('image')" href="#">Add Image</a>

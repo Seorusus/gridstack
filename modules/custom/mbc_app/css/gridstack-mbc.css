@@ -17,6 +17,9 @@ body {
 }
 /* end of temporary common template settings*/
 
+.main-canvas > .grid-stack {
+  min-height: 410px;
+}
 .grid1 {
   background: #c6ecf1;
 }

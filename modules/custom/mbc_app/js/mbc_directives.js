@@ -20,6 +20,13 @@
                 var gridstack = controller.init(element, scope.options);
                 scope.gridstackHandler = gridstack;
 
+                element.on('added', function(e, items) {
+                    $timeout(function() {
+                        scope.$apply();
+                        scope.onChange({event: e, items: items});
+                    });
+                });
+
                 element.on('change', function(e, items) {
                     $timeout(function() {
                         scope.$apply();
@@ -48,7 +55,16 @@
                         scope.onResizeStop({event: e, ui: ui});
                     });
                 });
-
+                $('.right-canvas .grid-stack-item').draggable({
+                    revert: 'invalid',
+                    helper: 'clone',
+                    handle: '.grid-stack-item-content',
+                    scroll: false,
+                    appendTo: 'body',
+                    stop: function( event, ui ) {
+                        $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
+                    }
+                });
             }
         };
 
@@ -136,6 +152,17 @@
                     controller.removeItem(element);
                 });
 
+                $('.right-canvas .grid-stack-item').draggable({
+                    revert: 'invalid',
+                    helper: 'clone',
+                    handle: '.grid-stack-item-content',
+                    scroll: false,
+                    appendTo: 'body',
+                    stop: function( event, ui ) {
+                        $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
+                    }
+                });
+
             }
 
         };
@@ -169,12 +196,28 @@
                        $(element).css('font-family', '');
                    }
                });
+               scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                   if (scope.w.settings.fontSize.value) {
+                       $(element).css('font-size', scope.w.settings.fontSize.value);
+                   }
+                   else {
+                       $(element).css('font-size', '');
+                   }
+               });
                scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                    if (scope.w.settings.backgroundColor.value) {
                        $(element).css('background-color', scope.w.settings.backgroundColor.value);
                    }
                    else {
                        $(element).css('background-color', '');
+                   }
+               });
+               scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                   if (scope.w.settings.backgroundColor.opacity) {
+                       $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                   }
+                   else {
+                       $(element).css('opacity', '');
                    }
                });
                scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -268,12 +311,28 @@
                         $(el).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(el).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(el).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(el).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(el).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(el).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(el).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -367,12 +426,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -484,12 +559,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -582,12 +673,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -672,12 +779,12 @@
                         $(element).css('color', '');
                     }
                 });
-                scope.$watch(function () { return scope.w.settings.font.value; }, function(){
-                    if (scope.w.settings.font.value) {
-                        $(element).css('font-family', scope.w.settings.font.value);
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
                     }
                     else {
-                        $(element).css('font-family', '');
+                        $(element).css('font-size', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
@@ -686,6 +793,14 @@
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -778,12 +893,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -876,12 +1007,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -974,12 +1121,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -1072,12 +1235,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -1170,12 +1349,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -1268,12 +1463,28 @@
                         $(element).css('font-family', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
+                    if (scope.w.settings.fontSize.value) {
+                        $(element).css('font-size', scope.w.settings.fontSize.value);
+                    }
+                    else {
+                        $(element).css('font-size', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundColor.value; }, function(){
                     if (scope.w.settings.backgroundColor.value) {
                         $(element).css('background-color', scope.w.settings.backgroundColor.value);
                     }
                     else {
                         $(element).css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.backgroundColor.opacity; }, function(){
+                    if (scope.w.settings.backgroundColor.opacity) {
+                        $(element).css('opacity', scope.w.settings.backgroundColor.opacity);
+                    }
+                    else {
+                        $(element).css('opacity', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
@@ -1365,7 +1576,15 @@
             restrict: 'A',
             controller: 'DemoCtrl',
             link: function ($scope, element, attrs) {
-                $(element).minicolors();
+                $(element).minicolors({
+                    opacity: true,
+                    change: function(value, opacity) {
+                        $scope.$apply();
+                    }
+                });
+                $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
+                    $scope.$parent.field.opacity = value;
+                });
             }
         }
     });
