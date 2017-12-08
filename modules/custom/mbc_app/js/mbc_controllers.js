@@ -50,23 +50,28 @@ mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$
 
         $scope.loadPage = function(nid) {
             PageService.loadPage(nid, function(data){
-                var res = false;
+                $scope.pageGs = false;
                 if (data === '[]') {
-                    res = {
+                    $scope.pageTitle = '';
+                    $scope.pageGs = {
                         "nid": nid,
                         "grid": JSON.parse(data),
+                        // "bgColor": '',
+                        // "bgUrl": '',
                         "type": 'mbc_page',
                     }
                 }
                 else if (data.field_gridstack_data !== undefined){
-                    res = {
+                    $scope.pageGs = {
                         "nid": nid,
                         "grid": JSON.parse(data.field_gridstack_data[0].value),
+                        // "bgColor": data.field_background_color[0].value,
+                        // "bgUrl": data.field_background_image[0].value,
                         "type": data.type[0].target_id,
                     }
                 }
-                if (res) {
-                    $scope.$emit('pageLoaded', res);
+                if ($scope.pageGs) {
+                    $scope.$emit('pageLoaded', $scope.pageGs);
                 }
             });
         }
@@ -122,6 +127,8 @@ app.controller('GridstackController', ['$scope', function($scope) {
     this.gridstack = null;
 
     this.init = function(element, options) {
+        options.acceptWidgets = '.grid-stack-item';
+        options.float = true;
         this.gridstack = element.gridstack(options).data('gridstack');
         return this.gridstack;
     };
@@ -234,8 +241,14 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                    title: 'Font',
                    type: 'select',
                 },
+                fontSize: {
+                    value: '15px',
+                    title: 'Font size',
+                    type: 'text',
+                },
                 color: {
                     value: '',
+                    opacity: '',
                     title: 'Color',
                     type: 'colorpicker',
                 },
@@ -263,6 +276,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 borderColor: {
                     value: '',
+                    opacity: '',
                     title: 'Border color',
                     type: 'colorpicker',
                 },
@@ -278,6 +292,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 backgroundColor: {
                     value: '',
+                    opacity: '',
                     title: 'Background color',
                     type: 'colorpicker',
                 },
@@ -400,6 +415,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                     title: 'Text',
                     type: 'text',
                 };
+                newWidget.settings.fontSize.value = '25px';
                 break;
             case 'text':
                 newWidget.settings.textText = {
@@ -414,6 +430,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                     title: 'Text',
                     type: 'text',
                 };
+                newWidget.settings.fontSize.value = '20px';
                 break;
             case 'menubar':
                 newWidget.settings.tabs = {
