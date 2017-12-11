@@ -1,128 +1,12 @@
 /**
  * Created by bob on 21.09.17.
  */
-mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$timeout',
-    function($scope, $http, PageService, $location, $timeout){
-        var csrf = drupalSettings.csrf;
-        var baseUrl = drupalSettings.baseUrl;
-        //var count = 0;
-        $scope.init = function() {
-            PageService.getPages(function(data){
-                $scope.pages = data;
-            });
-            PageService.getPagesTemplates(function(data){
-                $scope.templatePages = data;
-            });
-            $scope.loadPage('new');
-        }
-
-        $timeout($scope.init);
-
-        $scope.$on('newPageSaved', function (p1, p2) {
-            PageService.getPages(function(data){
-                $scope.pages = data;
-            });
-        });
-
-        $scope.newPage = function(){
-
-            // Get our data from the form
-            var package = {
-                'title': { 'value': $scope.title },
-                '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
-                'type' : {"target_id": "mbc_page"},
-            }
-
-            // Call the PageService object with the addPage method
-            PageService.addPage(package, csrf, baseUrl)
-                .then(function(response){
-                    console.log("Added");
-
-                    // Clear the inputs
-                    $scope.title = '';
-                    var resData = response.data;
-                    // Re-call the list of pages so that it updates
-                    PageService.getPages(function(resData){
-                        $scope.pages = resData;
-                    });
-                })
-        }
-
-        $scope.loadPage = function(nid) {
-            PageService.loadPage(nid, function(data){
-                $scope.pageGs = false;
-                if (data === '[]') {
-                    $scope.pageTitle = '';
-                    $scope.pageGs = {
-                        "nid": nid,
-                        "grid": JSON.parse(data),
-                        // "bgColor": '',
-                        // "bgUrl": '',
-                        "type": 'mbc_page',
-                    }
-                }
-                else if (data.field_gridstack_data !== undefined){
-                    $scope.pageGs = {
-                        "nid": nid,
-                        "grid": JSON.parse(data.field_gridstack_data[0].value),
-                        // "bgColor": data.field_background_color[0].value,
-                        // "bgUrl": data.field_background_image[0].value,
-                        "type": data.type[0].target_id,
-                    }
-                }
-                if ($scope.pageGs) {
-                    $scope.$emit('pageLoaded', $scope.pageGs);
-                }
-            });
-        }
-
-        $scope.updatePage = function (nid, values) {
-            var package = {
-                '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
-                'type' : {"target_id": "mbc_page"},
-            }
-            angular.forEach(values, function(value, key){
-                package[key] = value;
-            });
-            PageService.updatePage(package, csrf, baseUrl, nid)
-                .then(function() {
-                    console.log("Updated");
-                });
-        }
-        $scope.deletePage = function(id){
-
-            PageService.deletePage(id, csrf)
-                .then(function(response){
-                    var resData = response.data;
-                    PageService.getPages(function(resData){
-                        $scope.pages = resData;
-                    });
-                })
-        }
-        $scope.savePagesList = function(){
-           var pages = $scope.pages;
-           var i = 0;
-           var values = {};
-            angular.forEach (pages, function (value, key){
-                $scope.pages[key].field_weight_value = i;
-                i++;
-                values = {
-                    'field_weight': {"value": value.field_weight_value},
-                };
-
-                $scope.updatePage(value.nid, values);
-            });
-        }
-
-    }]);
 
 app.controller('GridstackController', ['$scope', function($scope) {
 
     $scope.button = {
         'toggle' : true,
     }
-
-    $scope.selectedDate = "2017-10-07T17:17:09.840Z";
 
     this.gridstack = null;
 
@@ -150,20 +34,117 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($scope, $uibModal, PageService) {
-
-    $scope.width = '100%';
-
+mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$location', '$timeout', function($scope, $http, $uibModal, PageService, $location, $timeout) {
     var csrf = drupalSettings.csrf;
     var baseUrl = drupalSettings.baseUrl;
 
-    $scope.$on('pageLoaded', function(event, pageObj) {
-        $scope.widgets = pageObj.grid;
-        if (pageObj.type === 'mbc_page') {
-            $scope.nid = pageObj.nid;
-            console.log($scope);
+    $scope.mbcInit = function() {
+        PageService.getPages(function(data){
+            $scope.pages = data;
+        });
+        PageService.getPagesTemplates(function(data){
+            $scope.templatePages = data;
+        });
+        $scope.loadPage('new');
+    }
+
+   // $timeout($scope.init);
+
+    $scope.newPage = function(){
+
+        // Get our data from the form
+        var package = {
+            'title': { 'value': $scope.pageTitle },
+            '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
+            'type' : {"target_id": "mbc_page"},
         }
-    });
+
+        // Call the PageService object with the addPage method
+        PageService.addPage(package, csrf, baseUrl)
+            .then(function(response){
+                console.log("Added");
+
+                // Clear the inputs
+                $scope.pageTitle = '';
+                var resData = response.data;
+                // Re-call the list of pages so that it updates
+                PageService.getPages(function(resData){
+                    $scope.pages = resData;
+                });
+            })
+    }
+
+    $scope.loadPage = function(nid) {
+        $scope.getPage(nid);
+        PageService.loadPage(nid, function(data){
+            var pageGs = {};
+            if (data === '[]') {
+                pageGs = {
+                    "nid": nid,
+                    "grid": JSON.parse(data),
+                    "type": 'mbc_page',
+                }
+            }
+            else if (data.field_gridstack_data !== undefined){
+                pageGs = {
+                    "nid": nid,
+                    "grid": JSON.parse(data.field_gridstack_data[0].value),
+                    "type": data.type[0].target_id,
+                }
+            }
+            if (pageGs) {
+                $scope.widgets = pageGs.grid;
+                if (pageGs.type === 'mbc_page') {
+                    $scope.nid = pageGs.nid;
+                    console.log($scope);
+                }
+            }
+            $timeout(function(){
+                $scope.$apply();
+            });
+        });
+    }
+
+    $scope.updatePage = function (nid, values) {
+        var package = {
+            '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
+            'type' : {"target_id": "mbc_page"},
+        }
+        angular.forEach(values, function(value, key){
+            package[key] = value;
+        });
+        PageService.updatePage(package, csrf, baseUrl, nid)
+            .then(function() {
+                console.log("Updated");
+            });
+    }
+    $scope.deletePage = function(id){
+
+        PageService.deletePage(id, csrf)
+            .then(function(response){
+                var resData = response.data;
+                PageService.getPages(function(resData){
+                    $scope.pages = resData;
+                });
+            })
+    }
+    $scope.savePagesList = function(){
+        var pages = $scope.pages;
+        var i = 0;
+        var values = {};
+        angular.forEach (pages, function (value, key){
+            $scope.pages[key].field_weight_value = i;
+            i++;
+            values = {
+                'field_weight': {"value": value.field_weight_value},
+            };
+
+            $scope.updatePage(value.nid, values);
+        });
+    }
+    $scope.width = '100%';
+    var csrf = drupalSettings.csrf;
+    var baseUrl = drupalSettings.baseUrl;
 
     $scope.options = {
         cellHeight: 200,
@@ -177,16 +158,60 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
     }
     mbcShowFiles();
 
+    $scope.getPage = function(nid) {
+        var curpage = {};
+        angular.forEach($scope.pages, function(page, key){
+            if (page.nid === nid) {
+                curpage = {
+                    'value' : page,
+                    'id' : key,
+                }
+            }
+        });
+        $scope.page = curpage;
+        return curpage;
+    }
+
+    $scope.editPage = function(nid) {
+        var page = $scope.getPage(nid);
+        $scope.page = page;
+        $scope.pagesOld = angular.copy($scope.pages);
+        $scope.newTitleModalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title-bottom',
+            ariaDescribedBy: 'modal-body-bottom',
+            templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
+            size: 'sm',
+            controller: 'ModalPageSettingsController',
+            controllerAs: '$pctrl',
+            backdrop: false,
+            scope: $scope,
+
+        });
+        $scope.newTitleModalInstance.result.then(function(res){
+            $scope.pages = res;
+        });
+    }
     $scope.savePage = function() {
         var nid = $scope.nid;
+        $scope.getPage(nid);
         var package = {
             '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
             'type' : {"target_id": "mbc_page"},
         }
         var values = {
+            'title': {
+                "value": $scope.pages[$scope.page.id].title
+            },
             'field_gridstack_data' : {
                 "value": angular.toJson($scope.widgets)
             },
+            'field_background_color': {
+                "value": $scope.pages[$scope.page.id].field_background_color
+            },
+            'field_background_image': {
+                "value": $scope.pages[$scope.page.id].field_background_image
+            }
         }
         angular.forEach(values, function(value, key){
             package[key] = value;
@@ -196,9 +221,9 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 animation: true,
                 ariaLabelledBy: 'modal-title-bottom',
                 ariaDescribedBy: 'modal-body-bottom',
-                templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcDialogNewTitle.html',
+                templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
                 size: 'sm',
-                controller: 'ModalNewTitleController',
+                controller: 'ModalPageSettingsController',
                 controllerAs: '$ctrl',
                 backdrop: false,
                 scope: $scope,
@@ -207,13 +232,21 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
             $scope.newTitleModalInstance.result.then(function(res){
                 if(res){
                     package.title = {
-                        value: res,
+                        value : res.pageTitle,
                     };
+                    package.field_background_color = {
+                        value : res.pageBgColor,
+                    }
+                    package.field_background_image = {
+                        value : res.pageBgUrl,
+                    }
                     PageService.addPage(package, csrf, baseUrl)
                         .then(function(node) {
                             console.log(node);
                             $scope.nid = node.data.nid[0].value;
-                            $scope.$broadcast('newPageSaved', $scope.nid);
+                            PageService.getPages(function(data){
+                                $scope.pages = data;
+                            });
                         });
                 }
             });
@@ -248,7 +281,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 color: {
                     value: '',
-                    opacity: '',
                     title: 'Color',
                     type: 'colorpicker',
                 },
@@ -276,7 +308,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 borderColor: {
                     value: '',
-                    opacity: '',
                     title: 'Border color',
                     type: 'colorpicker',
                 },
@@ -292,7 +323,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 backgroundColor: {
                     value: '',
-                    opacity: '',
                     title: 'Background color',
                     type: 'colorpicker',
                 },
@@ -456,10 +486,19 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
     $scope.setImageUrl = function($event, f) {
         $event.preventDefault();
         var imgUrlType = this.$parent.urlType;
-        $scope.$emit('changeComponentUrlImage', {
-            imgUrlType: imgUrlType,
-            file: f,
-        });
+        if (imgUrlType === 'pageBgUrl') {
+            $scope.$emit('changePageUrlImage', {
+                imgUrlType: imgUrlType,
+                file: f,
+            });
+        }
+        else {
+            $scope.$emit('changeComponentUrlImage', {
+                imgUrlType: imgUrlType,
+                file: f,
+            });
+        }
+
 
         console.log(f);
     }
@@ -596,13 +635,18 @@ mbcApp.controller('ModalController', function ($scope)
 
 });
 
-mbcApp.controller('ModalNewTitleController', function ($scope) {
-    var $ctrl = this;
-    $ctrl.ok = function() {
-        $scope.newTitleModalInstance.close($ctrl.pageTitle);
+mbcApp.controller('ModalPageSettingsController', function ($scope) {
+    var $pctrl = this;
+    $pctrl.page = $scope.page;
+    $pctrl.pages = $scope.pages;
+    $scope.$on('changePageUrlImage', function (event, data) {
+        $pctrl.pages[$pctrl.page.id].field_background_image = data.file.uri;
+    });
+    $pctrl.ok = function() {
+        $scope.newTitleModalInstance.close($pctrl.pages);
     };
-    $ctrl.cancel = function() {
-        $ctrl.pageTitle = '';
-        $scope.newTitleModalInstance.close($ctrl.pageTitle);
+    $pctrl.cancel = function() {
+        $pctrl.pages = $scope.pagesOld;
+        $scope.newTitleModalInstance.close($pctrl.pages);
     }
 });

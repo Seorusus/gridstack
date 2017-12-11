@@ -145,6 +145,23 @@
                 scope.$watch('gsItemY', propertyChanged);
                 scope.$watch('gsItemWidth', propertyChanged);
                 scope.$watch('gsItemHeight', propertyChanged);
+                var scopePar = scope.$parent.$parent;
+                scope.$watch(function () { return scopePar.pages[scopePar.page.id].field_background_color }, function(){
+                    if (scopePar.pages[scopePar.page.id].field_background_color) {
+                        $('.grid1').css('background-color', scopePar.pages[scopePar.page.id].field_background_color);
+                    }
+                    else {
+                        $('.grid1').css('background-color', '');
+                    }
+                });
+                scope.$watch(function () { return scopePar.pages[scopePar.page.id].field_background_image }, function(){
+                    if (scopePar.pages[scopePar.page.id].field_background_image) {
+                        $('.grid1').css('background-image', 'url(' + scopePar.pages[scopePar.page.id].field_background_image + ')');
+                    }
+                    else {
+                        $('.grid1').css('background-image', '');
+                    }
+                });
 
                 element.bind('$destroy', function() {
                     var item = element.data('_gridstack_node');
@@ -184,7 +201,7 @@
     mbcApp.directive('mbcWidgetButton', function(){
        return {
            restrict: 'E',
-           controller: 'DemoCtrl',
+           controller: 'mbcMain',
            replace: true,
            templateUrl: '/modules/custom/mbc_app/components/button/index.html',
            link: function (scope, element, attrs, controller) {
@@ -290,7 +307,7 @@
     mbcApp.directive('mbcWidgetCalendar', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/calendar/index.html',
             link: function (scope, element, attrs, controller) {
@@ -405,7 +422,7 @@
     mbcApp.directive('mbcWidgetCard', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/card/index.html',
             link: function (scope, element, attrs, controller) {
@@ -520,7 +537,7 @@
     mbcApp.directive('mbcWidgetCountdown', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/countdown/index.html',
             link: function (scope, element, attrs, controller) {
@@ -653,7 +670,7 @@
     mbcApp.directive('mbcWidgetForm', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/form/index.html',
             link: function (scope, element, attrs, controller) {
@@ -767,7 +784,7 @@
     mbcApp.directive('mbcWidgetImage', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/image/index.html',
             link: function (scope, element, attrs, controller) {
@@ -873,7 +890,7 @@
     mbcApp.directive('mbcWidgetMenubar', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/menubar/index.html',
             link: function (scope, element, attrs, controller) {
@@ -987,7 +1004,7 @@
     mbcApp.directive('mbcWidgetPrice', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/price/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1101,7 +1118,7 @@
     mbcApp.directive('mbcWidgetSubtitle', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/subtitle/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1215,7 +1232,7 @@
     mbcApp.directive('mbcWidgetTitle', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/title/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1329,7 +1346,7 @@
     mbcApp.directive('mbcWidgetVideo', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/video/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1443,7 +1460,7 @@
     mbcApp.directive('mbcWidgetText', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/text/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1558,7 +1575,7 @@
     mbcApp.directive('fileSelection', function() {
         return {
            restrict: 'E',
-           controller: 'DemoCtrl',
+           controller: 'mbcMain',
            templateUrl: '/modules/custom/mbc_app/js/dir-templates/fileSelection.html',
            replace: true,
            scope: {
@@ -1574,17 +1591,42 @@
     mbcApp.directive('minicolor', function() {
         return {
             restrict: 'A',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             link: function ($scope, element, attrs) {
                 $(element).minicolors({
                     opacity: true,
-                    change: function(value, opacity) {
-                        $scope.$apply();
+                    format: 'rgb',
+                    // change: function(value, opacity) {
+                    //     $scope.$apply();
+                    // }
+                });
+                if (attrs.targetEl === 'gridstack') {
+                    var scopeLocal = $scope.$parent.$parent;
+                }
+                else {
+                    var scopeLocal = $scope;
+                }
+                $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_color }, function(){
+                    if (scopeLocal.pages[scopeLocal.page.id].field_background_color) {
+                        $('.grid1').css('background-color', scopeLocal.pages[scopeLocal.page.id].field_background_color);
+                    }
+                    else {
+                        $('.grid1').css('background-color', '');
                     }
                 });
-                $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
-                    $scope.$parent.field.opacity = value;
+                $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_image }, function(){
+                    if (scopeLocal.pages[scopeLocal.page.id].field_background_image) {
+                        $('.grid1').css('background-image', 'url(' + scopeLocal.pages[scopeLocal.page.id].field_background_image + ')');
+                    }
+                    else {
+                        $('.grid1').css('background-image', '');
+                    }
                 });
+                // $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
+                //     if (attrs.targetEl === 'gridstack') {
+                //         $scope.pageBgColor = value;
+                //     }
+                // });
             }
         }
     });

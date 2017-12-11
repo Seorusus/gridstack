@@ -1,0 +1,22 @@
+<div ng-controller="ModalPageSettingsController as $pctrl" class="modal-demo">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Page settings</h3>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Title</label>
+        <input ng-model="$pctrl.pages[$pctrl.page.id].title">
+        <label>Background color</label>
+        <input  minicolor="true" data-opacity="" ng-model="$pctrl.pages[$pctrl.page.id].field_background_color"  target-el="gridstack">
+        <label>Background image</label>
+        <input ng-model="$pctrl.pages[$pctrl.page.id].field_background_image">
+        <file-selection url-type="pageBgUrl"></file-selection>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$pctrl.ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="$pctrl.cancel()">Cancel</button>
+  </div>
+</div>
