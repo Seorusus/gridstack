@@ -46,7 +46,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 $scope.loadPage(firstPage.nid);
             }
             else {
-                $scope.loadPage('new');
+                $scope.newPage();
             }
         });
         PageService.getPagesTemplates(function(data){
@@ -91,6 +91,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 'field_background_image' : '',
             }
             $scope.pages.push(newPage);
+            $scope.nid = 'new';
             return;
         }
         $scope.getPage(nid);
@@ -244,9 +245,9 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                     console.log("Added");
                     // var resData = response.data;
                     // // Re-call the list of pages so that it updates
-                    // PageService.getPages(function(resData){
-                    //     $scope.pages = resData;
-                    // });
+                    PageService.getPages(function(resData){
+                        $scope.pages = resData;
+                    });
                 })
         }
         else {
