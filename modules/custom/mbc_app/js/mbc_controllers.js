@@ -41,40 +41,58 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     $scope.mbcInit = function() {
         PageService.getPages(function(data){
             $scope.pages = data;
+            if ($scope.pages.length > 0){
+                var firstPage = $scope.pages[0];
+                $scope.loadPage(firstPage.nid);
+            }
+            else {
+                $scope.loadPage('new');
+            }
         });
         PageService.getPagesTemplates(function(data){
             $scope.templatePages = data;
         });
-        $scope.loadPage('new');
+
     }
 
    // $timeout($scope.init);
 
     $scope.newPage = function(){
+        $scope.loadPage('new');
+        $scope.newTitleModalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title-bottom',
+            ariaDescribedBy: 'modal-body-bottom',
+            templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
+            size: 'sm',
+            controller: 'ModalPageSettingsController',
+            controllerAs: '$ctrl',
+            backdrop: false,
+            scope: $scope,
 
-        // Get our data from the form
-        var package = {
-            'title': { 'value': $scope.pageTitle },
-            '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
-            'type' : {"target_id": "mbc_page"},
-        }
+        });
 
-        // Call the PageService object with the addPage method
-        PageService.addPage(package, csrf, baseUrl)
-            .then(function(response){
-                console.log("Added");
+        $scope.newTitleModalInstance.result.then(function(res){
+            if(res){
+                $scope.pages = res;
+                $scope.widgets = [];
+            }
+        });
 
-                // Clear the inputs
-                $scope.pageTitle = '';
-                var resData = response.data;
-                // Re-call the list of pages so that it updates
-                PageService.getPages(function(resData){
-                    $scope.pages = resData;
-                });
-            })
     }
 
     $scope.loadPage = function(nid) {
+        if (nid === 'new') {
+            var newPage = {
+                'title' : 'Untitled',
+                'nid' : 'new',
+                'field_weight_value' : 0,
+                'field_background_color' : '',
+                'field_background_image' : '',
+            }
+            $scope.pages.push(newPage);
+            return;
+        }
         $scope.getPage(nid);
         PageService.loadPage(nid, function(data){
             var pageGs = {};
@@ -99,9 +117,8 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                     console.log($scope);
                 }
             }
-            $timeout(function(){
-                $scope.$apply();
-            });
+            $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+            $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
         });
     }
 
@@ -119,14 +136,18 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             });
     }
     $scope.deletePage = function(id){
-
-        PageService.deletePage(id, csrf)
-            .then(function(response){
-                var resData = response.data;
-                PageService.getPages(function(resData){
-                    $scope.pages = resData;
+        if (id !== 'new') {
+            PageService.deletePage(id, csrf)
+                .then(function(response){
+                    var resData = response.data;
+                    PageService.getPages(function(resData){
+                        $scope.pages = resData;
+                    });
                 });
-            })
+        }else {
+            $scope.getPage(id);
+            $scope.pages.splice($scope.page.id, 1);
+        }
     }
     $scope.savePagesList = function(){
         var pages = $scope.pages;
@@ -217,39 +238,16 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             package[key] = value;
         });
         if (nid === 'new') {
-            $scope.newTitleModalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title-bottom',
-                ariaDescribedBy: 'modal-body-bottom',
-                templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
-                size: 'sm',
-                controller: 'ModalPageSettingsController',
-                controllerAs: '$ctrl',
-                backdrop: false,
-                scope: $scope,
-
-            });
-            $scope.newTitleModalInstance.result.then(function(res){
-                if(res){
-                    package.title = {
-                        value : res.pageTitle,
-                    };
-                    package.field_background_color = {
-                        value : res.pageBgColor,
-                    }
-                    package.field_background_image = {
-                        value : res.pageBgUrl,
-                    }
-                    PageService.addPage(package, csrf, baseUrl)
-                        .then(function(node) {
-                            console.log(node);
-                            $scope.nid = node.data.nid[0].value;
-                            PageService.getPages(function(data){
-                                $scope.pages = data;
-                            });
-                        });
-                }
-            });
+            // Call the PageService object with the addPage method
+            PageService.addPage(package, csrf, baseUrl)
+                .then(function(response){
+                    console.log("Added");
+                    // var resData = response.data;
+                    // // Re-call the list of pages so that it updates
+                    // PageService.getPages(function(resData){
+                    //     $scope.pages = resData;
+                    // });
+                })
         }
         else {
             PageService.updatePage(package, csrf, baseUrl, nid)

@@ -13,7 +13,7 @@
                 onResizeStart: '&',
                 onResizeStop: '&',
                 gridstackHandler: '=?',
-                options: '='
+                options: '=',
             },
             link: function(scope, element, attrs, controller, ngModel) {
 
@@ -145,23 +145,6 @@
                 scope.$watch('gsItemY', propertyChanged);
                 scope.$watch('gsItemWidth', propertyChanged);
                 scope.$watch('gsItemHeight', propertyChanged);
-                var scopePar = scope.$parent.$parent;
-                scope.$watch(function () { return scopePar.pages[scopePar.page.id].field_background_color }, function(){
-                    if (scopePar.pages[scopePar.page.id].field_background_color) {
-                        $('.grid1').css('background-color', scopePar.pages[scopePar.page.id].field_background_color);
-                    }
-                    else {
-                        $('.grid1').css('background-color', '');
-                    }
-                });
-                scope.$watch(function () { return scopePar.pages[scopePar.page.id].field_background_image }, function(){
-                    if (scopePar.pages[scopePar.page.id].field_background_image) {
-                        $('.grid1').css('background-image', 'url(' + scopePar.pages[scopePar.page.id].field_background_image + ')');
-                    }
-                    else {
-                        $('.grid1').css('background-image', '');
-                    }
-                });
 
                 element.bind('$destroy', function() {
                     var item = element.data('_gridstack_node');
