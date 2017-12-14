@@ -75,7 +75,6 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         $scope.newTitleModalInstance.result.then(function(res){
             if(res){
                 $scope.pages = res;
-                $scope.widgets = [];
             }
         });
 
@@ -83,44 +82,57 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
 
     $scope.loadPage = function(nid) {
         if (nid === 'new') {
-            var newPage = {
-                'title' : 'Untitled',
-                'nid' : 'new',
-                'field_weight_value' : 0,
-                'field_background_color' : '',
-                'field_background_image' : '',
+            if ($scope.getPage(nid) === 0) {
+                var newPage = {
+                    'title' : 'Untitled',
+                    'nid' : 'new',
+                    'field_weight_value' : 0,
+                    'field_background_color' : '',
+                    'field_background_image' : '',
+                }
+                $scope.pages.push(newPage);
+                $scope.nid = 'new';
+                $scope.getPage(nid);
+                $scope.widgets = [];
+                $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+                $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
             }
-            $scope.pages.push(newPage);
-            $scope.nid = 'new';
-            return;
+            else {
+                $scope.getPage(nid);
+                $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+                $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
+            }
         }
-        $scope.getPage(nid);
-        PageService.loadPage(nid, function(data){
-            var pageGs = {};
-            if (data === '[]') {
-                pageGs = {
-                    "nid": nid,
-                    "grid": JSON.parse(data),
-                    "type": 'mbc_page',
+        else {
+            $scope.getPage(nid);
+            PageService.loadPage(nid, function(data){
+                var pageGs = {};
+                if (data === '[]') {
+                    pageGs = {
+                        "nid": nid,
+                        "grid": JSON.parse(data),
+                        "type": 'mbc_page',
+                    }
                 }
-            }
-            else if (data.field_gridstack_data !== undefined){
-                pageGs = {
-                    "nid": nid,
-                    "grid": JSON.parse(data.field_gridstack_data[0].value),
-                    "type": data.type[0].target_id,
+                else if (data.field_gridstack_data !== undefined){
+                    pageGs = {
+                        "nid": nid,
+                        "grid": JSON.parse(data.field_gridstack_data[0].value),
+                        "type": data.type[0].target_id,
+                    }
                 }
-            }
-            if (pageGs) {
-                $scope.widgets = pageGs.grid;
-                if (pageGs.type === 'mbc_page') {
-                    $scope.nid = pageGs.nid;
-                    console.log($scope);
+                if (pageGs) {
+                    $scope.widgets = pageGs.grid;
+                    if (pageGs.type === 'mbc_page') {
+                        $scope.nid = pageGs.nid;
+                        console.log($scope);
+                    }
                 }
-            }
-            $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
-            $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
-        });
+                $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+                $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
+            });
+        }
+
     }
 
     $scope.updatePage = function (nid, values) {
@@ -181,7 +193,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     mbcShowFiles();
 
     $scope.getPage = function(nid) {
-        var curpage = {};
+        var curpage = [];
         angular.forEach($scope.pages, function(page, key){
             if (page.nid === nid) {
                 curpage = {
@@ -191,12 +203,11 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             }
         });
         $scope.page = curpage;
-        return curpage;
+        return curpage.length;
     }
 
     $scope.editPage = function(nid) {
-        var page = $scope.getPage(nid);
-        $scope.page = page;
+        $scope.getPage(nid);
         $scope.pagesOld = angular.copy($scope.pages);
         $scope.newTitleModalInstance = $uibModal.open({
             animation: true,
