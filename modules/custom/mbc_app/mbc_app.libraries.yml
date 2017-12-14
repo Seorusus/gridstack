@@ -28,7 +28,7 @@ jquery.ui:
 lodash:
   version: VERSION
   js:
-    js/libraries/lodash/dist/lodash.min.js: {}
+    js/libraries/lodash/dist/lodash.min.js: {weight: -9}
 
 angularjs:
   version: VERSION

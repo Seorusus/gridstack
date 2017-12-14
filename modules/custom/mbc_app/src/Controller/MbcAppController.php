@@ -19,6 +19,7 @@ class MbcAppController extends ControllerBase {
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_sanitize';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/ngFileUpload';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_dnd_lists';
+    $build['mbc_app']['#attached']['library'][] = 'mbc_app/lodash';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/gridstack';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/jquery-minicolors';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/mbc_app';

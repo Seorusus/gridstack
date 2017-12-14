@@ -35,8 +35,10 @@ app.controller('GridstackController', ['$scope', function($scope) {
 }]);
 
 mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$location', '$timeout', function($scope, $http, $uibModal, PageService, $location, $timeout) {
-    var csrf = drupalSettings.csrf;
-    var baseUrl = drupalSettings.baseUrl;
+    if (typeof drupalSettings !== 'undefined') {
+        var csrf = drupalSettings.csrf;
+        var baseUrl = drupalSettings.baseUrl;
+    }
 
     $scope.mbcInit = function() {
         PageService.getPages(function(data){
@@ -177,8 +179,10 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         });
     }
     $scope.width = '100%';
-    var csrf = drupalSettings.csrf;
-    var baseUrl = drupalSettings.baseUrl;
+    if (typeof drupalSettings !== 'undefined') {
+        var csrf = drupalSettings.csrf;
+        var baseUrl = drupalSettings.baseUrl;
+    }
 
     $scope.options = {
         cellHeight: 200,
