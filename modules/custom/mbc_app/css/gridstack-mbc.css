@@ -91,3 +91,10 @@ body {
   height: 100px;
   width: 100px;
 }
+/*menubar template*/
+.menu-items-controls-list {
+  list-style: none;
+}
+.menu-items-controls-list .menu-item-row:hover {
+  cursor: pointer;
+}

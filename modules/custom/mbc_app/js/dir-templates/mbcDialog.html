@@ -3,7 +3,6 @@
     <h3 class="modal-title" id="modal-title">Edit element</h3>
   </div>
   <div class="modal-body">
-    <form>
       <div class="form-group" ng-repeat="(key,field) in $ctrl.settings">
         <div class="element-wrapper" ng-switch on="field.type">
           <div class="element" ng-switch-when="text">
@@ -33,11 +32,45 @@
           </div>
           <div class="element" ng-switch-when="tabs">
             <label>Tabs</label>
-            <input ng-model="settings.mbcTabTitle.title" type="text" class="form-control">
-            <input type="submit" class="btn btn-default" id="submit" value="Save" ng-click="mbcAddTab()">
-            <ul>
-              <li ng-repeat="t in $ctrl.settings[key].value track by $index" pid="{{$index}}"><a ng-click="mbcEditTab($event)">{{ t }}</a><a ng-click="mbcDeleteTab()"><span class="glyphicon glyphicon-remove"></span></a></li>
+            <ul class="menu-items-controls-list">
+              <li ng-repeat="t in $ctrl.settings[key].value track by $index" pid="{{$index}}" class="row">
+                <div class="col-xs-9 menu-item-row">
+                  <span ng-hide="editing" ng-click="editing = true">{{$ctrl.settings[key].value[$index].title}}</span>
+                  <div class="form-group">
+                    <form ng-show="editing" ng-submit="editing = false">
+                      <div class="input-group">
+                        <span class="input-group-addon" id="mititle">Title</span>
+                        <input type="text" class="form-control" aria-describedby="mititle" ng-model="$ctrl.settings[key].value[$index].title" placeholder="Title" ng-required/>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="milink">Link</span>
+                        <input type="text" class="form-control" ng-model="$ctrl.settings[key].value[$index].link" aria-describedby="milink" placeholder="link" ng-required/>
+                      </div>
+                      <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <a ng-click="mbcDeleteTab()"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+              </li>
             </ul>
+
+            <form ng-show="$ctrl.settings.menuvisible" ng-submit="mbcAddTab()">
+              <div class="input-group">
+                <span class="input-group-addon" id="amititle">Title</span>
+                <input type="text" ng-model="$ctrl.settings.menutitle" placeholder="Title" aria-describedby="amititle"/>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon" id="amilink">Link</span>
+                <input type="text" ng-model="$ctrl.settings.menulink" placeholder="Link" aria-describedby="amilink"/>
+              </div>
+              <br/>
+              <button class="btn btn-default" type="submit">Save</button>
+            </form>
+            <br/>
+            <a class="btn btn-default" ng-click="$ctrl.settings.menuvisible = true"><i class="icon-plus"></i>Add tab</a>
+
           </div>
           <div class="element" ng-switch-when="select">
             <div class="form-group">
@@ -60,7 +93,6 @@
           </div>
         </div>
       </div>
-    </form>
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>

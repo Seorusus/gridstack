@@ -569,20 +569,21 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 }
             });
         });
-        $scope.settings.mbcTabTitle = {
-            title: '',
-            tid: null,
-        };
+        // $scope.settings.mbcTabTitle = {
+        //     title: '',
+        //     tid: null,
+        // };
+        $scope.settings.menutitle = '';
+        $scope.settings.menulink = '';
+        $scope.settings.menuvisible = false;
         $scope.mbcAddTab = function() {
-            var tid = $scope.settings.mbcTabTitle.tid;
-            if (tid === null) {
-                $scope.settings.tabs.value.push($scope.settings.mbcTabTitle.title);
-            }
-            else {
-                $scope.settings.tabs.value[tid] = $scope.settings.mbcTabTitle.title;
-            }
-            $scope.settings.mbcTabTitle.title = '';
-            $scope.settings.mbcTabTitle.tid = null;
+            $scope.settings.tabs.value.push({
+                title: $scope.settings.menutitle,
+                link: $scope.settings.menulink,
+            });
+            $scope.settings.menutitle = '';
+            $scope.settings.menulink = '';
+            $scope.settings.menuvisible = false;
         }
         $scope.mbcDeleteTab = function() {
             $scope.settings.tabs.value.splice(this.$index, 1);
