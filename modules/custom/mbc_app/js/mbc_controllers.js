@@ -288,6 +288,16 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                    title: 'Font',
                    type: 'select',
                 },
+                fontStyle: {
+                    value: {
+                        bold: false,
+                        italic: false,
+                        underline: false,
+                        linethrough: false,
+                    },
+                    title: 'Text styling',
+                    type: 'fontstyle',
+                },
                 fontSize: {
                     value: '15px',
                     title: 'Font size',
