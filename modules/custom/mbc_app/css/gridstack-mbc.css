@@ -71,9 +71,16 @@ body {
 }
 
 /*contdown template*/
-.mbc-widget .mbc-countdown.timeTo {
-  background: none;
-  height: auto;
+.counter-block {
+  margin-right: 10px;
+}
+.counter-block .counter {
+  width: 85px;
+  height: 52px;
+}
+.counter-block .counter .number {
+  font-size: 50px;
+  line-height: 48px;
 }
 /*contdown template*/
 

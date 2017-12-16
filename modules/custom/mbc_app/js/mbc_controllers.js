@@ -403,7 +403,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 };
                 break;
             case 'countdown':
-                newWidget.width = 5;
+                newWidget.width = 4;
                 newWidget.height = 1;
                 newWidget.settings.CountdownDate = {
                     value: {

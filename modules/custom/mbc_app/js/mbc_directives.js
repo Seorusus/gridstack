@@ -622,11 +622,13 @@
             link: function (scope, element, attrs, controller) {
                     scope.countdown = function() {
                     var countdownDate = scope.w.settings.CountdownDate;
-                    var cdDelay = countdownDate.value.days*24*60*60 + countdownDate.value.hours*60*60 + countdownDate.value.mins*60;
-                    element.timeTo({
-                        seconds: cdDelay,
-                        displayCaptions: true,
-                        fontSize: 56,
+                    var cDate = new Date();
+                    var cdDelay = cDate.getTime() + (countdownDate.value.days*24*60*60 + countdownDate.value.hours*60*60 + countdownDate.value.mins*60)*1000;
+                    var toDate = new Date(cdDelay);
+                    element.mbComingsoon({
+                        expiryDate: toDate,
+                        interval: 1000,
+                        speed: 500
                     });
 
                 };
