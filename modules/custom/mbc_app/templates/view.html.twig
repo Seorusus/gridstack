@@ -84,15 +84,13 @@
                   </li>
                 </ul>
                 <h2>Page templates</h2>
-                <div ng-controller="mbcMain">
+                <div>
                  <ul class="pages" dnd-list="templatePages">
-                    <li ng-repeat="page in templatePages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
-                        <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
-                        (<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
+                    <li ng-repeat="page in templatePages">
+                        <a href="#" ng-click="loadTemplatePage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title"></a>
                     </li>
                  </ul>
-    </div>
-
+                </div>
             </div>
             <div class="modal-demo" id="modalwindow">
             </div>

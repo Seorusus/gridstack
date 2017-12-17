@@ -137,6 +137,22 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
 
     }
 
+    $scope.loadTemplatePage = function (nid) {
+        PageService.loadPage(nid, function(data){
+            if (typeof data.field_gridstack_data !== 'undefined'){
+                 $scope.widgets = JSON.parse(data.field_gridstack_data[0].value);
+            }
+            if (typeof data.field_background_color !== 'undefined') {
+                $scope.currentBgColor = data.field_background_color[0].value;
+                $scope.pages[$scope.page.id].field_background_color = $scope.currentBgColor;
+            }
+            if(typeof data.field_background_image !== 'undefined'){
+                $scope.currentBgImage = data.field_background_image[0].value;
+                $scope.pages[$scope.page.id].field_background_image = $scope.currentBgImage;
+            }
+        });
+    }
+
     $scope.updatePage = function (nid, values) {
         if (typeof csrf === 'undefined') {
             return;
@@ -169,7 +185,9 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             $scope.getPage(id);
             $scope.pages.splice($scope.page.id, 1);
         }
+        $scope.widgets = [];
     }
+
     $scope.savePagesList = function(){
         var pages = $scope.pages;
         var i = 0;
