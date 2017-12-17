@@ -138,6 +138,9 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     }
 
     $scope.updatePage = function (nid, values) {
+        if (typeof csrf === 'undefined') {
+            return;
+        }
         var package = {
             '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
             'type' : {"target_id": "mbc_page"},
@@ -151,6 +154,9 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             });
     }
     $scope.deletePage = function(id){
+        if (typeof csrf === 'undefined') {
+            return;
+        }
         if (id !== 'new') {
             PageService.deletePage(id, csrf)
                 .then(function(response){
@@ -198,10 +204,10 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
 
     $scope.getPage = function(nid) {
         var curpage = [];
-        angular.forEach($scope.pages, function(page, key){
-            if (page.nid === nid) {
+        angular.forEach($scope.pages, function(value, key){
+            if (value.nid == nid) {
                 curpage = {
-                    'value' : page,
+                    'value' : value,
                     'id' : key,
                 }
             }
@@ -230,6 +236,9 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         });
     }
     $scope.savePage = function() {
+        if (typeof csrf === 'undefined') {
+            return;
+        }
         var nid = $scope.nid;
         $scope.getPage(nid);
         var package = {
@@ -258,10 +267,12 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             PageService.addPage(package, csrf, baseUrl)
                 .then(function(response){
                     console.log("Added");
-                    // var resData = response.data;
+                    var resNid = response.data.nid[0].value;
+                    $scope.nid = resNid;
                     // // Re-call the list of pages so that it updates
                     PageService.getPages(function(resData){
                         $scope.pages = resData;
+                        $scope.getPage(resNid);
                     });
                 })
         }
