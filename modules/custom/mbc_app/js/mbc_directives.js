@@ -13,7 +13,7 @@
                 onResizeStart: '&',
                 onResizeStop: '&',
                 gridstackHandler: '=?',
-                options: '='
+                options: '=',
             },
             link: function(scope, element, attrs, controller, ngModel) {
 
@@ -184,7 +184,7 @@
     mbcApp.directive('mbcWidgetButton', function(){
        return {
            restrict: 'E',
-           controller: 'DemoCtrl',
+           controller: 'mbcMain',
            replace: true,
            templateUrl: '/modules/custom/mbc_app/components/button/index.html',
            link: function (scope, element, attrs, controller) {
@@ -194,6 +194,38 @@
                    }
                    else {
                        $(element).css('font-family', '');
+                   }
+               });
+               scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                   if (scope.w.settings.fontStyle.value.bold) {
+                       $(element).css('font-weight', 'bold');
+                   }
+                   else {
+                       $(element).css('font-weight', '');
+                   }
+               });
+               scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                   if (scope.w.settings.fontStyle.value.italic) {
+                       $(element).css('font-style', 'italic');
+                   }
+                   else {
+                       $(element).css('font-style', '');
+                   }
+               });
+               scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                   if (scope.w.settings.fontStyle.value.underline) {
+                       $(element).css('text-decoration', 'underline');
+                   }
+                   else {
+                       $(element).css('text-decoration', '');
+                   }
+               });
+               scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                   if (scope.w.settings.fontStyle.value.linethrough) {
+                       $(element).css('text-decoration', 'line-through');
+                   }
+                   else {
+                       $(element).css('text-decoration', '');
                    }
                });
                scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
@@ -290,7 +322,7 @@
     mbcApp.directive('mbcWidgetCalendar', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/calendar/index.html',
             link: function (scope, element, attrs, controller) {
@@ -301,6 +333,38 @@
                     }
                     else {
                         $(el).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -405,7 +469,7 @@
     mbcApp.directive('mbcWidgetCard', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/card/index.html',
             link: function (scope, element, attrs, controller) {
@@ -416,6 +480,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -520,20 +616,54 @@
     mbcApp.directive('mbcWidgetCountdown', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/countdown/index.html',
             link: function (scope, element, attrs, controller) {
                     scope.countdown = function() {
                     var countdownDate = scope.w.settings.CountdownDate;
-                    var cdDelay = countdownDate.value.days*24*60*60 + countdownDate.value.hours*60*60 + countdownDate.value.mins*60;
-                    element.timeTo({
-                        seconds: cdDelay,
-                        displayCaptions: true,
-                        fontSize: 56,
+                    var cDate = new Date();
+                    var cdDelay = cDate.getTime() + (countdownDate.value.days*24*60*60 + countdownDate.value.hours*60*60 + countdownDate.value.mins*60)*1000;
+                    var toDate = new Date(cdDelay);
+                    element.mbComingsoon({
+                        expiryDate: toDate,
+                        interval: 1000,
+                        speed: 500
                     });
 
                 };
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.CountdownDate.value.days; }, function(){
                     scope.countdown();
                 });
@@ -653,7 +783,7 @@
     mbcApp.directive('mbcWidgetForm', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/form/index.html',
             link: function (scope, element, attrs, controller) {
@@ -663,6 +793,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -767,7 +929,7 @@
     mbcApp.directive('mbcWidgetImage', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/image/index.html',
             link: function (scope, element, attrs, controller) {
@@ -777,6 +939,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.fontSize.value; }, function(){
@@ -873,7 +1067,7 @@
     mbcApp.directive('mbcWidgetMenubar', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/menubar/index.html',
             link: function (scope, element, attrs, controller) {
@@ -883,6 +1077,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -987,7 +1213,7 @@
     mbcApp.directive('mbcWidgetPrice', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/price/index.html',
             link: function (scope, element, attrs, controller) {
@@ -997,6 +1223,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -1101,7 +1359,7 @@
     mbcApp.directive('mbcWidgetSubtitle', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/subtitle/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1111,6 +1369,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -1215,7 +1505,7 @@
     mbcApp.directive('mbcWidgetTitle', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/title/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1225,6 +1515,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -1329,7 +1651,7 @@
     mbcApp.directive('mbcWidgetVideo', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/video/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1339,6 +1661,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -1443,7 +1797,7 @@
     mbcApp.directive('mbcWidgetText', function(){
         return {
             restrict: 'E',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/text/index.html',
             link: function (scope, element, attrs, controller) {
@@ -1453,6 +1807,38 @@
                     }
                     else {
                         $(element).css('color', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.bold; }, function(){
+                    if (scope.w.settings.fontStyle.value.bold) {
+                        $(element).css('font-weight', 'bold');
+                    }
+                    else {
+                        $(element).css('font-weight', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.italic; }, function(){
+                    if (scope.w.settings.fontStyle.value.italic) {
+                        $(element).css('font-style', 'italic');
+                    }
+                    else {
+                        $(element).css('font-style', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.underline; }, function(){
+                    if (scope.w.settings.fontStyle.value.underline) {
+                        $(element).css('text-decoration', 'underline');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
+                    }
+                });
+                scope.$watch(function () { return scope.w.settings.fontStyle.value.linethrough; }, function(){
+                    if (scope.w.settings.fontStyle.value.linethrough) {
+                        $(element).css('text-decoration', 'line-through');
+                    }
+                    else {
+                        $(element).css('text-decoration', '');
                     }
                 });
                 scope.$watch(function () { return scope.w.settings.font.value; }, function(){
@@ -1558,7 +1944,7 @@
     mbcApp.directive('fileSelection', function() {
         return {
            restrict: 'E',
-           controller: 'DemoCtrl',
+           controller: 'mbcMain',
            templateUrl: '/modules/custom/mbc_app/js/dir-templates/fileSelection.html',
            replace: true,
            scope: {
@@ -1574,17 +1960,42 @@
     mbcApp.directive('minicolor', function() {
         return {
             restrict: 'A',
-            controller: 'DemoCtrl',
+            controller: 'mbcMain',
             link: function ($scope, element, attrs) {
                 $(element).minicolors({
                     opacity: true,
-                    change: function(value, opacity) {
-                        $scope.$apply();
+                    format: 'rgb',
+                    // change: function(value, opacity) {
+                    //     $scope.$apply();
+                    // }
+                });
+                if (attrs.targetEl === 'gridstack') {
+                    var scopeLocal = $scope.$parent.$parent;
+                }
+                else {
+                    var scopeLocal = $scope;
+                }
+                $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_color }, function(){
+                    if (scopeLocal.pages[scopeLocal.page.id].field_background_color) {
+                        $('.grid1').css('background-color', scopeLocal.pages[scopeLocal.page.id].field_background_color);
+                    }
+                    else {
+                        $('.grid1').css('background-color', '');
                     }
                 });
-                $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
-                    $scope.$parent.field.opacity = value;
+                $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_image }, function(){
+                    if (scopeLocal.pages[scopeLocal.page.id].field_background_image) {
+                        $('.grid1').css('background-image', 'url(' + scopeLocal.pages[scopeLocal.page.id].field_background_image + ')');
+                    }
+                    else {
+                        $('.grid1').css('background-image', '');
+                    }
                 });
+                // $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
+                //     if (attrs.targetEl === 'gridstack') {
+                //         $scope.pageBgColor = value;
+                //     }
+                // });
             }
         }
     });
@@ -1596,6 +2007,22 @@
             replace: true,
             link: function ($scope, element, attrs) {
                  console.log($scope);
+                // $scope.$watch(function () { return $scope.$parent.field.value.top; }, function(){
+                //     if ($scope.$parent.field.value.top) {
+                //         $('#button1').css('border-left', '2px solid red');
+                //     }
+                // });
+            }
+        }
+    });
+    mbcApp.directive('fontstyle', function() {
+        return {
+            restrict: 'E',
+            controller: 'ModalController',
+            templateUrl: '/modules/custom/mbc_app/js/dir-templates/templates/fontstyle.html',
+            replace: true,
+            link: function ($scope, element, attrs) {
+                console.log($scope);
                 // $scope.$watch(function () { return $scope.$parent.field.value.top; }, function(){
                 //     if ($scope.$parent.field.value.top) {
                 //         $('#button1').css('border-left', '2px solid red');

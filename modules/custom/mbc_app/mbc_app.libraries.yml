@@ -28,7 +28,7 @@ jquery.ui:
 lodash:
   version: VERSION
   js:
-    js/libraries/lodash/dist/lodash.min.js: {}
+    js/libraries/lodash/dist/lodash.min.js: {weight: -9}
 
 angularjs:
   version: VERSION
@@ -76,10 +76,10 @@ uiBootstrap:
 
 mbcCountdown:
     js:
-      js/libraries/coundown/jquery.time-to.min.js: {}
+      js/libraries/coundown/jquery.mb-comingsoon.min.js: {}
     css:
       layout:
-        js/libraries/coundown/timeTo.css: {}
+        js/libraries/coundown/mb-comingsoon.min.css: {}
 
 videosharing:
     js:

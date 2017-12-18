@@ -1,128 +1,12 @@
 /**
  * Created by bob on 21.09.17.
  */
-mbcApp.controller('PageList', ['$scope', '$http', 'PageService', '$location', '$timeout',
-    function($scope, $http, PageService, $location, $timeout){
-        var csrf = drupalSettings.csrf;
-        var baseUrl = drupalSettings.baseUrl;
-        //var count = 0;
-        $scope.init = function() {
-            PageService.getPages(function(data){
-                $scope.pages = data;
-            });
-            PageService.getPagesTemplates(function(data){
-                $scope.templatePages = data;
-            });
-            $scope.loadPage('new');
-        }
-
-        $timeout($scope.init);
-
-        $scope.$on('newPageSaved', function (p1, p2) {
-            PageService.getPages(function(data){
-                $scope.pages = data;
-            });
-        });
-
-        $scope.newPage = function(){
-
-            // Get our data from the form
-            var package = {
-                'title': { 'value': $scope.title },
-                '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
-                'type' : {"target_id": "mbc_page"},
-            }
-
-            // Call the PageService object with the addPage method
-            PageService.addPage(package, csrf, baseUrl)
-                .then(function(response){
-                    console.log("Added");
-
-                    // Clear the inputs
-                    $scope.title = '';
-                    var resData = response.data;
-                    // Re-call the list of pages so that it updates
-                    PageService.getPages(function(resData){
-                        $scope.pages = resData;
-                    });
-                })
-        }
-
-        $scope.loadPage = function(nid) {
-            PageService.loadPage(nid, function(data){
-                $scope.pageGs = false;
-                if (data === '[]') {
-                    $scope.pageTitle = '';
-                    $scope.pageGs = {
-                        "nid": nid,
-                        "grid": JSON.parse(data),
-                        // "bgColor": '',
-                        // "bgUrl": '',
-                        "type": 'mbc_page',
-                    }
-                }
-                else if (data.field_gridstack_data !== undefined){
-                    $scope.pageGs = {
-                        "nid": nid,
-                        "grid": JSON.parse(data.field_gridstack_data[0].value),
-                        // "bgColor": data.field_background_color[0].value,
-                        // "bgUrl": data.field_background_image[0].value,
-                        "type": data.type[0].target_id,
-                    }
-                }
-                if ($scope.pageGs) {
-                    $scope.$emit('pageLoaded', $scope.pageGs);
-                }
-            });
-        }
-
-        $scope.updatePage = function (nid, values) {
-            var package = {
-                '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
-                'type' : {"target_id": "mbc_page"},
-            }
-            angular.forEach(values, function(value, key){
-                package[key] = value;
-            });
-            PageService.updatePage(package, csrf, baseUrl, nid)
-                .then(function() {
-                    console.log("Updated");
-                });
-        }
-        $scope.deletePage = function(id){
-
-            PageService.deletePage(id, csrf)
-                .then(function(response){
-                    var resData = response.data;
-                    PageService.getPages(function(resData){
-                        $scope.pages = resData;
-                    });
-                })
-        }
-        $scope.savePagesList = function(){
-           var pages = $scope.pages;
-           var i = 0;
-           var values = {};
-            angular.forEach (pages, function (value, key){
-                $scope.pages[key].field_weight_value = i;
-                i++;
-                values = {
-                    'field_weight': {"value": value.field_weight_value},
-                };
-
-                $scope.updatePage(value.nid, values);
-            });
-        }
-
-    }]);
 
 app.controller('GridstackController', ['$scope', function($scope) {
 
     $scope.button = {
         'toggle' : true,
     }
-
-    $scope.selectedDate = "2017-10-07T17:17:09.840Z";
 
     this.gridstack = null;
 
@@ -150,20 +34,179 @@ app.controller('GridstackController', ['$scope', function($scope) {
 
 }]);
 
-mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($scope, $uibModal, PageService) {
+mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$location', '$timeout', function($scope, $http, $uibModal, PageService, $location, $timeout) {
+    if (typeof drupalSettings !== 'undefined') {
+        var csrf = drupalSettings.csrf;
+        var baseUrl = drupalSettings.baseUrl;
+    }
 
-    $scope.width = '100%';
+    $scope.mbcInit = function() {
+        PageService.getPages(function(data){
+            $scope.pages = data;
+            if ($scope.pages.length > 0){
+                var firstPage = $scope.pages[0];
+                $scope.loadPage(firstPage.nid);
+            }
+            else {
+                $scope.newPage();
+            }
+        });
+        PageService.getPagesTemplates(function(data){
+            $scope.templatePages = data;
+        });
 
-    var csrf = drupalSettings.csrf;
-    var baseUrl = drupalSettings.baseUrl;
+    }
 
-    $scope.$on('pageLoaded', function(event, pageObj) {
-        $scope.widgets = pageObj.grid;
-        if (pageObj.type === 'mbc_page') {
-            $scope.nid = pageObj.nid;
-            console.log($scope);
+   // $timeout($scope.init);
+
+    $scope.newPage = function(){
+        $scope.loadPage('new');
+        $scope.newTitleModalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title-bottom',
+            ariaDescribedBy: 'modal-body-bottom',
+            templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
+            size: 'sm',
+            controller: 'ModalPageSettingsController',
+            controllerAs: '$ctrl',
+            backdrop: false,
+            scope: $scope,
+
+        });
+
+        $scope.newTitleModalInstance.result.then(function(res){
+            if(res){
+                $scope.pages = res;
+            }
+        });
+
+    }
+
+    $scope.loadPage = function(nid) {
+        if (nid === 'new') {
+            if ($scope.getPage(nid) === 0) {
+                var newPage = {
+                    'title' : 'Untitled',
+                    'nid' : 'new',
+                    'field_weight_value' : 0,
+                    'field_background_color' : '',
+                    'field_background_image' : '',
+                }
+                $scope.pages.push(newPage);
+                $scope.nid = 'new';
+                $scope.getPage(nid);
+                $scope.widgets = [];
+                $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+                $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
+            }
+            else {
+                $scope.getPage(nid);
+                $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+                $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
+            }
         }
-    });
+        else {
+            $scope.getPage(nid);
+            PageService.loadPage(nid, function(data){
+                var pageGs = {};
+                if (data === '[]') {
+                    pageGs = {
+                        "nid": nid,
+                        "grid": JSON.parse(data),
+                        "type": 'mbc_page',
+                    }
+                }
+                else if (data.field_gridstack_data !== undefined){
+                    pageGs = {
+                        "nid": nid,
+                        "grid": JSON.parse(data.field_gridstack_data[0].value),
+                        "type": data.type[0].target_id,
+                    }
+                }
+                if (pageGs) {
+                    $scope.widgets = pageGs.grid;
+                    if (pageGs.type === 'mbc_page') {
+                        $scope.nid = pageGs.nid;
+                        console.log($scope);
+                    }
+                }
+                $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
+                $scope.currentBgImage = $scope.pages[$scope.page.id].field_background_image;
+            });
+        }
+
+    }
+
+    $scope.loadTemplatePage = function (nid) {
+        PageService.loadPage(nid, function(data){
+            if (typeof data.field_gridstack_data !== 'undefined'){
+                 $scope.widgets = JSON.parse(data.field_gridstack_data[0].value);
+            }
+            if (typeof data.field_background_color !== 'undefined') {
+                $scope.currentBgColor = data.field_background_color[0].value;
+                $scope.pages[$scope.page.id].field_background_color = $scope.currentBgColor;
+            }
+            if(typeof data.field_background_image !== 'undefined'){
+                $scope.currentBgImage = data.field_background_image[0].value;
+                $scope.pages[$scope.page.id].field_background_image = $scope.currentBgImage;
+            }
+        });
+    }
+
+    $scope.updatePage = function (nid, values) {
+        if (typeof csrf === 'undefined') {
+            return;
+        }
+        var package = {
+            '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
+            'type' : {"target_id": "mbc_page"},
+        }
+        angular.forEach(values, function(value, key){
+            package[key] = value;
+        });
+        PageService.updatePage(package, csrf, baseUrl, nid)
+            .then(function() {
+                console.log("Updated");
+            });
+    }
+    $scope.deletePage = function(id){
+        if (typeof csrf === 'undefined') {
+            return;
+        }
+        if (id !== 'new') {
+            PageService.deletePage(id, csrf)
+                .then(function(response){
+                    var resData = response.data;
+                    PageService.getPages(function(resData){
+                        $scope.pages = resData;
+                    });
+                });
+        }else {
+            $scope.getPage(id);
+            $scope.pages.splice($scope.page.id, 1);
+        }
+        $scope.widgets = [];
+    }
+
+    $scope.savePagesList = function(){
+        var pages = $scope.pages;
+        var i = 0;
+        var values = {};
+        angular.forEach (pages, function (value, key){
+            $scope.pages[key].field_weight_value = i;
+            i++;
+            values = {
+                'field_weight': {"value": value.field_weight_value},
+            };
+
+            $scope.updatePage(value.nid, values);
+        });
+    }
+    $scope.width = '100%';
+    if (typeof drupalSettings !== 'undefined') {
+        var csrf = drupalSettings.csrf;
+        var baseUrl = drupalSettings.baseUrl;
+    }
 
     $scope.options = {
         cellHeight: 200,
@@ -177,46 +220,79 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
     }
     mbcShowFiles();
 
+    $scope.getPage = function(nid) {
+        var curpage = [];
+        angular.forEach($scope.pages, function(value, key){
+            if (value.nid == nid) {
+                curpage = {
+                    'value' : value,
+                    'id' : key,
+                }
+            }
+        });
+        $scope.page = curpage;
+        return curpage.length;
+    }
+
+    $scope.editPage = function(nid) {
+        $scope.getPage(nid);
+        $scope.pagesOld = angular.copy($scope.pages);
+        $scope.newTitleModalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title-bottom',
+            ariaDescribedBy: 'modal-body-bottom',
+            templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
+            size: 'sm',
+            controller: 'ModalPageSettingsController',
+            controllerAs: '$pctrl',
+            backdrop: false,
+            scope: $scope,
+
+        });
+        $scope.newTitleModalInstance.result.then(function(res){
+            $scope.pages = res;
+        });
+    }
     $scope.savePage = function() {
+        if (typeof csrf === 'undefined') {
+            return;
+        }
         var nid = $scope.nid;
+        $scope.getPage(nid);
         var package = {
             '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
             'type' : {"target_id": "mbc_page"},
         }
         var values = {
+            'title': {
+                "value": $scope.pages[$scope.page.id].title
+            },
             'field_gridstack_data' : {
                 "value": angular.toJson($scope.widgets)
             },
+            'field_background_color': {
+                "value": $scope.pages[$scope.page.id].field_background_color
+            },
+            'field_background_image': {
+                "value": $scope.pages[$scope.page.id].field_background_image
+            }
         }
         angular.forEach(values, function(value, key){
             package[key] = value;
         });
         if (nid === 'new') {
-            $scope.newTitleModalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title-bottom',
-                ariaDescribedBy: 'modal-body-bottom',
-                templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcDialogNewTitle.html',
-                size: 'sm',
-                controller: 'ModalNewTitleController',
-                controllerAs: '$ctrl',
-                backdrop: false,
-                scope: $scope,
-
-            });
-            $scope.newTitleModalInstance.result.then(function(res){
-                if(res){
-                    package.title = {
-                        value: res,
-                    };
-                    PageService.addPage(package, csrf, baseUrl)
-                        .then(function(node) {
-                            console.log(node);
-                            $scope.nid = node.data.nid[0].value;
-                            $scope.$broadcast('newPageSaved', $scope.nid);
-                        });
-                }
-            });
+            // Call the PageService object with the addPage method
+            PageService.addPage(package, csrf, baseUrl)
+                .then(function(response){
+                    console.log("Added");
+                    var resNid = response.data.nid[0].value;
+                    $scope.nid = resNid;
+                    // // Re-call the list of pages so that it updates
+                    PageService.getPages(function(resData){
+                        $scope.pages = resData;
+                        $scope.getPage(resNid);
+                    });
+                })
         }
         else {
             PageService.updatePage(package, csrf, baseUrl, nid)
@@ -241,6 +317,16 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                    title: 'Font',
                    type: 'select',
                 },
+                fontStyle: {
+                    value: {
+                        bold: false,
+                        italic: false,
+                        underline: false,
+                        linethrough: false,
+                    },
+                    title: 'Text styling',
+                    type: 'fontstyle',
+                },
                 fontSize: {
                     value: '15px',
                     title: 'Font size',
@@ -248,7 +334,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 color: {
                     value: '',
-                    opacity: '',
                     title: 'Color',
                     type: 'colorpicker',
                 },
@@ -276,7 +361,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 borderColor: {
                     value: '',
-                    opacity: '',
                     title: 'Border color',
                     type: 'colorpicker',
                 },
@@ -292,7 +376,6 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 },
                 backgroundColor: {
                     value: '',
-                    opacity: '',
                     title: 'Background color',
                     type: 'colorpicker',
                 },
@@ -349,7 +432,7 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 };
                 break;
             case 'countdown':
-                newWidget.width = 5;
+                newWidget.width = 4;
                 newWidget.height = 1;
                 newWidget.settings.CountdownDate = {
                     value: {
@@ -456,10 +539,19 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
     $scope.setImageUrl = function($event, f) {
         $event.preventDefault();
         var imgUrlType = this.$parent.urlType;
-        $scope.$emit('changeComponentUrlImage', {
-            imgUrlType: imgUrlType,
-            file: f,
-        });
+        if (imgUrlType === 'pageBgUrl') {
+            $scope.$emit('changePageUrlImage', {
+                imgUrlType: imgUrlType,
+                file: f,
+            });
+        }
+        else {
+            $scope.$emit('changeComponentUrlImage', {
+                imgUrlType: imgUrlType,
+                file: f,
+            });
+        }
+
 
         console.log(f);
     }
@@ -520,20 +612,21 @@ mbcApp.controller('DemoCtrl', ['$scope','$uibModal', 'PageService', function($sc
                 }
             });
         });
-        $scope.settings.mbcTabTitle = {
-            title: '',
-            tid: null,
-        };
+        // $scope.settings.mbcTabTitle = {
+        //     title: '',
+        //     tid: null,
+        // };
+        $scope.settings.menutitle = '';
+        $scope.settings.menulink = '';
+        $scope.settings.menuvisible = false;
         $scope.mbcAddTab = function() {
-            var tid = $scope.settings.mbcTabTitle.tid;
-            if (tid === null) {
-                $scope.settings.tabs.value.push($scope.settings.mbcTabTitle.title);
-            }
-            else {
-                $scope.settings.tabs.value[tid] = $scope.settings.mbcTabTitle.title;
-            }
-            $scope.settings.mbcTabTitle.title = '';
-            $scope.settings.mbcTabTitle.tid = null;
+            $scope.settings.tabs.value.push({
+                title: $scope.settings.menutitle,
+                link: $scope.settings.menulink,
+            });
+            $scope.settings.menutitle = '';
+            $scope.settings.menulink = '';
+            $scope.settings.menuvisible = false;
         }
         $scope.mbcDeleteTab = function() {
             $scope.settings.tabs.value.splice(this.$index, 1);
@@ -596,13 +689,18 @@ mbcApp.controller('ModalController', function ($scope)
 
 });
 
-mbcApp.controller('ModalNewTitleController', function ($scope) {
-    var $ctrl = this;
-    $ctrl.ok = function() {
-        $scope.newTitleModalInstance.close($ctrl.pageTitle);
+mbcApp.controller('ModalPageSettingsController', function ($scope) {
+    var $pctrl = this;
+    $pctrl.page = $scope.page;
+    $pctrl.pages = $scope.pages;
+    $scope.$on('changePageUrlImage', function (event, data) {
+        $pctrl.pages[$pctrl.page.id].field_background_image = data.file.uri;
+    });
+    $pctrl.ok = function() {
+        $scope.newTitleModalInstance.close($pctrl.pages);
     };
-    $ctrl.cancel = function() {
-        $ctrl.pageTitle = '';
-        $scope.newTitleModalInstance.close($ctrl.pageTitle);
+    $pctrl.cancel = function() {
+        $pctrl.pages = $scope.pagesOld;
+        $scope.newTitleModalInstance.close($pctrl.pages);
     }
 });
