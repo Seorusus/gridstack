@@ -1,0 +1,19 @@
+uuid: 0a6387df-db11-4c78-8715-6aff8bd0d1c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_background_image
+    - node.type.mbc_page
+id: node.mbc_page.field_background_image
+field_name: field_background_image
+entity_type: node
+bundle: mbc_page
+label: 'Background image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

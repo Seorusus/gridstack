@@ -17,6 +17,9 @@ body {
 }
 /* end of temporary common template settings*/
 
+.main-canvas > .grid-stack {
+  min-height: 410px;
+}
 .grid1 {
   background: #c6ecf1;
 }
@@ -68,9 +71,16 @@ body {
 }
 
 /*contdown template*/
-.mbc-widget .mbc-countdown.timeTo {
-  background: none;
-  height: auto;
+.counter-block {
+  margin-right: 10px;
+}
+.counter-block .counter {
+  width: 85px;
+  height: 52px;
+}
+.counter-block .counter .number {
+  font-size: 50px;
+  line-height: 48px;
 }
 /*contdown template*/
 
@@ -87,4 +97,11 @@ body {
 .img-preview-item a img {
   height: 100px;
   width: 100px;
+}
+/*menubar template*/
+.menu-items-controls-list {
+  list-style: none;
+}
+.menu-items-controls-list .menu-item-row:hover {
+  cursor: pointer;
 }

@@ -1,9 +1,9 @@
 <h2>{{  title }}</h2>
 
 <div ng-app="mbcApp">
-    <div ng-controller="DemoCtrl">
+    <div ng-controller="mbcMain" ng-init="mbcInit()">
         <div class="left-sidebar" style="width: 15%; float: left">
-            <div ng-controller="PageList">
+            <div class="page-list">
                 {% verbatim %}
              <form ng-submit="newPage()" >
                 <div class="form-group">
@@ -14,8 +14,8 @@
              </form>
              <ul class="pages" dnd-list="pages">
                 <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
-                    <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
-                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>&nbsp;<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
+                    <a href="#" ng-click="loadPage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title"></a>
+                    (<a href="#" ng-click="deletePage(page.nid)">Delete</a>&nbsp;<a href="#" ng-click="editPage(page.nid); $event.preventDefault(); $event.stopPropagation();">Edit</a>)
                 </li>
               </ul>
               <hr />
@@ -25,8 +25,8 @@
         </div>
         {% verbatim %}
           <p>{{widgets}}</p>
-            <div class="main-canvas" style="width: 70%; float: left">
-                <div gridstack class="grid-stack grid1" nid="{{nid}}" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)">
+            <div class="main-canvas" style="width: 70%; float: left;">
+                <div gridstack class="grid-stack grid1" nid="{{nid}}" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)" style="background-color: {{currentBgColor}}; background-image: url('{{currentBgImage}}')">
                     <div gridstack-item ng-model="widgets" ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
                          gs-item-width="w.width" gs-item-height="w.height" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                         <div class="grid-stack-item-content">
@@ -45,9 +45,9 @@
             </div>
             <div class="right-canvas" style="width: 15%; float: left">
                 <h2>Components</h2>
-                <ul>
-                  <li>
-                    <a class="btn btn-primary" ng-click="addWidget('form')" href="#">Add Form</a>
+                <ul class="components-buttons">
+                  <li class="form">
+                    <div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>
                   </li>
                   <li>
                     <a class="btn btn-primary" ng-click="addWidget('image')" href="#">Add Image</a>
@@ -84,15 +84,13 @@
                   </li>
                 </ul>
                 <h2>Page templates</h2>
-                <div ng-controller="PageList">
+                <div>
                  <ul class="pages" dnd-list="templatePages">
-                    <li ng-repeat="page in templatePages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)">
-                        <a href="#" ng-click="loadPage(page.nid)" ng-bind-html="page.title"></a>
-                        (<a href="#" ng-click="loadPage(page.nid)">Edit</a>)
+                    <li ng-repeat="page in templatePages">
+                        <a href="#" ng-click="loadTemplatePage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title"></a>
                     </li>
                  </ul>
-    </div>
-
+                </div>
             </div>
             <div class="modal-demo" id="modalwindow">
             </div>
