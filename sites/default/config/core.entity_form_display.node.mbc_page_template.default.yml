@@ -3,8 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.mbc_page_template.field_background_color
-    - field.field.node.mbc_page_template.field_background_image
     - field.field.node.mbc_page_template.field_gridstack_data
     - node.type.mbc_page_template
   module:
@@ -20,22 +18,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_background_color:
-    weight: 32
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_background_image:
-    weight: 33
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_gridstack_data:
     weight: 31
     settings:
