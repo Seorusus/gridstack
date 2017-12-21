@@ -1,0 +1,21 @@
+uuid: faba6648-ba0d-411e-bcd0-0bdc60a1e276
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.mbc_page_template
+  module:
+    - user
+id: node.mbc_page_template.teaser
+targetEntityType: node
+bundle: mbc_page_template
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_background_color: true
+  field_background_image: true
+  field_gridstack_data: true
