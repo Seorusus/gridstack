@@ -94,6 +94,16 @@ bootstrap:
     css:
       layout:
         js/libraries/bootstrap-3.3.7/css/bootstrap.css: {}
+        js/libraries/bootstrap-3.3.7/css/bootstrap-theme.css: {}
+    js:
+      js/libraries/bootstrap-3.3.7/js/bootstrap.min.js: {}
+
+jquery-scrollbar:
+    css:
+      layout:
+        js/libraries/jquery-scrollbar/jquery.scrollbar.css: {}
+    js:
+      js/libraries/jquery-scrollbar/jquery.scrollbar.min.js: {}
 
 jquery-minicolors:
     js:

@@ -13,6 +13,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
     this.init = function(element, options) {
         options.acceptWidgets = '.grid-stack-item';
         options.float = true;
+        options.verticalMargin = 0;
         this.gridstack = element.gridstack(options).data('gridstack');
         return this.gridstack;
     };
@@ -703,4 +704,8 @@ mbcApp.controller('ModalPageSettingsController', function ($scope) {
         $pctrl.pages = $scope.pagesOld;
         $scope.newTitleModalInstance.close($pctrl.pages);
     }
+});
+
+mbcApp.controller('SimpleController', function($scope){
+
 });

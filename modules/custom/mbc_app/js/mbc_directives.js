@@ -55,16 +55,16 @@
                         scope.onResizeStop({event: e, ui: ui});
                     });
                 });
-                $('.right-canvas .grid-stack-item').draggable({
-                    revert: 'invalid',
-                    helper: 'clone',
-                    handle: '.grid-stack-item-content',
-                    scroll: false,
-                    appendTo: 'body',
-                    stop: function( event, ui ) {
-                        $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
-                    }
-                });
+                // $('.right-canvas .grid-stack-item').draggable({
+                //     revert: 'invalid',
+                //     helper: 'clone',
+                //     handle: '.grid-stack-item-content',
+                //     scroll: false,
+                //     appendTo: 'body',
+                //     stop: function( event, ui ) {
+                //         $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
+                //     }
+                // });
             }
         };
 
@@ -152,16 +152,16 @@
                     controller.removeItem(element);
                 });
 
-                $('.right-canvas .grid-stack-item').draggable({
-                    revert: 'invalid',
-                    helper: 'clone',
-                    handle: '.grid-stack-item-content',
-                    scroll: false,
-                    appendTo: 'body',
-                    stop: function( event, ui ) {
-                        $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
-                    }
-                });
+                // $('.right-canvas .grid-stack-item').draggable({
+                //     revert: 'invalid',
+                //     helper: 'clone',
+                //     handle: '.grid-stack-item-content',
+                //     scroll: false,
+                //     appendTo: 'body',
+                //     stop: function( event, ui ) {
+                //         $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
+                //     }
+                // });
 
             }
 
