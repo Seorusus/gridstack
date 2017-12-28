@@ -56,6 +56,9 @@ body {
     #main-wrapper, #header {
       background: none;
     }
+    .site-footer {
+      padding: 5px;
+    }
   }
 }
 
@@ -374,25 +377,15 @@ body {
   }
 }
 
-#page-wrapper {
-  #main-wrapper {
-    .layout-main {
-      margin: 0;
-    }
-  }
-  .site-footer {
-    padding-top: 0;
-    .site-footer__bottom {
-      text-align: center;
-      margin-top: 0;
-      border-top: none;
-      .content {
-        padding: 0;
-        p {
-          font-family: 'Roboto', sans-serif;
-          font-size: 14px;
-        }
-      }
-    }
+.mbc-footer{
+  text-align: center;
+  position: absolute;
+  bottom: -36px;
+  left: 0;
+  right: 0;
+  .mbc-footer-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
   }
 }

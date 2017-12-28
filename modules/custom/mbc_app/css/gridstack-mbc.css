@@ -42,6 +42,9 @@ body {
 #page-wrapper #page #header {
   background: none;
 }
+#page-wrapper #page .site-footer {
+  padding: 5px;
+}
 .scrollbar-dynamic {
   max-height: 600px;
   overflow: auto;
@@ -316,21 +319,15 @@ body {
   font-size: 14px;
   color: #ffffff;
 }
-#page-wrapper #main-wrapper .layout-main {
-  margin: 0;
-}
-#page-wrapper .site-footer {
-  padding-top: 0;
-}
-#page-wrapper .site-footer .site-footer__bottom {
+.mbc-footer {
   text-align: center;
-  margin-top: 0;
-  border-top: none;
+  position: absolute;
+  bottom: -36px;
+  left: 0;
+  right: 0;
 }
-#page-wrapper .site-footer .site-footer__bottom .content {
-  padding: 0;
-}
-#page-wrapper .site-footer .site-footer__bottom .content p {
+.mbc-footer .mbc-footer-text {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+  color: #ffffff;
 }
