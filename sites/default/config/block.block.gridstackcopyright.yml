@@ -1,0 +1,25 @@
+uuid: 4070c113-8ebf-4547-95f6-520da36d8270
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:bd02363d-b07e-4a4d-a056-c36b6d75280f'
+  module:
+    - block_content
+  theme:
+    - bartik
+id: gridstackcopyright
+theme: bartik
+region: footer_fifth
+weight: 0
+provider: null
+plugin: 'block_content:bd02363d-b07e-4a4d-a056-c36b6d75280f'
+settings:
+  id: 'block_content:bd02363d-b07e-4a4d-a056-c36b6d75280f'
+  label: 'Gridstack copyright'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

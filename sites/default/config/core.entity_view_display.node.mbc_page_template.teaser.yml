@@ -15,7 +15,4 @@ content:
   links:
     weight: 100
     region: content
-hidden:
-  field_background_color: true
-  field_background_image: true
-  field_gridstack_data: true
+hidden: {  }

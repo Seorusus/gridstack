@@ -6,10 +6,35 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px!important;
 }
-
+.region-secondary-menu {
+  .menu--account {
+    .content {
+      .menu {
+        & > .menu-item {
+          a {
+            color: #f44336;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px!important;
+          }
+          &:first-child {
+            background: left center url("../img/account-icon.png") no-repeat;
+            padding-left: 6px;
+          }
+          &:last-child {
+            background: left center url("../img/loginout-icon.png") no-repeat;
+            padding-left: 17px;
+          }
+        }
+      }
+    }
+  }
+}
 #content {
   a, a.link {
     border: none;
+  }
+  .btn:hover, .btn:focus, .btn.focus {
+    color: #ffffff;
   }
 }
 
@@ -46,6 +71,7 @@ body {
   .left-sidebar {
     padding-right: 0;
     .page-list {
+      margin-top: 30px;
       .add-page {
         width: 100%;
         background-color: #0074d9;
@@ -144,7 +170,7 @@ body {
         border-top: none;
         padding-bottom: 5px;
         padding-top: 20px;
-        .components-buttons {
+        .components-buttons, .pages {
           list-style: none;
           padding: 0;
           li {
@@ -196,6 +222,28 @@ body {
 }
 .grid1 {
   background: #c6ecf1;
+  min-height: 400px;
+}
+.main-canvas {
+  .save-current-page {
+    background-color: #f44336;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    width: 115px;
+    height: 39px;
+    margin: 20px 10px 10px 0;
+    & > a:hover {
+      color: #ffffff;
+    }
+  }
+
+  .gs-button {
+    background-color: #0074d9;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+  }
 }
 .grid-stack-item-content {
   color: #2c3e50;
@@ -303,5 +351,48 @@ body {
   .grid-stack-item-content, .placeholder-content {
     left: 0!important;
     right: 0!important;
+  }
+}
+
+.modal-content {
+  .btn:hover, .btn:focus, .btn.focus {
+    color: #ffffff;
+  }
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  .gs-button-ok {
+    background-color: #f44336;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+  }
+  .gs-button-cancel {
+    background-color: #0074d9;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+  }
+}
+
+#page-wrapper {
+  #main-wrapper {
+    .layout-main {
+      margin: 0;
+    }
+  }
+  .site-footer {
+    padding-top: 0;
+    .site-footer__bottom {
+      text-align: center;
+      margin-top: 0;
+      border-top: none;
+      .content {
+        padding: 0;
+        p {
+          font-family: 'Roboto', sans-serif;
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
