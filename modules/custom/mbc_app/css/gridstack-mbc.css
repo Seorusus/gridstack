@@ -220,7 +220,6 @@ body {
 .grid-stack-item-content {
   color: #2c3e50;
   text-align: center;
-  background-color: #c4bec0;
 }
 .btn-grid-remove {
   position: absolute;
@@ -250,15 +249,17 @@ body {
   }
 }
 .mbc-widget-wrapper {
-  position: relative;
   height: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 .mbc-widget {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
+  height: 100%;
+  width: 100%;
+}
+.mbc-widget > img {
+  height: 100%;
 }
 /*contdown template*/
 .counter-block {
@@ -292,6 +293,9 @@ body {
 }
 .menu-items-controls-list .menu-item-row:hover {
   cursor: pointer;
+}
+.grid-stack-item {
+  min-height: 40px!important;
 }
 .grid-stack-item .grid-stack-item-content,
 .grid-stack-item .placeholder-content {

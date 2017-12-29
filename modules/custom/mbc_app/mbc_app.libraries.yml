@@ -49,11 +49,12 @@ gridstack:
   version: VERSION
   css:
     layout:
-      js/libraries/gridstack/dist/gridstack.min.css: {}
+      js/libraries/gridstack/dist/gridstack.css: {weight: -9}
       js/libraries/gridstack/dist/gridstack-extra.min.css: {}
+
       css/gridstack-mbc.css: {}
   js:
-    js/libraries/gridstack/dist/gridstack.min.js: {weight: -9}
+    js/libraries/gridstack/dist/gridstack.all.js: {weight: -9}
 
 ngStrap:
   version: "2.3.8"

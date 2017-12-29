@@ -14,6 +14,8 @@ app.controller('GridstackController', ['$scope', function($scope) {
         options.acceptWidgets = '.grid-stack-item';
         options.float = true;
         options.verticalMargin = 0;
+        options.cellHeight = 20;
+        options.width = 24;
         this.gridstack = element.gridstack(options).data('gridstack');
         return this.gridstack;
     };
@@ -210,8 +212,8 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     }
 
     $scope.options = {
-        cellHeight: 200,
-        verticalMargin: 10
+        cellHeight: 20,
+        verticalMargin: 0
     };
 
     var mbcShowFiles = function() {
