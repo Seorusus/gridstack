@@ -86,7 +86,7 @@
                 gsItemWidth: '=',
                 gsItemHeight: '=',
                 gsItemAutopos: '=',
-                gsItemMinHeight: '=?',
+                gsItemMinHeight: '=',
                 gsItemMaxHeight: '=?',
                 gsItemMinWidth: '=?',
                 gsItemMaxWidth: '=?',

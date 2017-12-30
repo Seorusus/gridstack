@@ -1,6 +1,7 @@
 //fonts settings
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto:400,400i,500,500i');
 //fonts settings
+html, body {height:100%;}
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -135,11 +136,13 @@ body {
   }
 }
 .right-canvas {
+  margin-top: 15px;
   .panel-group {
     .panel {
       border-radius: 0;
       padding-left: 0;
       padding-right: 0;
+      margin-top: 0;
       .panel-heading {
         padding: 0 10px;
         background-color: #0074d9;
@@ -220,14 +223,15 @@ body {
 }
 /* end of temporary common template settings*/
 
-.main-canvas > .grid-stack {
-  min-height: 410px;
-}
-.grid1 {
-  background: #c6ecf1;
-  min-height: 400px;
-}
 .main-canvas {
+  margin-top: 15px;
+  & > .grid-stack {
+
+  }
+}
+
+.right-canvas-center {
+  padding-bottom: 85px;
   .save-current-page {
     background-color: #f44336;
     font-family: 'Roboto', sans-serif;
@@ -239,6 +243,9 @@ body {
     & > a:hover {
       color: #ffffff;
     }
+    bottom: 14px;
+    position: absolute;
+    left: 18px;
   }
 
   .gs-button {
@@ -295,6 +302,39 @@ body {
   width: 100%;
   & > img {
     height: 100%;
+  }
+}
+
+/*form template*/
+.grid-stack-item {
+  .mbc-widget-wrapper[mbc-widget="form"] {
+    form {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      button {
+        background-color: #0074d9;
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        border-radius: 2px;
+        background-image: none;
+        border-radius: 2px;
+      }
+    }
+  }
+  .mbc-widget-wrapper[mbc-widget="price"] {
+    .panel {
+      margin: 0;
+    }
+  }
+  .mbc-widget-wrapper[mbc-widget="card"] {
+    .panel {
+      margin: 0;
+    }
+  }
+  .mbc-widget-wrapper[mbc-widget="calendar"] {
+    & > div {
+      width: 100%;
+    }
   }
 }
 

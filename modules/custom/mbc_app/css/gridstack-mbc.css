@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto:400,400i,500,500i');
+html,
+body {
+  height: 100%;
+}
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px!important;
@@ -111,10 +115,14 @@ body {
   height: 39px;
   margin: 20px 10px 10px 0;
 }
+.right-canvas {
+  margin-top: 15px;
+}
 .right-canvas .panel-group .panel {
   border-radius: 0;
   padding-left: 0;
   padding-right: 0;
+  margin-top: 0;
 }
 .right-canvas .panel-group .panel .panel-heading {
   padding: 0 10px;
@@ -192,14 +200,13 @@ body {
   }
 }
 /* end of temporary common template settings*/
-.main-canvas > .grid-stack {
-  min-height: 410px;
+.main-canvas {
+  margin-top: 15px;
 }
-.grid1 {
-  background: #c6ecf1;
-  min-height: 400px;
+.right-canvas-center {
+  padding-bottom: 85px;
 }
-.main-canvas .save-current-page {
+.right-canvas-center .save-current-page {
   background-color: #f44336;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -207,11 +214,14 @@ body {
   width: 115px;
   height: 39px;
   margin: 20px 10px 10px 0;
+  bottom: 14px;
+  position: absolute;
+  left: 18px;
 }
-.main-canvas .save-current-page > a:hover {
+.right-canvas-center .save-current-page > a:hover {
   color: #ffffff;
 }
-.main-canvas .gs-button {
+.right-canvas-center .gs-button {
   background-color: #0074d9;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -260,6 +270,27 @@ body {
 }
 .mbc-widget > img {
   height: 100%;
+}
+/*form template*/
+.grid-stack-item .mbc-widget-wrapper[mbc-widget="form"] form {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+.grid-stack-item .mbc-widget-wrapper[mbc-widget="form"] form button {
+  background-color: #0074d9;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  background-image: none;
+  border-radius: 2px;
+}
+.grid-stack-item .mbc-widget-wrapper[mbc-widget="price"] .panel {
+  margin: 0;
+}
+.grid-stack-item .mbc-widget-wrapper[mbc-widget="card"] .panel {
+  margin: 0;
+}
+.grid-stack-item .mbc-widget-wrapper[mbc-widget="calendar"] > div {
+  width: 100%;
 }
 /*contdown template*/
 .counter-block {
