@@ -49,11 +49,12 @@ gridstack:
   version: VERSION
   css:
     layout:
-      js/libraries/gridstack/dist/gridstack.min.css: {}
+      js/libraries/gridstack/dist/gridstack.css: {weight: -9}
       js/libraries/gridstack/dist/gridstack-extra.min.css: {}
+
       css/gridstack-mbc.css: {}
   js:
-    js/libraries/gridstack/dist/gridstack.min.js: {weight: -9}
+    js/libraries/gridstack/dist/gridstack.all.js: {weight: -9}
 
 ngStrap:
   version: "2.3.8"
@@ -94,6 +95,16 @@ bootstrap:
     css:
       layout:
         js/libraries/bootstrap-3.3.7/css/bootstrap.css: {}
+        js/libraries/bootstrap-3.3.7/css/bootstrap-theme.css: {}
+    js:
+      js/libraries/bootstrap-3.3.7/js/bootstrap.min.js: {}
+
+jquery-scrollbar:
+    css:
+      layout:
+        js/libraries/jquery-scrollbar/jquery.scrollbar.css: {}
+    js:
+      js/libraries/jquery-scrollbar/jquery.scrollbar.min.js: {}
 
 jquery-minicolors:
     js:

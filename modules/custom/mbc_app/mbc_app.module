@@ -8,19 +8,27 @@
  */
 function mbc_app_theme($existing, $type, $theme, $path) {
   return array(
-    'mbc_app_view' => array(
-      'template' => 'view',
+    'mbc_app_page' => array(
+      'template' => 'page--mbc-app',
       'variables' => array('title' => NULL),
+      'base hook' => 'page',
     ),
   );
 }
+
+//function mbc_app_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+//  $path = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
+//  if ((isset($path[0]) && $path[0] == 'mbc-page')&&($hook === 'page')) {
+//    $suggestions[] = 'page__mbc_app';
+//  }
+//}
 
 /**
  * Implements hook_js_alter().
  */
 function mbc_app_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
   $current_path = \Drupal::service('path.current')->getPath();
-  if ($current_path === '/mbc_app') {
+  if ($current_path === '/mbc-app') {
     unset($javascript['core/assets/vendor/jquery/jquery.min.js']);
     unset($javascript['core/assets/vendor/jquery.ui/ui/core-min.js']);
     unset($javascript['core/assets/vendor/jquery.ui/ui/draggable-min.js']);
