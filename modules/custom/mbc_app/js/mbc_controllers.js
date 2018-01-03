@@ -310,6 +310,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             x:0,
             y:0,
             width:3,
+            mwidth:3,
             height:1,
             mheight: 1,
             mbcWidgetId:widid,
@@ -392,7 +393,8 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         };
         switch(widid) {
             case 'calendar':
-                newWidget.width = 10;
+                newWidget.width = 16;
+                newWidget.mwidth = 16;
                 newWidget.height = 19;
                 newWidget.mheight = 19;
                 newWidget.settings.calDate = {
@@ -403,6 +405,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'button':
                 newWidget.width = 1;
+                newWidget.mwidth = 1;
                 newWidget.height = 2;
                 newWidget.mheight = 2;
                 newWidget.settings.buttonValue = {
@@ -414,6 +417,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'form':
                 newWidget.width = 6;
+                newWidget.mwidth = 6;
                 newWidget.height = 14;
                 newWidget.mheight = 14;
                 newWidget.settings.formMail = {
@@ -439,7 +443,8 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 };
                 break;
             case 'countdown':
-                newWidget.width = 11;
+                newWidget.width = 13;
+                newWidget.mwidth = 13;
                 newWidget.height = 8;
                 newWidget.mheight = 8;
                 newWidget.settings.CountdownDate = {
@@ -454,13 +459,15 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'video':
                 newWidget.width = 6;
+                newWidget.mwidth = 6;
                 newWidget.height = 8;
                 newWidget.mheight = 8;
                 break;
             case 'image':
-                newWidget.width = 1;
-                newWidget.height = 2;
-                newWidget.mheight = 2;
+                newWidget.width = 3;
+                newWidget.mwidth = 3;
+                newWidget.height = 3;
+                newWidget.mheight = 3;
                 newWidget.settings.imageUrl = {
                     value: '',
                     title: 'Image Url',
@@ -469,6 +476,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'price':
                 newWidget.width = 5;
+                newWidget.mwidth = 5;
                 newWidget.height = 4;
                 newWidget.mheight = 4;
                 newWidget.settings.priceTitle = {
@@ -494,6 +502,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'card':
                 newWidget.width = 5;
+                newWidget.mwidth = 5;
                 newWidget.height = 5;
                 newWidget.mheight = 5;
                 newWidget.settings.cardImage = {
@@ -514,6 +523,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'title':
                 newWidget.width = 6;
+                newWidget.mwidth = 6;
                 newWidget.height = 2;
                 newWidget.mheight = 2;
                 newWidget.settings.titleText = {
@@ -525,6 +535,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'text':
                 newWidget.width = 6;
+                newWidget.mwidth = 6;
                 newWidget.height = 2;
                 newWidget.mheight = 2;
                 newWidget.settings.textText = {
@@ -535,6 +546,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'subtitle':
                 newWidget.width = 6;
+                newWidget.hwidth = 6;
                 newWidget.height = 2;
                 newWidget.mheight = 2;
                 newWidget.settings.subtitleText = {
@@ -546,6 +558,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
             case 'menubar':
                 newWidget.width = 6;
+                newWidget.mwidth = 6;
                 newWidget.height = 4;
                 newWidget.mheight = 4;
                 newWidget.settings.tabs = {

@@ -156,7 +156,7 @@ body {
 }
 .right-canvas .panel-group .panel .panel-body {
   background-color: #333333;
-  border-top: none;
+  border-top: none!important;
   padding-bottom: 5px;
   padding-top: 20px;
 }
@@ -270,6 +270,7 @@ body {
 }
 .mbc-widget > img {
   height: 100%;
+  width: 100%;
 }
 /*form template*/
 .grid-stack-item .mbc-widget-wrapper[mbc-widget="form"] form {
@@ -303,6 +304,20 @@ body {
 .counter-block .counter .number {
   font-size: 50px;
   line-height: 48px;
+}
+/*video template*/
+.control-video-wrapper {
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.control-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 /*contdown template*/
 .card .panel-heading img {

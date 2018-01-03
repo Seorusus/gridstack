@@ -87,9 +87,9 @@
                 gsItemHeight: '=',
                 gsItemAutopos: '=',
                 gsItemMinHeight: '=',
-                gsItemMaxHeight: '=?',
-                gsItemMinWidth: '=?',
-                gsItemMaxWidth: '=?',
+                //gsItemMaxHeight: '=?',
+                gsItemMinWidth: '=',
+                //gsItemMaxWidth: '=?',
                 mbcWidgetId: '=',
             },
             link: function(scope, element, attrs, controller) {
@@ -102,8 +102,8 @@
                 $(element).attr('data-gs-height', scope.gsItemHeight);
                 $(element).attr('data-gs-min-width', scope.gsItemMinWidth);
                 $(element).attr('data-gs-min-height', scope.gsItemMinHeight);
-                $(element).attr('data-gs-max-width', scope.gsItemMaxWidth);
-                $(element).attr('data-gs-max-height', scope.gsItemMaxHeight);
+                // $(element).attr('data-gs-max-width', scope.gsItemMaxWidth);
+                // $(element).attr('data-gs-max-height', scope.gsItemMaxHeight);
                 $(element).attr('data-gs-auto-position', scope.gsItemAutopos);
                 $(element).attr('mbc-widget-id', scope.mbcWidgetId);
                 var mbcWidget = angular.element(element[0].querySelector('.mbc-widget'));
