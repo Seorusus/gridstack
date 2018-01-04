@@ -416,10 +416,10 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 };
                 break;
             case 'form':
-                newWidget.width = 6;
-                newWidget.mwidth = 6;
-                newWidget.height = 14;
-                newWidget.mheight = 14;
+                newWidget.width = 10;
+                newWidget.mwidth = 10;
+                newWidget.height = 11;
+                newWidget.mheight = 11;
                 newWidget.settings.formMail = {
                     value: '',
                     title: 'Email',

@@ -26,7 +26,8 @@ body {
 }
 #content .btn:hover,
 #content .btn:focus,
-#content .btn.focus {
+#content .btn.focus,
+#content btn.active {
   color: #ffffff;
 }
 .region-header {
@@ -199,6 +200,11 @@ body {
     max-width: 100%!important;
   }
 }
+@media (max-width: 850px) {
+  .content .mbc-footer {
+    position: relative;
+  }
+}
 /* end of temporary common template settings*/
 .main-canvas {
   margin-top: 15px;
@@ -279,6 +285,7 @@ body {
 }
 .grid-stack-item .mbc-widget-wrapper[mbc-widget="form"] form button {
   background-color: #0074d9;
+  color: #ffffff;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   background-image: none;

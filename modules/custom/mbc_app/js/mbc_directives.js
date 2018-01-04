@@ -1509,6 +1509,13 @@
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/title/index.html',
             link: function (scope, element, attrs, controller) {
+                // scope.$watch(function(){
+                //     var mbcWTitle = angular.element(element[0].querySelector('.mbc-widget'));
+                //     return $(mbcWTitle).height();
+                // }, function() {
+                //     var mbcWTitle = angular.element(element[0].querySelector('.mbc-widget'));
+                //     console.log($(mbcWTitle).height());
+                // });
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
                         $(element).css('color', scope.w.settings.color.value);
@@ -1977,18 +1984,18 @@
                 }
                 $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_color }, function(){
                     if (scopeLocal.pages[scopeLocal.page.id].field_background_color) {
-                        $('.grid1').css('background-color', scopeLocal.pages[scopeLocal.page.id].field_background_color);
+                        $('.right-canvas-center').css('background-color', scopeLocal.pages[scopeLocal.page.id].field_background_color);
                     }
                     else {
-                        $('.grid1').css('background-color', '');
+                        $('.right-canvas-center').css('background-color', '');
                     }
                 });
                 $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_image }, function(){
                     if (scopeLocal.pages[scopeLocal.page.id].field_background_image) {
-                        $('.grid1').css('background-image', 'url(' + scopeLocal.pages[scopeLocal.page.id].field_background_image + ')');
+                        $('.right-canvas-center').css('background-image', 'url(' + scopeLocal.pages[scopeLocal.page.id].field_background_image + ')');
                     }
                     else {
-                        $('.grid1').css('background-image', '');
+                        $('.right-canvas-center').css('background-image', '');
                     }
                 });
                 // $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
