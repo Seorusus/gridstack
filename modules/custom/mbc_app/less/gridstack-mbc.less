@@ -173,7 +173,7 @@ body {
       }
       .panel-body {
         background-color: #333333;
-        border-top: none;
+        border-top: none!important;
         padding-bottom: 5px;
         padding-top: 20px;
         .components-buttons, .pages {
@@ -302,6 +302,7 @@ body {
   width: 100%;
   & > img {
     height: 100%;
+    width: 100%;
   }
 }
 
@@ -354,6 +355,21 @@ body {
       font-size: 50px;
       line-height: 48px;
     }
+  }
+}
+
+/*video template*/
+.control-video-wrapper {
+  //position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 
