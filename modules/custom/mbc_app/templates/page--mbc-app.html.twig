@@ -33,7 +33,7 @@
                 <div class="gridstack-area">
                   <div gridstack class="grid-stack grid-stack-24 grid1" nid="{{nid}}" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)" style="background-color: {{currentBgColor}}; background-image: url('{{currentBgImage}}')">
                     <div gridstack-item ng-model="widgets" ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
-                         gs-item-width="w.width" gs-item-min-width="w.mwidth" gs-item-height="w.height" gs-item-min-height="w.mheight" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
+                         gs-item-width="w.width" gs-item-min-width="w.mwidth" gs-item-height="w.height" gs-item-min-height="w.mheight" gs-item-autopos="w.autopos" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                         <div class="grid-stack-item-content">
                               <a class="btn-grid-edit" ng-click="editWidget(w.mbcComponentId)" href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" aria-label="Edit"></span>

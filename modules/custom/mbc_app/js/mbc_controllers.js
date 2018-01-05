@@ -266,6 +266,11 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
             'type' : {"target_id": "mbc_page"},
         }
+        angular.forEach($scope.widgets, function (value, key) {
+            if (value.autopos === 1) {
+                $scope.widgets[key].autopos = 0;
+            }
+        });
         var values = {
             'title': {
                 "value": $scope.pages[$scope.page.id].title
@@ -315,6 +320,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             mheight: 1,
             mbcWidgetId:widid,
             mbcComponentId: $scope.getNewId(),
+            autopos: 1,
             settings: {
                 font: {
                    value: '',
