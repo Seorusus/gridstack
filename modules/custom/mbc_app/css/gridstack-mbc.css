@@ -182,6 +182,38 @@ body {
   border-radius: 2px;
   background-image: none;
 }
+.right-canvas #basicComponents .components-buttons li a {
+  background-position: 30% center;
+  background-repeat: no-repeat;
+}
+@media (max-width: 767px) {
+  .right-canvas #basicComponents .components-buttons li a {
+    background-position: 25% center;
+  }
+}
+@media (max-width: 1439px) {
+  .right-canvas #basicComponents .components-buttons li a {
+    background-position: 15% center;
+  }
+}
+.right-canvas #basicComponents .components-buttons #btn-component-title a {
+  background-image: url("../img/icon-title.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-subtitle a {
+  background-image: url("../img/icon-subtitle.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-text a {
+  background-image: url("../img/icon-text.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-video a {
+  background-image: url("../img/icon-video.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-image a {
+  background-image: url("../img/icon-image.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-button a {
+  background-image: url("../img/icon-button.png");
+}
 .right-canvas-wrapper {
   background-color: #ffffff;
 }
