@@ -116,6 +116,19 @@ body {
   height: 39px;
   margin: 20px 10px 10px 0;
 }
+.grid1 {
+  min-height: 400px;
+}
+.grid1 li.grid-stack-item {
+  list-style: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #0074d9;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  border-radius: 2px;
+  padding-bottom: 0;
+}
 .right-canvas {
   margin-top: 15px;
 }
@@ -182,36 +195,54 @@ body {
   border-radius: 2px;
   background-image: none;
 }
-.right-canvas #basicComponents .components-buttons li a {
+.right-canvas #basicComponents .components-buttons li.grid-stack-item,
+.right-canvas #components .components-buttons li.grid-stack-item {
+  width: 100%;
+}
+.right-canvas #basicComponents .components-buttons li a,
+.right-canvas #components .components-buttons li a {
+  color: #ffffff;
   background-position: 30% center;
   background-repeat: no-repeat;
 }
+.right-canvas #basicComponents .components-buttons li a:hover,
+.right-canvas #components .components-buttons li a:hover {
+  color: #ffffff;
+}
 @media (max-width: 767px) {
-  .right-canvas #basicComponents .components-buttons li a {
+  .right-canvas #basicComponents .components-buttons li a,
+  .right-canvas #components .components-buttons li a {
     background-position: 25% center;
   }
 }
 @media (max-width: 1439px) {
-  .right-canvas #basicComponents .components-buttons li a {
+  .right-canvas #basicComponents .components-buttons li a,
+  .right-canvas #components .components-buttons li a {
     background-position: 15% center;
   }
 }
-.right-canvas #basicComponents .components-buttons #btn-component-title a {
+.right-canvas #basicComponents .components-buttons #btn-component-title a,
+.right-canvas #components .components-buttons #btn-component-title a {
   background-image: url("../img/icon-title.png");
 }
-.right-canvas #basicComponents .components-buttons #btn-component-subtitle a {
+.right-canvas #basicComponents .components-buttons #btn-component-subtitle a,
+.right-canvas #components .components-buttons #btn-component-subtitle a {
   background-image: url("../img/icon-subtitle.png");
 }
-.right-canvas #basicComponents .components-buttons #btn-component-text a {
+.right-canvas #basicComponents .components-buttons #btn-component-text a,
+.right-canvas #components .components-buttons #btn-component-text a {
   background-image: url("../img/icon-text.png");
 }
-.right-canvas #basicComponents .components-buttons #btn-component-video a {
+.right-canvas #basicComponents .components-buttons #btn-component-video a,
+.right-canvas #components .components-buttons #btn-component-video a {
   background-image: url("../img/icon-video.png");
 }
-.right-canvas #basicComponents .components-buttons #btn-component-image a {
+.right-canvas #basicComponents .components-buttons #btn-component-image a,
+.right-canvas #components .components-buttons #btn-component-image a {
   background-image: url("../img/icon-image.png");
 }
-.right-canvas #basicComponents .components-buttons #btn-component-button a {
+.right-canvas #basicComponents .components-buttons #btn-component-button a,
+.right-canvas #components .components-buttons #btn-component-button a {
   background-image: url("../img/icon-button.png");
 }
 .right-canvas-wrapper {
@@ -380,7 +411,7 @@ body {
   cursor: pointer;
 }
 .grid-stack-item {
-  min-height: 40px!important;
+  min-height: 34px!important;
 }
 .grid-stack-item .grid-stack-item-content,
 .grid-stack-item .placeholder-content {

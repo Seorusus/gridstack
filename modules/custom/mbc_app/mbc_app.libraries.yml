@@ -54,7 +54,8 @@ gridstack:
 
       css/gridstack-mbc.css: {}
   js:
-    js/libraries/gridstack/dist/gridstack.all.js: {weight: -9}
+    js/libraries/gridstack/dist/gridstack.js: {weight: -9}
+    js/libraries/gridstack/dist/gridstack.jQueryUI.js: {weight: -9}
 
 ngStrap:
   version: "2.3.8"

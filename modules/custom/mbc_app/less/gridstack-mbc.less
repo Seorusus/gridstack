@@ -135,6 +135,19 @@ body {
     }
   }
 }
+.grid1 {
+  min-height: 400px;
+  li.grid-stack-item {
+    list-style: none;
+    text-align: center;
+    color: #ffffff;
+    background-color: #0074d9;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    border-radius: 2px;
+    padding-bottom: 0;
+  }
+}
 .right-canvas {
   margin-top: 15px;
   .panel-group {
@@ -197,10 +210,17 @@ body {
       }
     }
   }
-  #basicComponents {
+  #basicComponents, #components {
     .components-buttons {
       li {
+        &.grid-stack-item {
+          width: 100%;
+        }
         a {
+          color: #ffffff;
+          &:hover {
+            color: #ffffff;
+          }
           background-position: 30% center;
           @media (max-width: 767px) {
             background-position: 25% center;
@@ -464,7 +484,7 @@ body {
 }
 
 .grid-stack-item {
-  min-height: 40px!important;
+  min-height: 34px!important;
   .grid-stack-item-content, .placeholder-content {
     left: 0!important;
     right: 0!important;

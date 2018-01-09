@@ -311,16 +311,19 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     }
 
     $scope.addWidget = function(widid) {
+        if (arguments[1] !== undefined) {
+           var coords = arguments[1];
+        }
         var newWidget = {
-            x:0,
-            y:0,
+            x:(coords !== undefined)? coords.gsx : 0,
+            y:(coords !== undefined)? coords.gsy : 0,
             width:3,
             mwidth:3,
             height:1,
             mheight: 1,
             mbcWidgetId:widid,
             mbcComponentId: $scope.getNewId(),
-            autopos: 1,
+            autopos: (coords !== undefined)? 0 : 1,
             settings: {
                 font: {
                    value: '',
@@ -410,7 +413,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 };
                 break;
             case 'button':
-                newWidget.width = 1;
+                newWidget.width = 2;
                 newWidget.mwidth = 1;
                 newWidget.height = 2;
                 newWidget.mheight = 2;
@@ -602,9 +605,6 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 file: f,
             });
         }
-
-
-        console.log(f);
     }
 
     $scope.getComponentProperties = function(id) {
