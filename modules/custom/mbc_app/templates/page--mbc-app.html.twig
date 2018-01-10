@@ -12,10 +12,10 @@
                      <div class="scrollbar-dynamic">
                          <ul class="pages container-fluid" dnd-list="pages">
                             <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)" class="page-line row">
-                                <div class="page-link-wrapper col-sm-7">
+                                <div class="page-link-wrapper col-xs-7">
                                   <a href="#" ng-click="loadPage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title" class="page-title"></a>
                                 </div>
-                                <div class="page-block-correction col-sm-5">
+                                <div class="page-block-correction col-xs-5">
                                   <a href="#" ng-click="deletePage(page.nid)" class="btn btn-page-delete col-sm-6">Delete</a>
                                   <a href="#" ng-click="editPage(page.nid); $event.preventDefault(); $event.stopPropagation();" class="btn btn-page-edit col-sm-6">Edit</a>
                                 </div>
