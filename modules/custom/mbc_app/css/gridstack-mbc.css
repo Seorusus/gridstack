@@ -188,7 +188,7 @@ body {
 .right-canvas .panel-group .panel .panel-body .components-buttons .btn-component,
 .right-canvas .panel-group .panel .panel-body .pages .btn-component {
   width: 100%;
-  text-align: center;
+  text-align: left;
   background-color: #0074d9;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
@@ -202,7 +202,9 @@ body {
 .right-canvas #basicComponents .components-buttons li a,
 .right-canvas #components .components-buttons li a {
   color: #ffffff;
-  background-position: 30% center;
+  background-position: 20px center;
+  background-size: 18px;
+  padding-left: 53px;
   background-repeat: no-repeat;
 }
 .right-canvas #basicComponents .components-buttons li a:hover,
@@ -212,13 +214,14 @@ body {
 @media (max-width: 767px) {
   .right-canvas #basicComponents .components-buttons li a,
   .right-canvas #components .components-buttons li a {
-    background-position: 25% center;
+    background-position: 20px center;
   }
 }
 @media (max-width: 1439px) {
   .right-canvas #basicComponents .components-buttons li a,
   .right-canvas #components .components-buttons li a {
-    background-position: 15% center;
+    background-position: 20px center;
+    padding-left: 53px;
   }
 }
 .right-canvas #basicComponents .components-buttons #btn-component-title a,
@@ -244,6 +247,30 @@ body {
 .right-canvas #basicComponents .components-buttons #btn-component-button a,
 .right-canvas #components .components-buttons #btn-component-button a {
   background-image: url("../img/icon-button.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-form a,
+.right-canvas #components .components-buttons #btn-component-form a {
+  background-image: url("../img/icon-text.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-calendar a,
+.right-canvas #components .components-buttons #btn-component-calendar a {
+  background-image: url("../img/icon-calendar.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-countdown a,
+.right-canvas #components .components-buttons #btn-component-countdown a {
+  background-image: url("../img/icon-countdown.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-price a,
+.right-canvas #components .components-buttons #btn-component-price a {
+  background-image: url("../img/icon-price.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-card a,
+.right-canvas #components .components-buttons #btn-component-card a {
+  background-image: url("../img/icon-card.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-menubar a,
+.right-canvas #components .components-buttons #btn-component-menubar a {
+  background-image: url("../img/icon-text.png");
 }
 .right-canvas-wrapper {
   background-color: #ffffff;
