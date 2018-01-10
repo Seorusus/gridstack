@@ -74,8 +74,8 @@ body {
 .content .left-sidebar .page-list .pages .page-line {
   list-style: none;
   border-bottom: 1px solid #4a4949;
-  padding-bottom: 35px;
-  padding-top: 10px;
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 .content .left-sidebar .page-list .pages .page-line .page-title {
   background: left center url("../img/page_icon.png") no-repeat;
@@ -84,29 +84,27 @@ body {
   font-size: 20px;
   color: #ffffff;
 }
-.content .left-sidebar .page-list .pages .page-line .page-block-correction {
-  float: right;
-  margin-right: 12px;
-}
 .content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-delete {
-  width: 50px;
+  width: 40px;
   padding: 2px 0;
   background-color: #f44336;
   color: #ffffff;
   border-radius: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 .content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-edit {
-  width: 50px;
+  width: 40px;
   padding: 2px 0;
   background-color: #0074d9;
   color: #ffffff;
   border-radius: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 .content .left-sidebar .page-list .save-pagelist {
   background-color: #f44336;
@@ -251,7 +249,7 @@ body {
 }
 .right-canvas #basicComponents .components-buttons #btn-component-form a,
 .right-canvas #components .components-buttons #btn-component-form a {
-  background-image: url("../img/icon-text.png");
+  background-image: url("../img/icon-form.png");
 }
 .right-canvas #basicComponents .components-buttons #btn-component-calendar a,
 .right-canvas #components .components-buttons #btn-component-calendar a {
@@ -271,7 +269,7 @@ body {
 }
 .right-canvas #basicComponents .components-buttons #btn-component-menubar a,
 .right-canvas #components .components-buttons #btn-component-menubar a {
-  background-image: url("../img/icon-text.png");
+  background-image: url("../img/icon-menubar.png");
 }
 .right-canvas-wrapper {
   background-color: #ffffff;

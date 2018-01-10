@@ -14,6 +14,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
         options.acceptWidgets = '.grid-stack-item';
         options.float = true;
         options.verticalMargin = 0;
+        options.alwaysShowResizeHandle = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         options.cellHeight = 20;
         options.width = 24;
         this.gridstack = element.gridstack(options).data('gridstack');
