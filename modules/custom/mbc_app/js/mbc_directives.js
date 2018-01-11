@@ -12,6 +12,7 @@
                 onDragStop: '&',
                 onResizeStart: '&',
                 onResizeStop: '&',
+                addWidgetDD: '&',
                 gridstackHandler: '=?',
                 options: '=',
             },
@@ -55,16 +56,26 @@
                         scope.onResizeStop({event: e, ui: ui});
                     });
                 });
-                // $('.right-canvas .grid-stack-item').draggable({
-                //     revert: 'invalid',
-                //     helper: 'clone',
-                //     handle: '.grid-stack-item-content',
-                //     scroll: false,
-                //     appendTo: 'body',
-                //     stop: function( event, ui ) {
-                //         $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
-                //     }
-                // });
+                $('.right-canvas .grid-stack-item').draggable({
+                    revert: 'invalid',
+                    helper: 'clone',
+                    handle: '.grid-stack-item-content',
+                    scroll: false,
+                    appendTo: '.grid1',
+                });
+                $('.right-canvas .grid-stack-item').on('dragstop', function( event, ui ) {
+                    $timeout(function() {
+                        var tempCell = $(".grid1 > li.grid-stack-item");
+                        var tempCellX = tempCell.attr('data-gs-x');
+                        var tempCellY = tempCell.attr('data-gs-y');
+                        scope.$parent.addWidget($(ui.helper).attr('gs-widget'), {gsx:tempCellX, gsy:tempCellY});
+                        $(".grid1 > li.grid-stack-item").remove();
+                        $(this).removeAttr('data-gs-x');
+                        $(this).removeAttr('data-gs-y');
+                        $(this).removeAttr('data-gs-width');
+                        $(this).removeAttr('data-gs-height');
+                    });
+                });
             }
         };
 
@@ -152,17 +163,6 @@
                     controller.removeItem(element);
                 });
 
-                // $('.right-canvas .grid-stack-item').draggable({
-                //     revert: 'invalid',
-                //     helper: 'clone',
-                //     handle: '.grid-stack-item-content',
-                //     scroll: false,
-                //     appendTo: 'body',
-                //     stop: function( event, ui ) {
-                //         $('.components-buttons .form').html('<div class="grid-stack-item" id="form"><div class="grid-stack-item-content">Add form</div></div>').css('position: relative');
-                //     }
-                // });
-
             }
 
         };
@@ -177,6 +177,25 @@
                     element.html('');
                     element.append($compile(angular.element('<mbc-widget-' + directive + '/>'))($scope));
                 });
+                // $('.right-canvas .grid-stack-item').draggable({
+                //     revert: 'invalid',
+                //     helper: 'clone',
+                //     handle: '.grid-stack-item-content',
+                //     scroll: false,
+                //     appendTo: '.grid1',
+                //     stop: function( event, ui ) {
+                //         var tempCell = $(".grid1 > li.grid-stack-item");
+                //         var tempCellX = tempCell.attr('data-gs-x');
+                //         var tempCellY = tempCell.attr('data-gs-y');
+                //         $scope.addWidget($(ui.helper).attr('gs-widget'), {gsx:tempCellX, gsy:tempCellY});
+                //         $(".grid1 > li.grid-stack-item").remove();
+                //         console.log($(ui.helper).attr('gs-widget'));
+                //         $(this).removeAttr('data-gs-x');
+                //         $(this).removeAttr('data-gs-y');
+                //         $(this).removeAttr('data-gs-width');
+                //         $(this).removeAttr('data-gs-height');
+                //     }
+                // });
             }
         };
 
@@ -1509,6 +1528,13 @@
             replace: true,
             templateUrl: '/modules/custom/mbc_app/components/title/index.html',
             link: function (scope, element, attrs, controller) {
+                // scope.$watch(function(){
+                //     var mbcWTitle = angular.element(element[0].querySelector('.mbc-widget'));
+                //     return $(mbcWTitle).height();
+                // }, function() {
+                //     var mbcWTitle = angular.element(element[0].querySelector('.mbc-widget'));
+                //     console.log($(mbcWTitle).height());
+                // });
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
                         $(element).css('color', scope.w.settings.color.value);
@@ -1977,18 +2003,18 @@
                 }
                 $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_color }, function(){
                     if (scopeLocal.pages[scopeLocal.page.id].field_background_color) {
-                        $('.grid1').css('background-color', scopeLocal.pages[scopeLocal.page.id].field_background_color);
+                        $('.right-canvas-center').css('background-color', scopeLocal.pages[scopeLocal.page.id].field_background_color);
                     }
                     else {
-                        $('.grid1').css('background-color', '');
+                        $('.right-canvas-center').css('background-color', '');
                     }
                 });
                 $scope.$watch(function () { return scopeLocal.pages[scopeLocal.page.id].field_background_image }, function(){
                     if (scopeLocal.pages[scopeLocal.page.id].field_background_image) {
-                        $('.grid1').css('background-image', 'url(' + scopeLocal.pages[scopeLocal.page.id].field_background_image + ')');
+                        $('.right-canvas-center').css('background-image', 'url(' + scopeLocal.pages[scopeLocal.page.id].field_background_image + ')');
                     }
                     else {
-                        $('.grid1').css('background-image', '');
+                        $('.right-canvas-center').css('background-image', '');
                     }
                 });
                 // $scope.$watch(function () { return $(element).attr('data-opacity'); }, function(value){
