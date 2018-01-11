@@ -26,7 +26,8 @@ body {
 }
 #content .btn:hover,
 #content .btn:focus,
-#content .btn.focus {
+#content .btn.focus,
+#content btn.active {
   color: #ffffff;
 }
 .region-header {
@@ -73,7 +74,8 @@ body {
 .content .left-sidebar .page-list .pages .page-line {
   list-style: none;
   border-bottom: 1px solid #4a4949;
-  line-height: 5;
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 .content .left-sidebar .page-list .pages .page-line .page-title {
   background: left center url("../img/page_icon.png") no-repeat;
@@ -82,29 +84,27 @@ body {
   font-size: 20px;
   color: #ffffff;
 }
-.content .left-sidebar .page-list .pages .page-line .page-block-correction {
-  float: right;
-  margin-right: 12px;
-}
 .content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-delete {
-  width: 50px;
+  width: 40px;
   padding: 2px 0;
   background-color: #f44336;
   color: #ffffff;
   border-radius: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 .content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-edit {
-  width: 50px;
+  width: 40px;
   padding: 2px 0;
   background-color: #0074d9;
   color: #ffffff;
   border-radius: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 .content .left-sidebar .page-list .save-pagelist {
   background-color: #f44336;
@@ -114,6 +114,19 @@ body {
   width: 115px;
   height: 39px;
   margin: 20px 10px 10px 0;
+}
+.grid1 {
+  min-height: 400px;
+}
+.grid1 li.grid-stack-item {
+  list-style: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #0074d9;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  border-radius: 2px;
+  padding-bottom: 0;
 }
 .right-canvas {
   margin-top: 15px;
@@ -174,12 +187,89 @@ body {
 .right-canvas .panel-group .panel .panel-body .components-buttons .btn-component,
 .right-canvas .panel-group .panel .panel-body .pages .btn-component {
   width: 100%;
-  text-align: center;
+  text-align: left;
   background-color: #0074d9;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   border-radius: 2px;
   background-image: none;
+}
+.right-canvas #basicComponents .components-buttons li.grid-stack-item,
+.right-canvas #components .components-buttons li.grid-stack-item {
+  width: 100%;
+}
+.right-canvas #basicComponents .components-buttons li a,
+.right-canvas #components .components-buttons li a {
+  color: #ffffff;
+  background-position: 20px center;
+  background-size: 18px;
+  padding-left: 53px;
+  background-repeat: no-repeat;
+}
+.right-canvas #basicComponents .components-buttons li a:hover,
+.right-canvas #components .components-buttons li a:hover {
+  color: #ffffff;
+}
+@media (max-width: 767px) {
+  .right-canvas #basicComponents .components-buttons li a,
+  .right-canvas #components .components-buttons li a {
+    background-position: 20px center;
+  }
+}
+@media (max-width: 1439px) {
+  .right-canvas #basicComponents .components-buttons li a,
+  .right-canvas #components .components-buttons li a {
+    background-position: 20px center;
+    padding-left: 53px;
+  }
+}
+.right-canvas #basicComponents .components-buttons #btn-component-title a,
+.right-canvas #components .components-buttons #btn-component-title a {
+  background-image: url("../img/icon-title.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-subtitle a,
+.right-canvas #components .components-buttons #btn-component-subtitle a {
+  background-image: url("../img/icon-subtitle.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-text a,
+.right-canvas #components .components-buttons #btn-component-text a {
+  background-image: url("../img/icon-text.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-video a,
+.right-canvas #components .components-buttons #btn-component-video a {
+  background-image: url("../img/icon-video.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-image a,
+.right-canvas #components .components-buttons #btn-component-image a {
+  background-image: url("../img/icon-image.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-button a,
+.right-canvas #components .components-buttons #btn-component-button a {
+  background-image: url("../img/icon-button.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-form a,
+.right-canvas #components .components-buttons #btn-component-form a {
+  background-image: url("../img/icon-form.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-calendar a,
+.right-canvas #components .components-buttons #btn-component-calendar a {
+  background-image: url("../img/icon-calendar.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-countdown a,
+.right-canvas #components .components-buttons #btn-component-countdown a {
+  background-image: url("../img/icon-countdown.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-price a,
+.right-canvas #components .components-buttons #btn-component-price a {
+  background-image: url("../img/icon-price.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-card a,
+.right-canvas #components .components-buttons #btn-component-card a {
+  background-image: url("../img/icon-card.png");
+}
+.right-canvas #basicComponents .components-buttons #btn-component-menubar a,
+.right-canvas #components .components-buttons #btn-component-menubar a {
+  background-image: url("../img/icon-menubar.png");
 }
 .right-canvas-wrapper {
   background-color: #ffffff;
@@ -197,6 +287,11 @@ body {
   }
   .layout-container {
     max-width: 100%!important;
+  }
+}
+@media (max-width: 850px) {
+  .content .mbc-footer {
+    position: relative;
   }
 }
 /* end of temporary common template settings*/
@@ -279,6 +374,7 @@ body {
 }
 .grid-stack-item .mbc-widget-wrapper[mbc-widget="form"] form button {
   background-color: #0074d9;
+  color: #ffffff;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   background-image: none;
@@ -341,7 +437,7 @@ body {
   cursor: pointer;
 }
 .grid-stack-item {
-  min-height: 40px!important;
+  min-height: 34px!important;
 }
 .grid-stack-item .grid-stack-item-content,
 .grid-stack-item .placeholder-content {

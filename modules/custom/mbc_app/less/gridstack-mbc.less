@@ -34,7 +34,7 @@ body {
   a, a.link {
     border: none;
   }
-  .btn:hover, .btn:focus, .btn.focus {
+  .btn:hover, .btn:focus, .btn.focus, btn.active {
     color: #ffffff;
   }
 }
@@ -89,7 +89,9 @@ body {
         .page-line {
           list-style: none;
           border-bottom: 1px solid #4a4949;
-          line-height: 5;
+          //line-height: 5;
+          padding-bottom: 30px;
+          padding-top: 30px;
           .page-title {
             background: left center url("../img/page_icon.png") no-repeat;
             padding-left: 65px;
@@ -98,28 +100,30 @@ body {
             color: #ffffff;
           }
           .page-block-correction {
-            float: right;
+            //float: right;
             .btn-page-delete {
-              width: 50px;
+              width: 40px;
               padding: 2px 0;
               background-color: #f44336;
               color: #ffffff;
               border-radius: 0;
               font-family: 'Roboto', sans-serif;
               font-size: 10px;
-              margin-left: 10px;
+              margin-left: 5px;
+              margin-top: 5px;
             }
             .btn-page-edit {
-              width: 50px;
+              width: 40px;
               padding: 2px 0;
               background-color: #0074d9;
               color: #ffffff;
               border-radius: 0;
               font-family: 'Roboto', sans-serif;
               font-size: 10px;
-              margin-left: 10px;
+              margin-left: 5px;
+              margin-top: 5px;
             }
-            margin-right: 12px;
+            //margin-right: 12px;
           }
         }
       }
@@ -133,6 +137,19 @@ body {
         margin: 20px 10px 10px 0;
       }
     }
+  }
+}
+.grid1 {
+  min-height: 400px;
+  li.grid-stack-item {
+    list-style: none;
+    text-align: center;
+    color: #ffffff;
+    background-color: #0074d9;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    border-radius: 2px;
+    padding-bottom: 0;
   }
 }
 .right-canvas {
@@ -186,13 +203,99 @@ body {
           }
           .btn-component {
             width: 100%;
-            text-align: center;
+            text-align: left;
             background-color: #0074d9;
             font-family: 'Lato', sans-serif;
             font-size: 16px;
             border-radius: 2px;
             background-image: none;
           }
+        }
+      }
+    }
+  }
+  #basicComponents, #components {
+    .components-buttons {
+      li {
+        &.grid-stack-item {
+          width: 100%;
+        }
+        a {
+          color: #ffffff;
+          &:hover {
+            color: #ffffff;
+          }
+          background-position: 20px center;
+          background-size: 18px;
+          padding-left: 53px;
+          @media (max-width: 767px) {
+            background-position: 20px center;
+          }
+          @media (max-width: 1439px) {
+            background-position: 20px center;
+            padding-left: 53px;
+          }
+          background-repeat: no-repeat;
+        }
+      }
+      #btn-component-title {
+        a {
+          background-image: url("../img/icon-title.png");
+        }
+      }
+      #btn-component-subtitle {
+        a {
+          background-image: url("../img/icon-subtitle.png");
+        }
+      }
+      #btn-component-text {
+        a {
+          background-image: url("../img/icon-text.png");
+        }
+      }
+      #btn-component-video {
+        a {
+          background-image: url("../img/icon-video.png");
+        }
+      }
+      #btn-component-image {
+        a {
+          background-image: url("../img/icon-image.png");
+        }
+      }
+      #btn-component-button {
+        a {
+          background-image: url("../img/icon-button.png");
+        }
+      }
+      #btn-component-form {
+        a {
+          background-image: url("../img/icon-form.png");
+        }
+      }
+      #btn-component-calendar {
+        a {
+          background-image: url("../img/icon-calendar.png");
+        }
+      }
+      #btn-component-countdown {
+        a {
+          background-image: url("../img/icon-countdown.png");
+        }
+      }
+      #btn-component-price {
+        a {
+          background-image: url("../img/icon-price.png");
+        }
+      }
+      #btn-component-card {
+        a {
+          background-image: url("../img/icon-card.png");
+        }
+      }
+      #btn-component-menubar {
+        a {
+          background-image: url("../img/icon-menubar.png");
         }
       }
     }
@@ -221,6 +324,15 @@ body {
     max-width: 100%!important;
   }
 }
+
+@media (max-width: 850px) {
+  .content {
+    .mbc-footer {
+      position: relative;
+    }
+  }
+}
+
 /* end of temporary common template settings*/
 
 .main-canvas {
@@ -314,6 +426,7 @@ body {
       font-size: 14px;
       button {
         background-color: #0074d9;
+        color: #ffffff;
         font-family: 'Lato', sans-serif;
         font-size: 16px;
         border-radius: 2px;
@@ -408,7 +521,7 @@ body {
 }
 
 .grid-stack-item {
-  min-height: 40px!important;
+  min-height: 34px!important;
   .grid-stack-item-content, .placeholder-content {
     left: 0!important;
     right: 0!important;

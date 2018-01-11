@@ -14,6 +14,7 @@ app.controller('GridstackController', ['$scope', function($scope) {
         options.acceptWidgets = '.grid-stack-item';
         options.float = true;
         options.verticalMargin = 0;
+        options.alwaysShowResizeHandle = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         options.cellHeight = 20;
         options.width = 24;
         this.gridstack = element.gridstack(options).data('gridstack');
@@ -266,6 +267,11 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             '_links': { 'type': { 'href': baseUrl + '/rest/type/node/mbc_page' }},
             'type' : {"target_id": "mbc_page"},
         }
+        angular.forEach($scope.widgets, function (value, key) {
+            if (value.autopos === 1) {
+                $scope.widgets[key].autopos = 0;
+            }
+        });
         var values = {
             'title': {
                 "value": $scope.pages[$scope.page.id].title
@@ -306,15 +312,19 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     }
 
     $scope.addWidget = function(widid) {
+        if (arguments[1] !== undefined) {
+           var coords = arguments[1];
+        }
         var newWidget = {
-            x:0,
-            y:0,
+            x:(coords !== undefined)? coords.gsx : 0,
+            y:(coords !== undefined)? coords.gsy : 0,
             width:3,
             mwidth:3,
             height:1,
             mheight: 1,
             mbcWidgetId:widid,
             mbcComponentId: $scope.getNewId(),
+            autopos: (coords !== undefined)? 0 : 1,
             settings: {
                 font: {
                    value: '',
@@ -404,7 +414,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 };
                 break;
             case 'button':
-                newWidget.width = 1;
+                newWidget.width = 2;
                 newWidget.mwidth = 1;
                 newWidget.height = 2;
                 newWidget.mheight = 2;
@@ -416,10 +426,10 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 };
                 break;
             case 'form':
-                newWidget.width = 6;
-                newWidget.mwidth = 6;
-                newWidget.height = 14;
-                newWidget.mheight = 14;
+                newWidget.width = 10;
+                newWidget.mwidth = 10;
+                newWidget.height = 11;
+                newWidget.mheight = 11;
                 newWidget.settings.formMail = {
                     value: '',
                     title: 'Email',
@@ -596,9 +606,6 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 file: f,
             });
         }
-
-
-        console.log(f);
     }
 
     $scope.getComponentProperties = function(id) {

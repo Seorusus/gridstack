@@ -1,5 +1,5 @@
 <div ng-app="mbcApp">
-    <div ng-controller="mbcMain" ng-init="mbcInit()">
+    <div ng-controller="mbcMain" ng-init="mbcInit()" class="row">
         <div class="left-sidebar col-sm-2">
             <div class="page-list">
              {% verbatim %}
@@ -10,12 +10,14 @@
                  </form>
                  <div data-ng-controller="SimpleController">
                      <div class="scrollbar-dynamic">
-                         <ul class="pages" dnd-list="pages">
-                            <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)" class="page-line">
-                                <a href="#" ng-click="loadPage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title" class="page-title"></a>
-                                <div class="page-block-correction">
-                                  <a href="#" ng-click="deletePage(page.nid)" class="btn btn-page-delete">Delete</a>
-                                  <a href="#" ng-click="editPage(page.nid); $event.preventDefault(); $event.stopPropagation();" class="btn btn-page-edit">Edit</a>
+                         <ul class="pages container-fluid" dnd-list="pages">
+                            <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)" class="page-line row">
+                                <div class="page-link-wrapper col-xs-7">
+                                  <a href="#" ng-click="loadPage(page.nid); $event.preventDefault(); $event.stopPropagation();" ng-bind-html="page.title" class="page-title"></a>
+                                </div>
+                                <div class="page-block-correction col-xs-5">
+                                  <a href="#" ng-click="deletePage(page.nid)" class="btn btn-page-delete col-sm-6">Delete</a>
+                                  <a href="#" ng-click="editPage(page.nid); $event.preventDefault(); $event.stopPropagation();" class="btn btn-page-edit col-sm-6">Edit</a>
                                 </div>
                             </li>
                           </ul>
@@ -33,7 +35,7 @@
                 <div class="gridstack-area">
                   <div gridstack class="grid-stack grid-stack-24 grid1" nid="{{nid}}" options="options" on-change="onChange(event,items)" on-drag-start="onDragStart(event,ui)" on-drag-stop="onDragStop(event,ui)" on-resize-start="onResizeStart(event,ui)" on-resize-stop="onResizeStop(event,ui)" style="background-color: {{currentBgColor}}; background-image: url('{{currentBgImage}}')">
                     <div gridstack-item ng-model="widgets" ng-repeat="w in widgets" class="grid-stack-item" gs-item-x="w.x" gs-item-y="w.y"
-                         gs-item-width="w.width" gs-item-min-width="w.mwidth" gs-item-height="w.height" gs-item-min-height="w.mheight" gs-item-autopos="1" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
+                         gs-item-width="w.width" gs-item-min-width="w.mwidth" gs-item-height="w.height" gs-item-min-height="w.mheight" gs-item-autopos="w.autopos" on-item-added="onItemAdded(item)" on-item-removed="onItemRemoved(item)" mbc-widget-id="w.mbcWidgetId" mbc-component-id="{{w.mbcComponentId}}">
                         <div class="grid-stack-item-content">
                               <a class="btn-grid-edit" ng-click="editWidget(w.mbcComponentId)" href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" aria-label="Edit"></span>
@@ -62,23 +64,23 @@
                        <div id="basicComponents" class="panel-collapse collapse in">
                           <div class="panel-body">
                             <ul class="components-buttons">
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('title')" href="#">Title</a>
+                              <li id="btn-component-title" class="grid-stack-item" gs-widget="title">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('title')" href="#">Title</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('subtitle')" href="#">Subtitle</a>
+                              <li id="btn-component-subtitle" class="grid-stack-item" gs-widget="subtitle">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('subtitle')" href="#">Subtitle</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('text')" href="#">Text</a>
+                              <li id="btn-component-text" class="grid-stack-item" gs-widget="text">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('text')" href="#">Text</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('video')" href="#">Video</a>
+                              <li id="btn-component-video" class="grid-stack-item" gs-widget="video">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('video')" href="#">Video</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('image')" href="#">Image</a>
+                              <li id="btn-component-image" class="grid-stack-item" gs-widget="image">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('image')" href="#">Image</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('button')" href="#">Button</a>
+                              <li id="btn-component-button" class="grid-stack-item" gs-widget="button">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('button')" href="#">Button</a>
                               </li>
                             </ul>
                           </div>
@@ -96,23 +98,23 @@
                        <div id="components" class="panel-collapse collapse">
                           <div class="panel-body">
                             <ul class="components-buttons">
-                              <li class="form">
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('form')" href="#">Form</a>
+                              <li id="btn-component-form" class="grid-stack-item" gs-widget="form">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('form')" href="#">Form</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('calendar')" href="#">Calendar</a>
+                              <li id="btn-component-calendar" class="grid-stack-item" gs-widget="calendar">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('calendar')" href="#">Calendar</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('countdown')" href="#">Countdown Timer</a>
+                              <li id="btn-component-countdown" class="grid-stack-item" gs-widget="countdown">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('countdown')" href="#">Countdown</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('price')" href="#">Price</a>
+                              <li id="btn-component-price" class="grid-stack-item" gs-widget="price">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('price')" href="#">Price</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('card')" href="#">Card</a>
+                              <li id="btn-component-card" class="grid-stack-item" gs-widget="card">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('card')" href="#">Card</a>
                               </li>
-                              <li>
-                                <a class="btn btn-primary btn-component" ng-click="addWidget('menubar')" href="#">Menu Bar</a>
+                              <li id="btn-component-menubar" class="grid-stack-item" gs-widget="menubar">
+                                <a class="btn btn-component grid-stack-item-content" ng-click="addWidget('menubar')" href="#">Menu Bar</a>
                               </li>
                             </ul>
                           </div>

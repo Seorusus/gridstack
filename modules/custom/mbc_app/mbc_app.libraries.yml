@@ -28,7 +28,11 @@ jquery.ui:
 lodash:
   version: VERSION
   js:
-    js/libraries/lodash/dist/lodash.min.js: {weight: -9}
+    js/libraries/lodash/dist/lodash.min.js: {weight: -10}
+
+touchPunch:
+  js:
+    js/libraries/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js: {weight: -10}
 
 angularjs:
   version: VERSION
@@ -54,7 +58,8 @@ gridstack:
 
       css/gridstack-mbc.css: {}
   js:
-    js/libraries/gridstack/dist/gridstack.all.js: {weight: -9}
+    js/libraries/gridstack/dist/gridstack.js: {weight: -9}
+    js/libraries/gridstack/dist/gridstack.jQueryUI.js: {weight: -9}
 
 ngStrap:
   version: "2.3.8"
