@@ -131,7 +131,6 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                     $scope.widgets = pageGs.grid;
                     if (pageGs.type === 'mbc_page') {
                         $scope.nid = pageGs.nid;
-                        console.log($scope);
                     }
                 }
                 $scope.currentBgColor = $scope.pages[$scope.page.id].field_background_color;
@@ -294,6 +293,18 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             PageService.addPage(package, csrf, baseUrl)
                 .then(function(response){
                     console.log("Added");
+                    var pageSavedModal = $uibModal.open({
+                        animation: true,
+                        template: 'New page saved!',
+                        windowClass: 'pageSavedMsg',
+                        size: 'sm',
+                        controller: 'ModalController',
+                        controllerAs: '$ctrl',
+                        scope: $scope,
+                    });
+                    $timeout(function(){
+                        pageSavedModal.close();
+                    }, 2000);
                     var resNid = response.data.nid[0].value;
                     $scope.nid = resNid;
                     // // Re-call the list of pages so that it updates
@@ -306,7 +317,18 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         else {
             PageService.updatePage(package, csrf, baseUrl, nid)
                 .then(function() {
-                    console.log("Page updated");
+                    var pageSavedModal = $uibModal.open({
+                        animation: true,
+                        template: 'Page saved!',
+                        windowClass: 'pageSavedMsg',
+                        size: 'sm',
+                        controller: 'ModalController',
+                        controllerAs: '$ctrl',
+                        scope: $scope,
+                    });
+                    $timeout(function(){
+                        pageSavedModal.close();
+                    }, 2000);
                 });
         }
     }
@@ -542,6 +564,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                     type: 'text',
                 };
                 newWidget.settings.fontSize.value = '25px';
+                delete newWidget.settings.text;
                 break;
             case 'text':
                 newWidget.width = 6;
@@ -553,6 +576,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                     title: 'Text',
                     type: 'textarea',
                 };
+                delete newWidget.settings.text;
                 break;
             case 'subtitle':
                 newWidget.width = 6;
@@ -565,6 +589,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                     type: 'text',
                 };
                 newWidget.settings.fontSize.value = '20px';
+                delete newWidget.settings.text;
                 break;
             case 'menubar':
                 newWidget.width = 6;
@@ -579,8 +604,6 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
 
         }
         $scope.widgets.push(newWidget);
-        console.log($scope.widgets);
-        console.log($scope.getComponentProperties($scope.widgets.length));
     };
 
     $scope.getNewId = function() {
@@ -697,31 +720,31 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
     };
 
     $scope.onChange = function(event, items) {
-        console.log("onChange event: "+event+" items:"+items);
+       // console.log("onChange event: "+event+" items:"+items);
     };
 
     $scope.onDragStart = function(event, ui) {
-        console.log("onDragStart event: "+event+" ui:"+ui);
+       // console.log("onDragStart event: "+event+" ui:"+ui);
     };
 
     $scope.onDragStop = function(event, ui) {
-        console.log("onDragStop event: "+event+" ui:"+ui);
+       // console.log("onDragStop event: "+event+" ui:"+ui);
     };
 
     $scope.onResizeStart = function(event, ui) {
-        console.log("onResizeStart event: "+event+" ui:"+ui);
+       // console.log("onResizeStart event: "+event+" ui:"+ui);
     };
 
     $scope.onResizeStop = function(event, ui) {
-        console.log("onResizeStop event: "+event+" ui:"+ui);
+       // console.log("onResizeStop event: "+event+" ui:"+ui);
     };
 
     $scope.onItemAdded = function(item) {
-        console.log("onItemAdded item: "+item);
+      //  console.log("onItemAdded item: "+item);
     };
 
     $scope.onItemRemoved = function(item) {
-        console.log("onItemRemoved item: "+item);
+      //  console.log("onItemRemoved item: "+item);
     };
 
 }]);

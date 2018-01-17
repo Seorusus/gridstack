@@ -1016,6 +1016,17 @@
                         $(element).css('opacity', '');
                     }
                 });
+                scope.$watch(function () { return scope.w.settings.imageUrl.value; }, function(){
+                    if (scope.w.settings.imageUrl.value) {
+                        if (!$(element).children().length) {
+                            $(element).append('<img>');
+                        }
+                        $(element).find('img').attr('src', scope.w.settings.imageUrl.value);
+                    }
+                    else {
+                        $(element).find('img').remove();
+                    }
+                });
                 scope.$watch(function () { return scope.w.settings.backgroundUrl.value; }, function(){
                     if (scope.w.settings.backgroundUrl.value) {
                         $(element).css('background-image', 'url(' + scope.w.settings.backgroundUrl.value + ')');

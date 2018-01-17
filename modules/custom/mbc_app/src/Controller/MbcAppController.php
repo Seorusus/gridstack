@@ -17,7 +17,6 @@ class MbcAppController extends ControllerBase {
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/uiBootstrap';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angularjs';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_sanitize';
-    $build['mbc_app']['#attached']['library'][] = 'mbc_app/ngFileUpload';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/jquery-scrollbar';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/angular_dnd_lists';
     $build['mbc_app']['#attached']['library'][] = 'mbc_app/lodash';
