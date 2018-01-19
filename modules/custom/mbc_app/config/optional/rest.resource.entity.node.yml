@@ -1,14 +1,16 @@
-uuid: ff320b1f-a828-4234-af7e-762ea7f53224
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - basic_auth
-    - file
     - hal
+    - node
     - user
-id: entity.file
-plugin_id: 'entity:file'
+  enforced:
+    module:
+      - mbc_app
+id: entity.node
+plugin_id: 'entity:node'
 granularity: resource
 configuration:
   methods:
@@ -19,5 +21,5 @@ configuration:
   formats:
     - hal_json
   authentication:
-    - basic_auth
     - cookie
+    - basic_auth

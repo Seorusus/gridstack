@@ -1,4 +1,11 @@
 name: MBC
 type: module
 description: 'MBC (Gridstack) SPA implementation'
+package: Gridstack
 core: 8.x
+
+dependencies:
+  - weight:weight
+  - hal
+  - basic_auth
+  - rest

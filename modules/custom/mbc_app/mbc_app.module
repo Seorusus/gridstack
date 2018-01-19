@@ -7,21 +7,18 @@
  * Implements hook_theme().
  */
 function mbc_app_theme($existing, $type, $theme, $path) {
+  $logged_in = \Drupal::currentUser()->isAuthenticated();
   return array(
-    'mbc_app_page' => array(
+    'page__mbc_app' => array(
+      'title' => 'gridstack',
       'template' => 'page--mbc-app',
-      'variables' => array('title' => NULL),
+      'variables' => array(
+        'logged_in' => $logged_in,
+      ),
       'base hook' => 'page',
     ),
   );
 }
-
-//function mbc_app_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-//  $path = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
-//  if ((isset($path[0]) && $path[0] == 'mbc-page')&&($hook === 'page')) {
-//    $suggestions[] = 'page__mbc_app';
-//  }
-//}
 
 /**
  * Implements hook_js_alter().
@@ -37,5 +34,20 @@ function mbc_app_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterfa
     unset($javascript['core/assets/vendor/jquery.ui/ui/button-min.js']);
     unset($javascript['core/assets/vendor/jquery.ui/ui/mouse-min.js']);
     unset($javascript['core/assets/vendor/jquery.ui/ui/dialog-min.js']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function mbc_app_preprocess_page(&$variables) {
+  global $base_url;
+  $current_path = \Drupal::service('path.current')->getPath();
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('mbc_app')->getPath();
+  if ($current_path === '/mbc-app') {
+    $variables['#attached']['drupalSettings']['csrf'] = \Drupal::csrfToken()->get('rest');
+    $variables['#attached']['drupalSettings']['baseUrl'] = $base_url;
+    $variables['#attached']['drupalSettings']['modulePath'] = $module_path;
   }
 }
