@@ -3,7 +3,6 @@ namespace Drupal\mbc_app\Controller;
 use Drupal\Core\Controller\ControllerBase;
 class MbcAppController extends ControllerBase {
   public function content() {
-    global $base_url;
     $title = '';
     $build['mbc_app'] = array(
       '#theme' => 'mbc_app_page',
