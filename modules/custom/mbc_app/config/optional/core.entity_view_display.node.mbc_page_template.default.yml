@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.mbc_page_template.field_background_color
+    - field.field.node.mbc_page_template.field_background_image
+    - field.field.node.mbc_page_template.field_gridstack_data
+    - node.type.mbc_page_template
+  module:
+    - user
+  enforced:
+    module:
+      - mbc_app
+id: node.mbc_page_template.default
+targetEntityType: node
+bundle: mbc_page_template
+mode: default
+content:
+  field_background_color:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_background_image:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_gridstack_data:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

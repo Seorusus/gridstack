@@ -1,14 +1,41 @@
-<div ng-app="mbcApp">
-    <div ng-controller="mbcMain" ng-init="mbcInit()" class="row">
-        <div class="left-sidebar col-sm-2">
-            <div class="page-list">
-             {% verbatim %}
-                 <form ng-submit="newPage()" >
+<div class="layout-container container-fluid">
+    <header role="banner" class="mbc-header">
+        <div class="row">
+            <div class="col-sm-6 mbc-branding-name">
+                GRIDSTACK
+            </div>
+            <div class="col-sm-6">
+                <div class="mbc-user-auth-links">
+                    <ul>
+                        {% if logged_in %}
+                            <li class="mbc-account-link"><a href="/user">Account</a></li>
+                        {% endif %}
+                        {% if logged_in %}
+                            <li class="mbc-logout-link"><a href="/user/logout">Log out</a></li>
+                        {% else %}
+                            <li class="mbc-login-link"><a href="/user/login">Log in</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    {{ page.highlighted }}
+    {{ page.help }}
+    <main role="main">
+        <a id="main-content" tabindex="-1"></a>
+        <div class="layout-content">
+            <div ng-app="mbcApp">
+                <div ng-controller="mbcMain" ng-init="mbcInit()" class="row">
+                    <div class="left-sidebar col-sm-2">
+                        <div class="page-list">
+                            {% verbatim %}
+                                <form ng-submit="newPage()" >
                     <div class="form-group">
                         <button class="btn btn-primary add-page" type="submit">Add Page</button>
                     </div>
                  </form>
-                 <div data-ng-controller="SimpleController">
+                                <div data-ng-controller="SimpleController">
                      <div class="scrollbar-dynamic">
                          <ul class="pages container-fluid" dnd-list="pages">
                             <li ng-repeat="page in pages" weight="{{page.field_weight_value}}" dnd-draggable="page" dnd-effect-allowed="move" dnd-moved="pages.splice($index, 1)" class="page-line row">
@@ -23,12 +50,12 @@
                           </ul>
                      </div>
                  </div>
-                  <a href="#" ng-click="savePagesList()" class="btn save-pagelist">Save</a>
-              {% endverbatim %}
-            </div>
-        </div>
-        {% verbatim %}
-        <div class="right-canvas-wrapper col-sm-10">
+                                <a href="#" ng-click="savePagesList()" class="btn save-pagelist">Save</a>
+                            {% endverbatim %}
+                        </div>
+                    </div>
+                    {% verbatim %}
+                        <div class="right-canvas-wrapper col-sm-10">
           <div class="right-canvas-center row" style="background-color: {{currentBgColor}}; background-image: url('{{currentBgImage}}')">
             <div class="main-canvas col-sm-9">
               <!--<p>{{widgets}}</p>-->
@@ -144,11 +171,32 @@
             <div class="modal-demo" id="modalwindow"></div>
           </div>
         </div>
-        {% endverbatim %}
-    </div>
+                    {% endverbatim %}
+                </div>
+            </div>
+            <div class="mbc-footer">
+                <div class="mbc-footer-text">
+                    © 2017 Gridstack
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
-<div class="mbc-footer">
-    <div class="mbc-footer-text">
-        © 2017 Gridstack
-    </div>
-</div>
+{{ attach_library('mbc_app/jquery') }}
+{{ attach_library('mbc_app/jquery.ui') }}
+{{ attach_library('mbc_app/mbcCountdown') }}
+{{ attach_library('mbc_app/videosharing') }}
+{{ attach_library('mbc_app/uiBootstrap') }}
+{{ attach_library('mbc_app/angularjs') }}
+{{ attach_library('mbc_app/angular_sanitize') }}
+{{ attach_library('mbc_app/jquery-scrollbar') }}
+{{ attach_library('mbc_app/angular_dnd_lists') }}
+{{ attach_library('mbc_app/lodash') }}
+{{ attach_library('mbc_app/gridstack') }}
+{{ attach_library('mbc_app/touchPunch') }}
+{{ attach_library('mbc_app/jquery-minicolors') }}
+{{ attach_library('mbc_app/mbc_controllers') }}
+{{ attach_library('mbc_app/mbc_directives') }}
+{{ attach_library('mbc_app/mbc_services') }}
+{{ attach_library('mbc_app/mbc_app') }}
+{{ attach_library('mbc_app/bootstrap') }}
