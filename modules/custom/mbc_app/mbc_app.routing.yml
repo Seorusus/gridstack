@@ -1,4 +1,4 @@
-drupal_ng.view:
+mbc_app.content:
   path: '/mbc-app'
   defaults:
     _title: 'MBC SPA'

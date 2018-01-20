@@ -205,7 +205,7 @@
            restrict: 'E',
            controller: 'mbcMain',
            replace: true,
-           templateUrl: '/modules/custom/mbc_app/components/button/index.html',
+           templateUrl: '/' + drupalSettings.modulePath + '/components/button/index.html',
            link: function (scope, element, attrs, controller) {
                scope.$watch(function () { return scope.w.settings.font.value; }, function(){
                    if (scope.w.settings.font.value) {
@@ -343,7 +343,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/calendar/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/calendar/index.html',
             link: function (scope, element, attrs, controller) {
                 var el = angular.element(element[0].querySelector('.mbc-widget'));
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
@@ -490,7 +490,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/card/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/card/index.html',
             link: function (scope, element, attrs, controller) {
                 //var el = angular.element(element[0].querySelector('.mbc-widget'));
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
@@ -637,7 +637,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/countdown/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/countdown/index.html',
             link: function (scope, element, attrs, controller) {
                     scope.countdown = function() {
                     var countdownDate = scope.w.settings.CountdownDate;
@@ -804,7 +804,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/form/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/form/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -950,7 +950,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/image/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/image/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -1099,7 +1099,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/menubar/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/menubar/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -1245,7 +1245,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/price/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/price/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -1391,7 +1391,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/subtitle/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/subtitle/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -1537,7 +1537,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/title/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/title/index.html',
             link: function (scope, element, attrs, controller) {
                 // scope.$watch(function(){
                 //     var mbcWTitle = angular.element(element[0].querySelector('.mbc-widget'));
@@ -1690,7 +1690,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/video/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/video/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -1836,7 +1836,7 @@
             restrict: 'E',
             controller: 'mbcMain',
             replace: true,
-            templateUrl: '/modules/custom/mbc_app/components/text/index.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/components/text/index.html',
             link: function (scope, element, attrs, controller) {
                 scope.$watch(function () { return scope.w.settings.color.value; }, function(){
                     if (scope.w.settings.color.value) {
@@ -1982,7 +1982,7 @@
         return {
            restrict: 'E',
            controller: 'mbcMain',
-           templateUrl: '/modules/custom/mbc_app/js/dir-templates/fileSelection.html',
+           templateUrl: '/' + drupalSettings.modulePath + '/js/dir-templates/fileSelection.html',
            replace: true,
            scope: {
                 urlType: '@',
@@ -2040,7 +2040,7 @@
         return {
             restrict: 'E',
             controller: 'ModalController',
-            templateUrl: '/modules/custom/mbc_app/js/dir-templates/templates/borderplace.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/js/dir-templates/templates/borderplace.html',
             replace: true,
             link: function ($scope, element, attrs) {
                  console.log($scope);
@@ -2056,7 +2056,7 @@
         return {
             restrict: 'E',
             controller: 'ModalController',
-            templateUrl: '/modules/custom/mbc_app/js/dir-templates/templates/fontstyle.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/js/dir-templates/templates/fontstyle.html',
             replace: true,
             link: function ($scope, element, attrs) {
                 console.log($scope);

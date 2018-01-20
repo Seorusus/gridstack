@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Manages installation and update of mbc_app module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function mbc_app_install() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('rest.resource.entity.node');
+  $config->set('configuration.authentication', ['basic_auth', 'cookie']);
+  $config->save();
+}

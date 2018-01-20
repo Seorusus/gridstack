@@ -13,27 +13,65 @@ body {
   padding: 30px;
   text-align: center;
 }
-.region-secondary-menu .menu--account .content .menu > .menu-item a {
+.mbc-header {
+  padding: 20px 0 10px;
+}
+.mbc-branding-name {
+  font-family: 'Roboto', sans-serif;
+  color: #fffeff;
+  font-size: 1.821em;
+}
+@media (max-width: 767px) {
+  .mbc-branding-name {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+.mbc-user-auth-links ul {
+  text-align: right;
+  font-size: 0.929em;
+  margin: 0;
+  padding: 0;
+  list-style: none outside;
+}
+@media (max-width: 767px) {
+  .mbc-user-auth-links ul {
+    text-align: center;
+  }
+}
+.mbc-user-auth-links ul a {
   color: #f44336;
   font-family: 'Roboto', sans-serif;
   font-size: 16px!important;
 }
-.region-secondary-menu .menu--account .content .menu > .menu-item:first-child {
+.mbc-user-auth-links ul li {
+  margin: 0 5px;
+  padding: 0;
+  display: inline;
+}
+.mbc-user-auth-links ul .mbc-account-link {
   background: left center url("../img/account-icon.png") no-repeat;
-  padding-left: 6px;
+  padding-left: 18px;
 }
-.region-secondary-menu .menu--account .content .menu > .menu-item:last-child {
+.mbc-user-auth-links ul .mbc-logout-link,
+.mbc-user-auth-links ul .mbc-login-link {
   background: left center url("../img/loginout-icon.png") no-repeat;
-  padding-left: 17px;
+  padding-left: 27px;
 }
-#content a,
-#content a.link {
+.layout-content a,
+.layout-content a.link,
+.layout-content a:hover,
+.layout-content a:active,
+.layout-content a:focus,
+.layout-content .link:hover,
+.layout-content .link:active,
+.layout-content .link:focus {
   border: none;
 }
-#content .btn:hover,
-#content .btn:focus,
-#content .btn.focus,
-#content btn.active {
+.layout-content .btn:hover,
+.layout-content .btn:focus,
+.layout-content .btn.focus,
+.layout-content btn.active {
   color: #ffffff;
 }
 .region-header {
@@ -63,13 +101,18 @@ body {
 .scrollbar-dynamic > ul {
   padding-left: 0;
 }
-.content .left-sidebar {
+.layout-content .left-sidebar {
   padding-right: 0;
 }
-.content .left-sidebar .page-list {
+@media (max-width: 767px) {
+  .layout-content .left-sidebar {
+    padding-right: 15px;
+  }
+}
+.layout-content .left-sidebar .page-list {
   margin-top: 30px;
 }
-.content .left-sidebar .page-list .add-page {
+.layout-content .left-sidebar .page-list .add-page {
   width: 100%;
   background-color: #0074d9;
   font-family: 'Roboto', sans-serif;
@@ -77,20 +120,20 @@ body {
   border-radius: 0;
   background-image: none;
 }
-.content .left-sidebar .page-list .pages .page-line {
+.layout-content .left-sidebar .page-list .pages .page-line {
   list-style: none;
   border-bottom: 1px solid #4a4949;
   padding-bottom: 30px;
   padding-top: 30px;
 }
-.content .left-sidebar .page-list .pages .page-line .page-title {
+.layout-content .left-sidebar .page-list .pages .page-line .page-title {
   background: left center url("../img/page_icon.png") no-repeat;
   padding-left: 65px;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
   color: #ffffff;
 }
-.content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-delete {
+.layout-content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-delete {
   width: 40px;
   padding: 2px 0;
   background-color: #f44336;
@@ -101,7 +144,7 @@ body {
   margin-left: 5px;
   margin-top: 5px;
 }
-.content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-edit {
+.layout-content .left-sidebar .page-list .pages .page-line .page-block-correction .btn-page-edit {
   width: 40px;
   padding: 2px 0;
   background-color: #0074d9;
@@ -112,7 +155,7 @@ body {
   margin-left: 5px;
   margin-top: 5px;
 }
-.content .left-sidebar .page-list .save-pagelist {
+.layout-content .left-sidebar .page-list .save-pagelist {
   background-color: #f44336;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -136,6 +179,7 @@ body {
 }
 .right-canvas {
   margin-top: 15px;
+  padding-left: 10px;
 }
 .right-canvas .panel-group .panel {
   border-radius: 0;
@@ -473,10 +517,7 @@ body {
 }
 .mbc-footer {
   text-align: center;
-  position: absolute;
-  bottom: -36px;
-  left: 0;
-  right: 0;
+  margin: 20px 0;
 }
 .mbc-footer .mbc-footer-text {
   font-family: 'Roboto', sans-serif;

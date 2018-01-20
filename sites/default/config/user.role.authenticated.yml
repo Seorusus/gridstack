@@ -15,6 +15,7 @@ permissions:
   - 'access site-wide contact form'
   - 'create mbc_page content'
   - 'delete own mbc_page content'
+  - 'edit own mbc_page content'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'

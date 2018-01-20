@@ -69,7 +69,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             animation: true,
             ariaLabelledBy: 'modal-title-bottom',
             ariaDescribedBy: 'modal-body-bottom',
-            templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/js/dir-templates/mbcPageSettings.html',
             size: 'lg',
             controller: 'ModalPageSettingsController',
             controllerAs: '$ctrl',
@@ -120,10 +120,10 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                         "type": 'mbc_page',
                     }
                 }
-                else if (data.field_gridstack_data !== undefined){
+                else {
                     pageGs = {
                         "nid": nid,
-                        "grid": JSON.parse(data.field_gridstack_data[0].value),
+                        "grid": (typeof data.field_gridstack_data !== 'undefined') ? JSON.parse(data.field_gridstack_data[0].value) : '[]',
                         "type": data.type[0].target_id,
                     }
                 }
@@ -244,7 +244,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
             animation: true,
             ariaLabelledBy: 'modal-title-bottom',
             ariaDescribedBy: 'modal-body-bottom',
-            templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcPageSettings.html',
+            templateUrl: '/' + drupalSettings.modulePath + '/js/dir-templates/mbcPageSettings.html',
             size: 'lg',
             controller: 'ModalPageSettingsController',
             controllerAs: '$pctrl',
@@ -317,6 +317,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         else {
             PageService.updatePage(package, csrf, baseUrl, nid)
                 .then(function() {
+                    console.log("Added");
                     var pageSavedModal = $uibModal.open({
                         animation: true,
                         template: 'Page saved!',
@@ -603,6 +604,9 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
                 break;
 
         }
+        if (typeof $scope.widgets === 'undefined') {
+            $scope.widgets = new Array();
+        }
         $scope.widgets.push(newWidget);
     };
 
@@ -651,7 +655,6 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
 
     $scope.editWidget = function (id) {
       $scope.currentEditWidget = id;
-      console.log('id : '+id);
       // get settings
       $scope.settings = $scope.getComponentProperties(id);
       // seve old settings
@@ -660,7 +663,7 @@ mbcApp.controller('mbcMain', ['$scope', '$http', '$uibModal', 'PageService', '$l
         animation: true,
         ariaLabelledBy: 'modal-title-bottom',
         ariaDescribedBy: 'modal-body-bottom',
-        templateUrl: 'modules/custom/mbc_app/js/dir-templates/mbcDialog.html',
+        templateUrl: '/' + drupalSettings.modulePath + '/js/dir-templates/mbcDialog.html',
         size: 'lg',
         controller: 'ModalController',
         controllerAs: '$ctrl',
