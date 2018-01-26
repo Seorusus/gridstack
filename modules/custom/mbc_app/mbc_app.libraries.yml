@@ -112,6 +112,7 @@ mbc_app:
     js/mbc_app.js: {}
   dependencies:
     - mbc_app/angularjs
+    - core/drupalSettings
 
 mbc_controllers:
   js:
